@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<m:mayaa xmlns:m="http://mayaa.seasar.org"
+	xmlns:html="http://struts.apache.org/tags-html"
+	xmlns:bean="http://struts.apache.org/tags-bean"
+	xmlns:logic="http://struts.apache.org/tags-logic"
+	m:noCache="true">
+
+	<m:beforeRender>
+		<![CDATA[
+			function beforeRender() {
+				request.setAttribute("prop", java.lang.System.getProperties());
+			}
+		]]>
+	</m:beforeRender>
+
+	<m:write m:id="top" >
+		<m:exec script="${beforeRender();}" />
+	</m:write>
+
+	<logic:iterate m:id="loop" id="xxx" name="prop" m:replace="false"/>
+	<html:text m:id="txt1" indexed="true" property="key" name="xxx" />
+	<bean:write m:id="box1" indexed="true" property="value" name="xxx" />
+
+	<m:null m:id="dummy" />
+</m:mayaa>
