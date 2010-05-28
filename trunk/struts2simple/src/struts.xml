@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+
+<struts>
+
+    
+    <constant name="struts.ui.theme" value="simple" />
+
+    <package name="myapp1" namespace="/myapp1" extends="struts-default">
+
+        <global-results>
+            <result name="failed">/WEB-INF/jsp/myapp1/failed.jsp
+            </result>
+        </global-results>
+
+        <action name="Index" class="test.Index">
+            <result name="success">/WEB-INF/jsp/myapp1/index.jsp
+            </result>
+        </action>
+
+    </package>
+
+</struts>
+    
+    
