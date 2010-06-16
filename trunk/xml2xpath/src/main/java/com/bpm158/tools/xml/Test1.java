@@ -16,7 +16,7 @@ public class Test1 {
 //		InputStream is = new FileInputStream(
 //			"ChoiceStationMobileActionTest__perform_7.data.in.1.xml");
 
-		LinkedHashMap<String, String> lhm = DomUtils.toXpath(is, true);
+		LinkedHashMap<String, String> lhm = DomUtils.toXpath(is, false);
 
 		for (Map.Entry<String, String> e : lhm.entrySet()) {
 			System.out.format("%s\t%s\n", e.getKey(), e.getValue());
