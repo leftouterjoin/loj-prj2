@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.6.0_05" class="java.beans.XMLDecoder">
+	<object class="jp.co.jrkyushu.service.business.consumer.point.fragment.PointReserveBean">
+	  <void property="jRLoginBean_">
+	   <object class="jp.co.jrkyushu.service.business.common.user.JRLoginBean">
+	    <void property="loginId">
+	     <string>ngccard_testuser@yahoo.co.jp</string>
+	    </void>
+	    <void property="loginId">
+	     <string>ngccard_testuser@yahoo.co.jp</string>
+	    </void>
+	    <void property="customerId">
+	     <string>0000000012345</string>
+	    </void>
+	    <void property="LoginFlg">
+	     <boolean>true</boolean>
+	    </void>
+	    <void property="MemberKind">
+	     <int>1</int>
+	    </void>
+	    <void property="jrCustomBean">
+	     <object class="jp.co.jrkyushu.service.business.common.user.JRCustomBean">
+	      <void property="creditCompany1">
+	       <string> </string>
+	      </void>
+	      <void property="creditCompany2">
+	       <string></string>
+	      </void>
+	      <void property="creditCompany3">
+	       <string></string>
+	      </void>
+	      <void property="creditNumber1">
+	       <string></string>
+	      </void>
+	      <void property="creditNumber2">
+	       <string></string>
+	      </void>
+	      <void property="creditNumber3">
+	       <string></string>
+	      </void>
+	      <void property="creditUseName1">
+	       <string></string>
+	      </void>
+	      <void property="creditUseName2">
+	       <string></string>
+	      </void>
+	      <void property="creditUseName3">
+	       <string></string>
+	      </void>
+	      <void property="limitMonth1">
+	       <string></string>
+	      </void>
+	      <void property="limitMonth2">
+	       <string></string>
+	      </void>
+	      <void property="limitMonth3">
+	       <string></string>
+	      </void>
+	      <void property="limitYear1">
+	       <string></string>
+	      </void>
+	      <void property="limitYear2">
+	       <string></string>
+	      </void>
+	      <void property="limitYear3">
+	       <string></string>
+	      </void>
+	      <void property="customData">
+	       <object class="jp.co.jrkyushu.dbaccess.entity.JRCustomDataBean">
+	        <void property="userId">
+	         <string>0000000012345</string>
+	        </void>
+	       </object>
+	      </void>
+	     </object>
+	    </void>
+	   </object>
+	  </void>
+   <void property="acceptDate">
+    <string>20100401</string>
+   </void>
+   <void property="messageNo">
+    <string>270003FB</string>
+   </void>
+   <void property="selectedCreditId">
+    <string>A12345</string>
+   </void>
+   <void property="reserveState">
+    <string>0</string>
+   </void>
+   <void property="operationCode">
+    <string>6320</string>
+   </void>
+  </object>
+</java>

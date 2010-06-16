@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	<display-name>jrqNetReserve_main_web</display-name>
+
+	<!-- コンテキストパラメータ(全サーブレット共通) -->
+	<context-param>
+		<param-name>jndiDataSourceName</param-name>
+		<param-value>java:comp/env/JRKDB</param-value>
+	</context-param>
+	<context-param>
+		<param-name>jndiMailSessionName</param-name>
+		<param-value>JRKMail</param-value>
+	</context-param>
+	<context-param>
+		<param-name>debug</param-name>
+		<param-value>false</param-value>
+	</context-param>
+
+	<!-- 携帯とEPOS向けのサーブレット・フィルタ -->
+	<filter>
+		<!-- エンコーディングをwindows-31j前提に設定する -->
+		<filter-name>servletFilter1</filter-name>
+		<filter-class>jp.co.jrkyushu.presentation.common.servlet.SetCharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>windows-31j</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>servletFilter1</filter-name>
+		<url-pattern>/mobile/*</url-pattern>
+		<url-pattern>/reserve/epos</url-pattern>
+	</filter-mapping>
+
+	<!-- PCとAPバッチ向け(携帯とEPOS以外)のサーブレット・フィルタ -->
+	<filter>
+		<!-- エンコーディングをutf-8前提に設定する -->
+		<filter-name>servletFilter2</filter-name>
+		<filter-class>jp.co.jrkyushu.presentation.common.servlet.SetCharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>utf-8</param-value>
+		</init-param>
+		<!-- 直前(servletFilter1)の設定を無視しない -->
+		<init-param>
+			<param-name>ignore</param-name>
+			<param-value>false</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>servletFilter2</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- 全リクエストが対象のサーブレット・フィルタ -->
+	<filter>
+		<!-- サーブレットリクエストコンテキストの初期化フィルタを設定する -->
+		<filter-name>servletFilter3</filter-name>
+		<filter-class>jp.co.jrkyushu.presentation.common.servlet.ServletRequestContextInitFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>servletFilter3</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- セッションリスナ -->
+	<listener>
+		<!-- セッショントレースフィルタを設定する -->
+		<listener-class>jp.co.jrkyushu.presentation.common.servlet.HttpSessionTraceListener</listener-class>
+	</listener>
+
+	<!-- Strutsのアクションサーブレット -->
+	<servlet>
+		<servlet-name>action</servlet-name>
+		<servlet-class>org.apache.struts.action.ActionServlet</servlet-class>
+		<init-param>
+			<param-name>config</param-name>
+			<param-value>/WEB-INF/struts-config.xml</param-value>
+		</init-param>
+		<init-param>
+			<param-name>chainConfig</param-name>
+			<param-value>
+				 /WEB-INF/chain-config.xml
+			</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>action</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+
+	<!-- EPOSのサーブレット -->
+	<servlet>
+		<servlet-name>e-pos</servlet-name>
+		<servlet-class>jp.co.jrkyushu.presentation.servlet.epos.PosReserveServlet</servlet-class>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>e-pos</servlet-name>
+		<url-pattern>/reserve/epos</url-pattern>
+	</servlet-mapping>
+
+	<!-- Mayaaテンプレートエンジンのサーブレット -->
+	<servlet>
+		<servlet-name>mayaa</servlet-name>
+		<servlet-class>org.seasar.mayaa.impl.MayaaServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+			<servlet-name>mayaa</servlet-name>
+			<url-pattern>*.html</url-pattern>
+	</servlet-mapping>
+
+	<!-- 拡張子マッピング -->
+	<mime-mapping>
+		<!-- MayaaのテンプレートでSSI IncludeされるファイルのContent-Typeを指定する -->
+	 	<extension>inc</extension>
+	 	<mime-type>text/html;charset=utf-8</mime-type>
+	</mime-mapping>
+
+<!-- test
+	<session-config>
+		<session-timeout>1</session-timeout>
+	</session-config>
+-->
+
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+	<!-- データソース設定 -->
+	<resource-ref>
+		<res-ref-name>JRKDB</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+	</resource-ref>
+
+</web-app>
