@@ -237,22 +237,17 @@ public final class DomUtils {
 
 		StringBuffer sb = new StringBuffer();
 
-		Node n = node;
-		do {
-			if (n.getNodeType() != Node.TEXT_NODE) {
-				int count = calculateNodeIndex(n);
+		while (node != null) {
+			if (node.getNodeType() == Node.ELEMENT_NODE) {
+				int count = calculateNodeIndex(node);
 				sb.insert(0, "]");
 				sb.insert(0, count);
 				sb.insert(0, "[");
-				sb.insert(0, n.getNodeName());
+				sb.insert(0, node.getNodeName());
 				sb.insert(0, "/");
 			}
-		} while (n.getParentNode().getNodeType() != Node.DOCUMENT_NODE
-			&& (n = n.getParentNode()).getParentNode() != null);
-
-		sb.insert(0, n.getNodeName());
-		sb.insert(0, "/");
-
+			node = node.getParentNode();
+		}
 		return sb.toString();
 	}
 
@@ -260,18 +255,18 @@ public final class DomUtils {
 
 		StringBuffer sb = new StringBuffer();
 		while (node != null) {
-			switch (node.getNodeType()) {
-				case Node.ELEMENT_NODE:
-					String attr = composeXpathAttr(node);
-					if (0 < attr.length()) {
-						sb.insert(0, attr);
-					} else {
-						int count = calculateNodeIndex(node);
-						sb.insert(0, "[" + count + "]");
-					}
-					sb.insert(0, node.getNodeName());
-					sb.insert(0, "/"); //$NON-NLS-1$
-					break;
+			if (node.getNodeType() == Node.ELEMENT_NODE) {
+				String attr = composeXpathAttr(node);
+				if (0 < attr.length()) {
+					sb.insert(0, attr);
+				} else {
+					int count = calculateNodeIndex(node);
+					sb.insert(0, "]");
+					sb.insert(0, count);
+					sb.insert(0, "[");
+				}
+				sb.insert(0, node.getNodeName());
+				sb.insert(0, "/");
 			}
 			node = node.getParentNode();
 		}
