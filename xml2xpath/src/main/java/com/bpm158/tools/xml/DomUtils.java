@@ -300,7 +300,7 @@ public final class DomUtils {
 			@Override
 			public boolean found(Node node) {
 
-				if (isA(node)) {
+				if (isOutputNode(node)) {
 					String xpath = calculateXPathToNode(node);
 					String value = (node.getNodeValue() == null) ? "" : node
 						.getNodeValue().trim();
@@ -341,7 +341,7 @@ public final class DomUtils {
 				}
 
 				// ボディを編集する
-				if (isA(node)) {
+				if (isOutputNode(node)) {
 					String xpath = generateXPath(node);
 					String value = (node.getNodeValue() == null) ? "" : node
 						.getNodeValue().trim();
@@ -357,7 +357,7 @@ public final class DomUtils {
 		return list;
 	}
 
-	private static boolean isA(Node node) {
+	private static boolean isOutputNode(Node node) {
 
 		if (node.getNodeType() == Node.ELEMENT_NODE && !node.hasChildNodes()) {
 			return true;
@@ -371,28 +371,26 @@ public final class DomUtils {
 		return (1 == nl.getLength());
 	}
 
-	public static String generateXPath(Node n) {
+	public static String generateXPath(Node node) {
 
-		String path = new String();
-		Node run = n;
-		while (run != null && run.getNodeType() != Node.DOCUMENT_NODE) {
-			if (run.getParentNode() == null
-				|| run.getParentNode().getNodeType() == Node.DOCUMENT_NODE) path = "/"
-				+ run.getNodeName() + path;
-			else if (run.getNodeType() == Node.TEXT_NODE) {
-				// If it's a text node, it can't have a sibling, hardcode
-				// text()[1]
-//				path = "/text()[1]" + path;
-			} else {
-				// If this node is not the root node, there may be other nodes
-				// with the same name on the same level, we therefore need
-				// an index on the node
+		StringBuffer sb = new StringBuffer();
 
-				int count = calculateNodeIndex(run);
-				path = "/" + run.getNodeName() + "[" + count + "]" + path;
+		Node n = node;
+		do {
+			if (n.getNodeType() != Node.TEXT_NODE) {
+				int count = calculateNodeIndex(n);
+				sb.insert(0, "]");
+				sb.insert(0, count);
+				sb.insert(0, "[");
+				sb.insert(0, n.getNodeName());
+				sb.insert(0, "/");
 			}
-			run = run.getParentNode();
-		}
-		return path;
+		} while (n.getParentNode().getNodeType() != Node.DOCUMENT_NODE
+			&& (n = n.getParentNode()).getParentNode() != null);
+
+		sb.insert(0, n.getNodeName());
+		sb.insert(0, "/");
+
+		return sb.toString();
 	}
 }
