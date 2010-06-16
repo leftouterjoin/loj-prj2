@@ -233,6 +233,29 @@ public final class DomUtils {
 		return count;
 	}
 
+	public static String generateXPath(Node node) {
+
+		StringBuffer sb = new StringBuffer();
+
+		Node n = node;
+		do {
+			if (n.getNodeType() != Node.TEXT_NODE) {
+				int count = calculateNodeIndex(n);
+				sb.insert(0, "]");
+				sb.insert(0, count);
+				sb.insert(0, "[");
+				sb.insert(0, n.getNodeName());
+				sb.insert(0, "/");
+			}
+		} while (n.getParentNode().getNodeType() != Node.DOCUMENT_NODE
+			&& (n = n.getParentNode()).getParentNode() != null);
+
+		sb.insert(0, n.getNodeName());
+		sb.insert(0, "/");
+
+		return sb.toString();
+	}
+
 	public static String calculateXPathToNode(Node node) {
 
 		StringBuffer sb = new StringBuffer();
@@ -369,28 +392,5 @@ public final class DomUtils {
 
 		NodeList nl = node.getParentNode().getChildNodes();
 		return (1 == nl.getLength());
-	}
-
-	public static String generateXPath(Node node) {
-
-		StringBuffer sb = new StringBuffer();
-
-		Node n = node;
-		do {
-			if (n.getNodeType() != Node.TEXT_NODE) {
-				int count = calculateNodeIndex(n);
-				sb.insert(0, "]");
-				sb.insert(0, count);
-				sb.insert(0, "[");
-				sb.insert(0, n.getNodeName());
-				sb.insert(0, "/");
-			}
-		} while (n.getParentNode().getNodeType() != Node.DOCUMENT_NODE
-			&& (n = n.getParentNode()).getParentNode() != null);
-
-		sb.insert(0, n.getNodeName());
-		sb.insert(0, "/");
-
-		return sb.toString();
 	}
 }
