@@ -233,31 +233,15 @@ public final class DomUtils {
 		return count;
 	}
 
-	public static String generateXPath(Node node) {
+	public static String calculateXPath(	Node node,
+												boolean inlineAttr) {
 
 		StringBuffer sb = new StringBuffer();
 
 		while (node != null) {
 			if (node.getNodeType() == Node.ELEMENT_NODE) {
-				int count = calculateNodeIndex(node);
-				sb.insert(0, "]");
-				sb.insert(0, count);
-				sb.insert(0, "[");
-				sb.insert(0, node.getNodeName());
-				sb.insert(0, "/");
-			}
-			node = node.getParentNode();
-		}
-		return sb.toString();
-	}
-
-	public static String calculateXPathToNode(Node node) {
-
-		StringBuffer sb = new StringBuffer();
-		while (node != null) {
-			if (node.getNodeType() == Node.ELEMENT_NODE) {
-				String attr = composeXpathAttr(node);
-				if (0 < attr.length()) {
+				String attr;
+				if (inlineAttr && 0 < (attr = calculateAttr(node)).length()) {
 					sb.insert(0, attr);
 				} else {
 					int count = calculateNodeIndex(node);
@@ -270,10 +254,11 @@ public final class DomUtils {
 			}
 			node = node.getParentNode();
 		}
+
 		return sb.toString();
 	}
 
-	private static String composeXpathAttr(Node node) {
+	private static String calculateAttr(Node node) {
 
 		NamedNodeMap nnm = node.getAttributes();
 
@@ -319,7 +304,7 @@ public final class DomUtils {
 			public boolean found(Node node) {
 
 				if (isOutputNode(node)) {
-					String xpath = calculateXPathToNode(node);
+					String xpath = calculateXPath(node, true);
 					String value = (node.getNodeValue() == null) ? "" : node
 						.getNodeValue().trim();
 					if (list.containsKey(xpath))
@@ -346,7 +331,7 @@ public final class DomUtils {
 				// 属性を編集する
 				NamedNodeMap nnm = node.getAttributes();
 				if (nnm != null) {
-					String xpath = generateXPath(node);
+					String xpath = calculateXPath(node, false);
 					for (int i = nnm.getLength() - 1; 0 <= i; i--) {
 						Node n = nnm.item(i);
 						String value = (n.getNodeValue() == null) ? "" : n
@@ -360,7 +345,7 @@ public final class DomUtils {
 
 				// ボディを編集する
 				if (isOutputNode(node)) {
-					String xpath = generateXPath(node);
+					String xpath = calculateXPath(node, false);
 					String value = (node.getNodeValue() == null) ? "" : node
 						.getNodeValue().trim();
 					if (list.containsKey(xpath))
