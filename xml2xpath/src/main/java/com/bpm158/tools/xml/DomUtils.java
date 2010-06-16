@@ -216,25 +216,26 @@ public final class DomUtils {
 		}
 	}
 
-	private static int calculateNodeIndex(Node node) {
+	public static int calculateNodeIndex(Node node) {
 
 		int count = 1;
 		NodeList nl = node.getParentNode().getChildNodes();
+
 		for (int i = 0; i < nl.getLength(); i++) {
 			if (nl.item(i).getNodeName().equals(node.getNodeName())) {
-				// Found the right node?
-				if (nl.item(i) == node) break;
-				else {
-					//System.out.println(nl.item(i));
+				if (nl.item(i) == node) {
+					break;
+				} else {
 					count++;
 				}
 			}
 		}
+
 		return count;
 	}
 
-	public static String calculateXPath(	Node node,
-												boolean inlineAttr) {
+	public static String calculateXPath(Node node,
+										boolean inlineAttr) {
 
 		StringBuffer sb = new StringBuffer();
 
