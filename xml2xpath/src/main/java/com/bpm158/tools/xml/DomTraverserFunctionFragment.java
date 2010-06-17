@@ -6,10 +6,10 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-public class DomTraverseFunctionFragment {
+public class DomTraverserFunctionFragment {
 
 	private static final Log LOG = LogFactory
-		.getLog(DomTraverseFunctionFragment.class);
+		.getLog(DomTraverserFunctionFragment.class);
 
 	static boolean isIgnoreNode(Node node) {
 
