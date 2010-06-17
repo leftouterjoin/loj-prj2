@@ -23,13 +23,12 @@ public class XpathMapper {
 		try {
 			Document document = DomUtils.createDocumentBuilder().parse(is);
 			if (inlineAttr) {
-				DomTraverserFunctionImpl f = new DomTraverserFunctionImpl();
 				return new DomTraverser<DomTraverserFunctionImpl, List<XpathExpression>>(
-					f).traverse(document);
+					new DomTraverserFunctionImpl()).traverse(document);
 			} else {
-				AttrInlineDomTraverserFunctionImpl f = new AttrInlineDomTraverserFunctionImpl();
-				new DomTraverser(f).traverse(document);
-				return f.list;
+				return new DomTraverser<AttrInlineDomTraverserFunctionImpl, List<XpathExpression>>(
+					new AttrInlineDomTraverserFunctionImpl())
+					.traverse(document);
 			}
 		} catch (SAXException e) {
 			throw new RuntimeException(e);
@@ -38,13 +37,14 @@ public class XpathMapper {
 		}
 	}
 
-	static class AttrInlineDomTraverserFunctionImpl implements
-													DomTraverseFunction {
+	static class AttrInlineDomTraverserFunctionImpl
+													implements
+													DomTraverseFunction<List<XpathExpression>> {
 
 		private List<XpathExpression> list = new ArrayList<XpathExpression>();
 
 		@Override
-		public boolean found(Node node) {
+		public boolean whenFound(Node node) {
 
 			if (isIgnoreNode(node)) {
 				LOG.debug("ignored. " + node.getNodeName()
@@ -61,17 +61,9 @@ public class XpathMapper {
 		}
 
 		@Override
-		public DomTraverseResult<List<XpathExpression>> get() {
+		public List<XpathExpression> get() {
 
-			return new DomTraverseResult<List<XpathExpression>>() {
-
-				@Override
-				public List<XpathExpression> get() {
-
-					return list;
-				}
-
-			};
+			return list;
 		}
 	}
 
@@ -82,7 +74,7 @@ public class XpathMapper {
 		private List<XpathExpression> list = new ArrayList<XpathExpression>();
 
 		@Override
-		public boolean found(Node node) {
+		public boolean whenFound(Node node) {
 
 			// ëÆê´Çï“èWÇ∑ÇÈ
 			NamedNodeMap nnm = node.getAttributes();
