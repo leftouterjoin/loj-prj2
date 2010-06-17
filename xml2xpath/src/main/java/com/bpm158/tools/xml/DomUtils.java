@@ -3,13 +3,9 @@ package com.bpm158.tools.xml;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -29,7 +25,6 @@ import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
@@ -39,27 +34,16 @@ public final class DomUtils {
 
 	private static final Log LOG = LogFactory.getLog(DomUtils.class);
 
-	private static DocumentBuilderFactory domFactory;
-
-	public static DocumentBuilderFactory getDomFactory() {
-
-		if (domFactory == null) {
-			domFactory = DocumentBuilderFactory.newInstance();
-		}
-
-		return domFactory;
-	}
-
 	public static DocumentBuilder createDocumentBuilder() {
 
 		try {
-			return getDomFactory().newDocumentBuilder();
+			return DocumentBuilderFactory.newInstance().newDocumentBuilder();
 		} catch (ParserConfigurationException e) {
 			throw new RuntimeException(e);
 		}
 	}
 
-	public Document parseString(StringWriter writer) {
+	public static Document parseString(StringWriter writer) {
 
 		try {
 			return createDocumentBuilder()
@@ -85,7 +69,7 @@ public final class DomUtils {
 		}
 	}
 
-	protected Document parseFile(String path) {
+	public static Document parseFile(String path) {
 
 		try {
 			return createDocumentBuilder().parse(new File(path));
@@ -94,30 +78,6 @@ public final class DomUtils {
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
-	}
-
-	public static List<Node> sanitize(NodeList nodes) {
-
-		ArrayList<Node> list = new ArrayList<Node>();
-
-		L1: for (int i = 0, size = nodes.getLength(); i < size; i++) {
-			Node n = nodes.item(i);
-
-			switch (n.getNodeType()) {
-				case Node.TEXT_NODE:
-					if (n.getNodeValue() != null) {
-						list.add(n);
-						continue L1;
-					}
-				case Node.COMMENT_NODE:
-					LOG.info("ignored. " + n.getNodeName() + n.getNodeValue());
-					continue L1;
-				default:
-					list.add(n);
-			}
-		}
-
-		return list;
 	}
 
 	public static Document overwriteAttribute(	Node swappee,
@@ -156,8 +116,7 @@ public final class DomUtils {
 			XPathConstants.NODESET);
 
 		if (0 == entries.getLength()) {
-			System.err.println("警告: xpathで指定された削除対象ノードが見つかりません。xpath:"
-				+ xpathString);
+			LOG.warn("警告: xpathで指定された削除対象ノードが見つかりません。xpath:" + xpathString);
 		} else {
 			overwriteAttribute(entries.item(0), name, value);
 		}
@@ -165,8 +124,8 @@ public final class DomUtils {
 		return doc;
 	}
 
-	public static final Document removeElement(	Document doc,
-												String xpathString) throws XPathExpressionException {
+	public static Document removeElement(	Document doc,
+											String xpathString) throws XPathExpressionException {
 
 		XPathFactory factory = XPathFactory.newInstance();
 		XPath xpath = factory.newXPath();
@@ -174,8 +133,7 @@ public final class DomUtils {
 			XPathConstants.NODESET);
 
 		if (0 == entries.getLength()) {
-			System.err.println("警告: xpathで指定された削除対象ノードが見つかりません。xpath:"
-				+ xpathString);
+			LOG.warn("警告: xpathで指定された削除対象ノードが見つかりません。xpath:" + xpathString);
 		} else {
 			for (int i = 0; i < entries.getLength(); i++) {
 				Node item = entries.item(i);
@@ -187,8 +145,8 @@ public final class DomUtils {
 						entries.item(i));
 					int elemCount = parent.getChildNodes().getLength();
 					if (1 < elemCount)
-						System.err
-							.println("警告: xpathで指定された削除対象ノードに複数の子ノードが存在します。xpathは最終要素まで指定してください。"
+						LOG
+							.warn("警告: xpathで指定された削除対象ノードに複数の子ノードが存在します。xpathは最終要素まで指定してください。"
 								+ elemCount
 								+ " の要素が比較対象から削除されました。 xpath:"
 								+ xpathString);
@@ -199,7 +157,8 @@ public final class DomUtils {
 		return doc;
 	}
 
-	public static final String document2String(Node node) {
+	public static String toXmlString(	Node node,
+										String encoding) {
 
 		try {
 			TransformerFactory tfactory = TransformerFactory.newInstance();
@@ -208,170 +167,11 @@ public final class DomUtils {
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 			transformer.transform(new DOMSource(node), new StreamResult(baos));
 
-			return baos.toString("utf-8");
+			return baos.toString(encoding);
 		} catch (TransformerException e) {
 			throw new RuntimeException(e);
 		} catch (UnsupportedEncodingException e) {
 			throw new RuntimeException(e);
 		}
-	}
-
-	public static int calculateNodeIndex(Node node) {
-
-		int count = 1;
-		NodeList nl = node.getParentNode().getChildNodes();
-
-		for (int i = 0; i < nl.getLength(); i++) {
-			if (nl.item(i).getNodeName().equals(node.getNodeName())) {
-				if (nl.item(i) == node) {
-					break;
-				} else {
-					count++;
-				}
-			}
-		}
-
-		return count;
-	}
-
-	public static String calculateXPath(Node node,
-										boolean inlineAttr) {
-
-		StringBuffer sb = new StringBuffer();
-
-		while (node != null) {
-			if (node.getNodeType() == Node.ELEMENT_NODE) {
-				String attr;
-				if (inlineAttr && 0 < (attr = calculateAttr(node)).length()) {
-					sb.insert(0, attr);
-				} else {
-					int count = calculateNodeIndex(node);
-					sb.insert(0, "]");
-					sb.insert(0, count);
-					sb.insert(0, "[");
-				}
-				sb.insert(0, node.getNodeName());
-				sb.insert(0, "/");
-			}
-			node = node.getParentNode();
-		}
-
-		return sb.toString();
-	}
-
-	private static String calculateAttr(Node node) {
-
-		NamedNodeMap nnm = node.getAttributes();
-
-		if (nnm == null) return "";
-
-		StringBuffer sb = new StringBuffer();
-
-		for (int i = 0; i < nnm.getLength(); i++) {
-			sb.append("[@");
-			Node n = nnm.item(i);
-			sb.append(n.getNodeName());
-			sb.append("='");
-			sb.append(n.getNodeValue().trim());
-			sb.append("']");
-		}
-
-		return sb.toString();
-	}
-
-	public static LinkedHashMap<String, String> toXpath(InputStream is,
-														boolean fullFlat) {
-
-		try {
-			if (fullFlat) {
-				return toXpathFullFlat(createDocumentBuilder().parse(is));
-			} else {
-				return toXpathIndexed(createDocumentBuilder().parse(is));
-			}
-		} catch (SAXException e) {
-			throw new RuntimeException(e);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	public static LinkedHashMap<String, String> toXpathFullFlat(Document document) {
-
-		final LinkedHashMap<String, String> list = new LinkedHashMap<String, String>();
-
-		new DomTraverser() {
-
-			@Override
-			public boolean found(Node node) {
-
-				if (isOutputNode(node)) {
-					String xpath = calculateXPath(node, true);
-					String value = (node.getNodeValue() == null) ? "" : node
-						.getNodeValue().trim();
-					if (list.containsKey(xpath))
-						LOG.info("xpathの重複を検出。" + xpath);
-					list.put(xpath, value);
-				}
-
-				return false;
-			}
-		}.traverseAllNodes(document);
-
-		return list;
-	}
-
-	public static LinkedHashMap<String, String> toXpathIndexed(Document document) {
-
-		final LinkedHashMap<String, String> list = new LinkedHashMap<String, String>();
-
-		new DomTraverser() {
-
-			@Override
-			public boolean found(Node node) {
-
-				// 属性を編集する
-				NamedNodeMap nnm = node.getAttributes();
-				if (nnm != null) {
-					String xpath = calculateXPath(node, false);
-					for (int i = nnm.getLength() - 1; 0 <= i; i--) {
-						Node n = nnm.item(i);
-						String value = (n.getNodeValue() == null) ? "" : n
-							.getNodeValue().trim();
-						xpath = xpath + "/@" + n.getNodeName();
-						if (list.containsKey(xpath))
-							LOG.info("xpathの重複を検出。" + xpath);
-						list.put(xpath, value);
-					}
-				}
-
-				// ボディを編集する
-				if (isOutputNode(node)) {
-					String xpath = calculateXPath(node, false);
-					String value = (node.getNodeValue() == null) ? "" : node
-						.getNodeValue().trim();
-					if (list.containsKey(xpath))
-						LOG.info("xpathの重複を検出。" + xpath);
-					list.put(xpath, value);
-				}
-
-				return false;
-			}
-		}.traverseAllNodes(document);
-
-		return list;
-	}
-
-	private static boolean isOutputNode(Node node) {
-
-		if (node.getNodeType() == Node.ELEMENT_NODE && !node.hasChildNodes()) {
-			return true;
-		}
-
-		if (node.getNodeType() != Node.TEXT_NODE) {
-			return false;
-		}
-
-		NodeList nl = node.getParentNode().getChildNodes();
-		return (1 == nl.getLength());
 	}
 }
