@@ -9,7 +9,7 @@ import org.w3c.dom.NodeList;
  * Domをトラーバスするテンプレートです。<br>
  * 順序付けは{@link org.w3c.dom.Node#getChildNodes() org.w3c.dom.Node.getChildNodes()}の順に一致します。<br>
  */
-public class DomTraverser<F extends DomTraverseFunction<R>, R> {
+public class DomTraverser<F extends DomTraverserFunction<R>, R> {
 
 	private F function;
 

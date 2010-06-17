@@ -9,7 +9,7 @@ import org.w3c.dom.Node;
 
 class DomTraverserFunctionAttrInlineImpl
 										implements
-										DomTraverseFunction<List<XpathExpression>> {
+										DomTraverserFunction<List<XpathExpression>> {
 
 	private static final Log LOG = LogFactory
 		.getLog(DomTraverserFunctionAttrInlineImpl.class);
@@ -19,12 +19,12 @@ class DomTraverserFunctionAttrInlineImpl
 	@Override
 	public boolean whenFoundNode(Node node) {
 
-		if (DomTraverseFunctionFragment.isIgnoreNode(node)) {
+		if (DomTraverserFunctionFragment.isIgnoreNode(node)) {
 			LOG.debug("ignored. " + node.getNodeName() + node.getNodeValue());
 			return false;
 		}
 
-		String xpath = DomTraverseFunctionFragment.calculateXPath(node, true);
+		String xpath = DomTraverserFunctionFragment.calculateXPath(node, true);
 		String value = (node.getNodeValue() == null) ? "" : node.getNodeValue()
 			.trim();
 		list.add(new XpathExpression(xpath, value));

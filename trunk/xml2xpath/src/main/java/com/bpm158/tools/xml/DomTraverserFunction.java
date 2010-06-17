@@ -5,7 +5,7 @@ import org.w3c.dom.Node;
 /**
  * Domトラーバス時の機能テンプレートです。<br>
  */
-public interface DomTraverseFunction<R> {
+public interface DomTraverserFunction<R> {
 
 	/**
 	 * テンプレートメソッド。<br>

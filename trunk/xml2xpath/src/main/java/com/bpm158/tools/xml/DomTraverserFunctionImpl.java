@@ -9,7 +9,7 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
 class DomTraverserFunctionImpl implements
-								DomTraverseFunction<List<XpathExpression>> {
+								DomTraverserFunction<List<XpathExpression>> {
 
 	private static final Log LOG = LogFactory
 		.getLog(DomTraverserFunctionImpl.class);
@@ -22,7 +22,7 @@ class DomTraverserFunctionImpl implements
 		// 属性を編集する
 		NamedNodeMap nnm = node.getAttributes();
 		if (nnm != null) {
-			String xpath = DomTraverseFunctionFragment.calculateXPath(node,
+			String xpath = DomTraverserFunctionFragment.calculateXPath(node,
 				false);
 			for (int i = 0; i < nnm.getLength(); i++) {
 				Node n = nnm.item(i);
@@ -34,12 +34,12 @@ class DomTraverserFunctionImpl implements
 		}
 
 		// ボディを編集する
-		if (DomTraverseFunctionFragment.isIgnoreNode(node)) {
+		if (DomTraverserFunctionFragment.isIgnoreNode(node)) {
 			LOG.debug("ignored. " + node.getNodeName() + node.getNodeValue());
 			return false;
 		}
 
-		String xpath = DomTraverseFunctionFragment.calculateXPath(node, false);
+		String xpath = DomTraverserFunctionFragment.calculateXPath(node, false);
 		String value = (node.getNodeValue() == null) ? "" : node.getNodeValue()
 			.trim();
 		list.add(new XpathExpression(xpath, value));
