@@ -24,8 +24,8 @@ public class XpathMapper {
 			Document document = DomUtils.createDocumentBuilder().parse(is);
 			if (inlineAttr) {
 				DomTraverserFunctionImpl f = new DomTraverserFunctionImpl();
-				new DomTraverser(f).traverse(document);
-				return f.list;
+				return new DomTraverser<DomTraverserFunctionImpl, List<XpathExpression>>(
+					f).traverse(document);
 			} else {
 				AttrInlineDomTraverserFunctionImpl f = new AttrInlineDomTraverserFunctionImpl();
 				new DomTraverser(f).traverse(document);
@@ -39,9 +39,9 @@ public class XpathMapper {
 	}
 
 	static class AttrInlineDomTraverserFunctionImpl implements
-													DomTraverserFunction {
+													DomTraverseFunction {
 
-		List<XpathExpression> list = new ArrayList<XpathExpression>();
+		private List<XpathExpression> list = new ArrayList<XpathExpression>();
 
 		@Override
 		public boolean found(Node node) {
@@ -59,9 +59,25 @@ public class XpathMapper {
 
 			return false;
 		}
+
+		@Override
+		public DomTraverseResult<List<XpathExpression>> get() {
+
+			return new DomTraverseResult<List<XpathExpression>>() {
+
+				@Override
+				public List<XpathExpression> get() {
+
+					return list;
+				}
+
+			};
+		}
 	}
 
-	static class DomTraverserFunctionImpl implements DomTraverserFunction {
+	static class DomTraverserFunctionImpl
+											implements
+											DomTraverseFunction<List<XpathExpression>> {
 
 		private List<XpathExpression> list = new ArrayList<XpathExpression>();
 
@@ -95,6 +111,13 @@ public class XpathMapper {
 
 			return false;
 		}
+
+		@Override
+		public List<XpathExpression> get() {
+
+			return list;
+		}
+
 	}
 
 	private static boolean isIgnoreNode(Node node) {
