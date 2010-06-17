@@ -35,13 +35,16 @@ public class DomTraverser {
 	public boolean start(Node root) {
 
 		LinkedList<Node> q = new LinkedList<Node>();
+
 		q.offer(root);
 
-		// 全ノードをtraverseする
+		// 全ノードをトラバースする
 		while (!q.isEmpty()) {
 			Node current = q.poll();
+
 			// 現在のノードを処理する
 			if (found(current)) return false;
+
 			// 子ノードをキューに積む
 			List<Node> list = new ArrayList<Node>();
 			NodeList nl = current.getChildNodes();
