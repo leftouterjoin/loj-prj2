@@ -103,7 +103,7 @@ public class XpathMapper {
 		return list;
 	}
 
-	public static boolean isIgnoreNode(Node node) {
+	private static boolean isIgnoreNode(Node node) {
 
 		if (node.getNodeType() == Node.COMMENT_NODE) {
 			return true;
@@ -121,7 +121,7 @@ public class XpathMapper {
 		return (1 != nl.getLength());
 	}
 
-	public static int calculateNodeIndex(Node node) {
+	private static int calculateNodeIndex(Node node) {
 
 		int count = 1;
 		NodeList nl = node.getParentNode().getChildNodes();
@@ -139,8 +139,8 @@ public class XpathMapper {
 		return count;
 	}
 
-	public static String calculateXPath(Node node,
-										boolean inlineAttr) {
+	private static String calculateXPath(	Node node,
+											boolean inlineAttr) {
 
 		StringBuffer sb = new StringBuffer();
 
@@ -164,7 +164,7 @@ public class XpathMapper {
 		return sb.toString();
 	}
 
-	public static String calculateAttr(Node node) {
+	private static String calculateAttr(Node node) {
 
 		NamedNodeMap nnm = node.getAttributes();
 
