@@ -13,26 +13,21 @@ import org.w3c.dom.NodeList;
  */
 public class DomTraverser {
 
-	/**
-	 * テンプレートメソッド。<br>
-	 * サブクラスでオーバーライドすることにより1つのノードが処理されるたびコールバック呼び出しされます。<br>
-	 * 
-	 * @param node 見つかったノード
-	 * @return 処理を中断する場合 true
-	 */
-	public boolean found(Node node) {
+	private DomTraverserFunction function;
 
-		// 処理を中断する
-		return true;
+	public DomTraverser(DomTraverserFunction function) {
+
+		this.function = function;
 	}
 
 	/**
 	 * トラバースを開始します。<br>
 	 * 
 	 * @param root トラバースを開始するノード
+	 * @param function ノード検出時のファンクション
 	 * @return 最後まで処理した場合 ture
 	 */
-	public boolean start(Node root) {
+	public boolean traverse(Node root) {
 
 		LinkedList<Node> q = new LinkedList<Node>();
 
@@ -43,7 +38,7 @@ public class DomTraverser {
 			Node current = q.poll();
 
 			// 現在のノードを処理する
-			if (found(current)) return false;
+			if (function.found(current)) return false;
 
 			// 子ノードをキューに積む
 			List<Node> list = new ArrayList<Node>();
