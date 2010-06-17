@@ -75,12 +75,12 @@ public class XpathMapper {
 				NamedNodeMap nnm = node.getAttributes();
 				if (nnm != null) {
 					String xpath = XpathMapper.calculateXPath(node, false);
-					for (int i = nnm.getLength() - 1; 0 <= i; i--) {
+					for (int i = 0; i < nnm.getLength(); i++) {
 						Node n = nnm.item(i);
 						String value = (n.getNodeValue() == null) ? "" : n
 							.getNodeValue().trim();
-						xpath = xpath + "/@" + n.getNodeName();
-						list.add(new XpathExpression(xpath, value));
+						list.add(new XpathExpression(xpath + "/@"
+							+ n.getNodeName(), value));
 					}
 				}
 
