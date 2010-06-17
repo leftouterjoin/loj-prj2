@@ -37,7 +37,8 @@ public class DomTraverser<F extends DomTraverseFunction<R>, R> {
 			Node current = q.poll();
 
 			// 現在のノードを処理する
-			if (function.whenFound(current)) return function.get();
+			if (function.whenNodeFound(current))
+				return function.whenDoneTraverse();
 
 			// 子ノードをキューに積む
 			List<Node> list = new ArrayList<Node>();
@@ -48,6 +49,6 @@ public class DomTraverser<F extends DomTraverseFunction<R>, R> {
 		}
 
 		// 最後まで処理した
-		return function.get();
+		return function.whenDoneTraverse();
 	}
 }
