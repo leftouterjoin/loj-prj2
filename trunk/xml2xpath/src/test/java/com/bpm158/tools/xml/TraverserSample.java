@@ -11,6 +11,23 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+/**
+ * 再帰と非再帰のサンプル<br>
+ * <br>
+ * 木構造(ディレクトリやDOMツリーなど)をトラバースする際、再帰を使うと<br>
+ * 簡単に実装ができる。<br>
+ * <br>
+ * でも、Java VMのデフォルトのスタックサイズは512KB。<br>
+ * つまり、Java の考え方としては「ヒープを使え」と言っていいと思う。<br>
+ * <br>
+ * int m(int i)みたいなメソッドでも、10000回に満たない再帰呼び出しで<br>
+ * java.lang.StackOverflowErrorがthrowされる。<br>
+ * <br>
+ * 単純に再帰を非再帰にする方法はStackをヒープにとること(変な表現だけど間違<br>
+ * いじゃない)。<br>
+ * <br>
+ * ここでは例としてDOMツリーのトラバースを再帰、非再帰で実装してみる。<br>
+ */
 public class TraverserSample {
 
 	int counter;
