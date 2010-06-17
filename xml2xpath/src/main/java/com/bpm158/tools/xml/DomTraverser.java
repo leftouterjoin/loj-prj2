@@ -1,8 +1,6 @@
 package com.bpm158.tools.xml;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Stack;
 
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -28,24 +26,21 @@ public class DomTraverser<F extends DomTraverseFunction<R>, R> {
 	 */
 	public R traverse(Node root) {
 
-		LinkedList<Node> q = new LinkedList<Node>();
-
-		q.offer(root);
+		Stack<Node> stack = new Stack<Node>();
+		stack.push(root);
 
 		// 全ノードをトラバースする
-		while (!q.isEmpty()) {
-			Node current = q.poll();
+		while (!stack.isEmpty()) {
+			Node current = stack.pop();
 
 			// 現在のノードを処理する
 			if (function.whenFoundNode(current))
 				return function.whenDoneTraverse();
 
 			// 子ノードをキューに積む
-			List<Node> list = new ArrayList<Node>();
 			NodeList nl = current.getChildNodes();
-			for (int i = 0, size = nl.getLength(); i < size; i++)
-				list.add(nl.item(i));
-			q.addAll(0, list);
+			for (int i = nl.getLength() - 1; 0 <= i; i--)
+				stack.push(nl.item(i));
 		}
 
 		// 最後まで処理した
