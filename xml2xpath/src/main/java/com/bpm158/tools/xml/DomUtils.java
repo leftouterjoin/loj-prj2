@@ -30,10 +30,18 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+/**
+ * Dom操作の汎用機能です。
+ */
 public final class DomUtils {
 
 	private static final Log LOG = LogFactory.getLog(DomUtils.class);
 
+	/**
+	 * DocumentBuilderを作成します。
+	 * 
+	 * @return DocumentBuilder のインスタンス
+	 */
 	public static DocumentBuilder createDocumentBuilder() {
 
 		try {
@@ -43,6 +51,12 @@ public final class DomUtils {
 		}
 	}
 
+	/**
+	 * xmlを文字列からパースします。
+	 * 
+	 * @param writer StringWriter
+	 * @return Documentのインスタンス
+	 */
 	public static Document parseString(StringWriter writer) {
 
 		try {
@@ -57,6 +71,12 @@ public final class DomUtils {
 		}
 	}
 
+	/**
+	 * xmlをStringWriterからパースします。
+	 * 
+	 * @param string xml文字列
+	 * @return Documentのインスタンス
+	 */
 	public static Document parseString(String string) {
 
 		try {
@@ -69,6 +89,12 @@ public final class DomUtils {
 		}
 	}
 
+	/**
+	 * xmlをファイルからパースします。
+	 * 
+	 * @param string xmlファイルのパス
+	 * @return Documentのインスタンス
+	 */
 	public static Document parseFile(String path) {
 
 		try {
@@ -80,6 +106,14 @@ public final class DomUtils {
 		}
 	}
 
+	/**
+	 * 属性を上書きします。
+	 * 
+	 * @param swappee ノード
+	 * @param name 属性名
+	 * @param value 属性値
+	 * @return 処理したノード
+	 */
 	public static Document overwriteAttribute(	Node swappee,
 												String name,
 												String value) {
@@ -105,6 +139,16 @@ public final class DomUtils {
 		return parent.getOwnerDocument();
 	}
 
+	/**
+	 * xmlドキュメントのxpathで指定した属性を上書きします。<br>
+	 * 
+	 * @param doc ドキュメント
+	 * @param xpathString xpath文字列
+	 * @param name 属性名
+	 * @param value 属性値
+	 * @return 処理したドキュメント
+	 * @throws XPathExpressionException 例外
+	 */
 	public static Document overwriteAttributeByXpath(	Document doc,
 														String xpathString,
 														String name,
@@ -124,6 +168,14 @@ public final class DomUtils {
 		return doc;
 	}
 
+	/**
+	 * xmlドキュメントのxpathで指定した属性を上書きします。<br>
+	 * 
+	 * @param doc ドキュメント
+	 * @param xpathString xpath文字列
+	 * @return 処理したドキュメント
+	 * @throws XPathExpressionException
+	 */
 	public static Document removeElement(	Document doc,
 											String xpathString) throws XPathExpressionException {
 
@@ -157,6 +209,13 @@ public final class DomUtils {
 		return doc;
 	}
 
+	/**
+	 * ノードをxml文字列にして返します。<br>
+	 * 
+	 * @param node ノード
+	 * @param encoding エンコード
+	 * @return xml文字列
+	 */
 	public static String toXmlString(	Node node,
 										String encoding) {
 

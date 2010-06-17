@@ -2,7 +2,8 @@ package com.bpm158.tools.xml;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.LinkedHashMap;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -16,8 +17,8 @@ public class XpathMapper {
 
 	private static final Log LOG = LogFactory.getLog(XpathMapper.class);
 
-	public static LinkedHashMap<String, String> toXpath(InputStream is,
-														boolean fullFlat) {
+	public static List<XpathExpression> toXpath(InputStream is,
+												boolean fullFlat) {
 
 		try {
 			if (fullFlat) {
@@ -34,9 +35,9 @@ public class XpathMapper {
 		}
 	}
 
-	public static LinkedHashMap<String, String> toXpathFullFlat(Document document) {
+	public static List<XpathExpression> toXpathFullFlat(Document document) {
 
-		final LinkedHashMap<String, String> list = new LinkedHashMap<String, String>();
+		final List<XpathExpression> list = new ArrayList<XpathExpression>();
 
 		new DomTraverser() {
 
@@ -52,19 +53,18 @@ public class XpathMapper {
 				String xpath = XpathMapper.calculateXPath(node, true);
 				String value = (node.getNodeValue() == null) ? "" : node
 					.getNodeValue().trim();
-				if (list.containsKey(xpath)) LOG.warn("xpathの重複を検出。" + xpath);
-				list.put(xpath, value);
+				list.add(new XpathExpression(xpath, value));
 
 				return false;
 			}
-		}.traverseAllNodes(document);
+		}.start(document);
 
 		return list;
 	}
 
-	public static LinkedHashMap<String, String> toXpathIndexed(Document document) {
+	public static List<XpathExpression> toXpathIndexed(Document document) {
 
-		final LinkedHashMap<String, String> list = new LinkedHashMap<String, String>();
+		final List<XpathExpression> list = new ArrayList<XpathExpression>();
 
 		new DomTraverser() {
 
@@ -80,9 +80,7 @@ public class XpathMapper {
 						String value = (n.getNodeValue() == null) ? "" : n
 							.getNodeValue().trim();
 						xpath = xpath + "/@" + n.getNodeName();
-						if (list.containsKey(xpath))
-							LOG.warn("xpathの重複を検出。" + xpath);
-						list.put(xpath, value);
+						list.add(new XpathExpression(xpath, value));
 					}
 				}
 
@@ -96,12 +94,11 @@ public class XpathMapper {
 				String xpath = XpathMapper.calculateXPath(node, false);
 				String value = (node.getNodeValue() == null) ? "" : node
 					.getNodeValue().trim();
-				if (list.containsKey(xpath)) LOG.warn("xpathの重複を検出。" + xpath);
-				list.put(xpath, value);
+				list.add(new XpathExpression(xpath, value));
 
 				return false;
 			}
-		}.traverseAllNodes(document);
+		}.start(document);
 
 		return list;
 	}

@@ -7,15 +7,32 @@ import java.util.List;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+/**
+ * Domをトラーバスするテンプレートです。<br>
+ * 順序付けは{@link org.w3c.dom.Node#getChildNodes() org.w3c.dom.Node.getChildNodes()}の順に一致します。<br>
+ */
 public class DomTraverser {
 
+	/**
+	 * テンプレートメソッド。<br>
+	 * サブクラスでオーバーライドすることにより1つのノードが処理されるたびコールバック呼び出しされます。<br>
+	 * 
+	 * @param node 見つかったノード
+	 * @return 処理を中断する場合 true
+	 */
 	public boolean found(Node node) {
 
 		// 処理を中断する
 		return true;
 	}
 
-	public boolean traverseAllNodes(Node root) {
+	/**
+	 * トラバースを開始します。<br>
+	 * 
+	 * @param root トラバースを開始するノード
+	 * @return 最後まで処理した場合 ture
+	 */
+	public boolean start(Node root) {
 
 		LinkedList<Node> q = new LinkedList<Node>();
 		q.offer(root);
