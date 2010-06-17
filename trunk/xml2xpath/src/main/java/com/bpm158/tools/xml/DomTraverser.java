@@ -8,21 +8,30 @@ import org.w3c.dom.NodeList;
 /**
  * Domをトラーバスするテンプレートです。<br>
  * 順序付けは{@link org.w3c.dom.Node#getChildNodes() org.w3c.dom.Node.getChildNodes()}の順に一致します。<br>
+ * 
+ * @param <F> DomTraverserFunctionの実装クラス
+ * @param <R> 処理結果クラス
  */
 public class DomTraverser<F extends DomTraverserFunction<R>, R> {
 
+	/** DomTraverserFunction */
 	private F function;
 
+	/**
+	 * DomTraverserFunctionの実装クラスを指定します。
+	 * 
+	 * @param function DomTraverserFunctionの実装クラスのインスタンス
+	 */
 	public DomTraverser(F function) {
 
 		this.function = function;
 	}
 
 	/**
-	 * トラバースを開始します。<br>
+	 * トラバースします。<br>
 	 * 
 	 * @param root トラバースを開始するノード
-	 * @return 最後まで処理した場合 ture
+	 * @return 処理結果
 	 */
 	public R traverse(Node root) {
 
@@ -37,13 +46,12 @@ public class DomTraverser<F extends DomTraverserFunction<R>, R> {
 			if (function.whenFoundNode(current))
 				return function.whenDoneTraverse();
 
-			// 子ノードをキューに積む
+			// 子ノードをstackに積む
 			NodeList nl = current.getChildNodes();
 			for (int i = nl.getLength() - 1; 0 <= i; i--)
 				stack.push(nl.item(i));
 		}
 
-		// 最後まで処理した
 		return function.whenDoneTraverse();
 	}
 }

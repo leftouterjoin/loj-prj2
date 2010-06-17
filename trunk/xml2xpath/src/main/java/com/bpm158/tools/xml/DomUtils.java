@@ -31,11 +31,19 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 /**
- * Dom操作の汎用機能です。
+ * DOM操作の汎用機能です。
  */
 public final class DomUtils {
 
+	/** ログ */
 	private static final Log LOG = LogFactory.getLog(DomUtils.class);
+
+	/**
+	 * インスタンス化禁止
+	 */
+	private DomUtils() {
+
+	}
 
 	/**
 	 * DocumentBuilderを作成します。
@@ -52,7 +60,7 @@ public final class DomUtils {
 	}
 
 	/**
-	 * xmlを文字列からパースします。
+	 * xmlを文字列からパースします。<br>
 	 * 
 	 * @param writer StringWriter
 	 * @return Documentのインスタンス
@@ -72,7 +80,7 @@ public final class DomUtils {
 	}
 
 	/**
-	 * xmlをStringWriterからパースします。
+	 * xmlをStringWriterからパースします。<br>
 	 * 
 	 * @param string xml文字列
 	 * @return Documentのインスタンス
@@ -90,9 +98,9 @@ public final class DomUtils {
 	}
 
 	/**
-	 * xmlをファイルからパースします。
+	 * xmlをファイルからパースします。<br>
 	 * 
-	 * @param string xmlファイルのパス
+	 * @param path xmlファイルのパス
 	 * @return Documentのインスタンス
 	 */
 	public static Document parseFile(String path) {
@@ -107,7 +115,7 @@ public final class DomUtils {
 	}
 
 	/**
-	 * 属性を上書きします。
+	 * 属性を上書きします。<br>
 	 * 
 	 * @param swappee ノード
 	 * @param name 属性名
@@ -174,7 +182,7 @@ public final class DomUtils {
 	 * @param doc ドキュメント
 	 * @param xpathString xpath文字列
 	 * @return 処理したドキュメント
-	 * @throws XPathExpressionException
+	 * @throws XPathExpressionException XPathExpressionException
 	 */
 	public static Document removeElement(	Document doc,
 											String xpathString) throws XPathExpressionException {

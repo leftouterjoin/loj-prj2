@@ -1,16 +1,27 @@
 package com.bpm158.tools.xml;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-public class DomTraverserFunctionFragment {
+/**
+ * Xpath変換機能の断片です。<br>
+ */
+public final class XpathConverterFragment {
 
-	private static final Log LOG = LogFactory
-		.getLog(DomTraverserFunctionFragment.class);
+	/**
+	 * インスタンス化禁止
+	 */
+	private XpathConverterFragment() {
 
+	}
+
+	/**
+	 * 対象外ノードか判定します。<br>
+	 * 
+	 * @param node ノード
+	 * @return 無視する場合 true
+	 */
 	static boolean isIgnoreNode(Node node) {
 
 		if (node.getNodeType() == Node.COMMENT_NODE) {
@@ -29,6 +40,12 @@ public class DomTraverserFunctionFragment {
 		return (1 != nl.getLength());
 	}
 
+	/**
+	 * ノードのインデックスを計算します。<br>
+	 * 
+	 * @param node ノード
+	 * @return インデックス
+	 */
 	private static int calculateNodeIndex(Node node) {
 
 		int count = 1;
@@ -47,6 +64,13 @@ public class DomTraverserFunctionFragment {
 		return count;
 	}
 
+	/**
+	 * xpathを求めます。<br>
+	 * 
+	 * @param node ノード
+	 * @param inlineAttr 属性をインライン化するか否か
+	 * @return xpath
+	 */
 	static String calculateXPath(	Node node,
 									boolean inlineAttr) {
 
@@ -72,6 +96,12 @@ public class DomTraverserFunctionFragment {
 		return sb.toString();
 	}
 
+	/**
+	 * 属性を求めます。<br>
+	 * 
+	 * @param node ノード
+	 * @return xpathの属性表現
+	 */
 	private static String calculateAttr(Node node) {
 
 		NamedNodeMap nnm = node.getAttributes();
