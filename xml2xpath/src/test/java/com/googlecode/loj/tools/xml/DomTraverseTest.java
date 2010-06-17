@@ -18,41 +18,46 @@ import org.w3c.dom.NodeList;
  * 簡単に実装ができる。<br>
  * <br>
  * でも、Java VMのデフォルトのスタックサイズは512KB。<br>
+ * <br>
  * つまり、Java の考え方としては「ヒープを使え」と言っていいと思う。<br>
  * <br>
  * int m(int i)みたいなメソッドでも、10000回に満たない再帰呼び出しで<br>
- * java.lang.StackOverflowErrorがthrowされる。<br>
+ * java.lang.StackOverflowErrorがthrowされるらしい。<br>
+ * <br>
+ * ここでは例としてDOMツリーのトラバースを再帰、非再帰で実装してみる。<br>
  * <br>
  * 単純に再帰を非再帰にする方法はStackをヒープにとること(変な表現だけど間違<br>
  * いじゃない)。<br>
  * <br>
- * ここでは例としてDOMツリーのトラバースを再帰、非再帰で実装してみる。<br>
+ * testRecursiveは3438回でjava.lang.StackOverflowErrorがthrowされた。<br>
+ * testNonRecursiveは最後まで処理された。<br>
+ * <br>
  */
 public class DomTraverseTest {
 
 	int counter;
 
 	@Test
-	public void test1() throws Exception {
+	public void testRecursive() throws Exception {
 
-		InputStream is = new FileInputStream("./manyA.xml");
+		InputStream is = new FileInputStream("./manyChild.xml");
 		Document document = DocumentBuilderFactory.newInstance()
 			.newDocumentBuilder().parse(is);
 
-		traverseByRecursive(document);
+		traverseNodeByRecursive(document);
 	}
 
 	@Test
-	public void test2() throws Exception {
+	public void testNonRecursive() throws Exception {
 
-		InputStream is = new FileInputStream("./manyA.xml");
+		InputStream is = new FileInputStream("./manyChild.xml");
 		Document document = DocumentBuilderFactory.newInstance()
 			.newDocumentBuilder().parse(is);
 
-		traverseByLifo(document);
+		traverseNodeByNonRecursive(document);
 	}
 
-	private void traverseByRecursive(Node node) {
+	private void traverseNodeByRecursive(Node node) {
 
 		// 目的の処理
 		System.out.format("%d nodeName=%s, nodeValue=%s\n", ++counter, node
@@ -61,10 +66,10 @@ public class DomTraverseTest {
 		// 子要素の再帰呼び出し
 		NodeList nl = node.getChildNodes();
 		for (int i = 0; i < nl.getLength(); i++)
-			traverseByRecursive(nl.item(i));
+			traverseNodeByRecursive(nl.item(i));
 	}
 
-	private void traverseByLifo(Node node) {
+	private void traverseNodeByNonRecursive(Node node) {
 
 		Stack<Node> stack = new Stack<Node>();
 		stack.push(node);
