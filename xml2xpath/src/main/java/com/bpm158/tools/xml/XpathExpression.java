@@ -5,7 +5,9 @@ package com.bpm158.tools.xml;
  */
 public class XpathExpression implements Comparable<XpathExpression> {
 
+	/** xpath */
 	private String xpath;
+	/** nodeValue */
 	private String nodeValue;
 
 	/**

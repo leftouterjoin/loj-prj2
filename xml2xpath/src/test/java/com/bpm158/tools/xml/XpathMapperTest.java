@@ -18,8 +18,8 @@ public class XpathMapperTest {
 
 		Document document = DomUtils.createDocumentBuilder().parse(is);
 
-		List<XpathExpression> list = new DomTraverser<DomTraverserFunctionImpl, List<XpathExpression>>(
-			new DomTraverserFunctionImpl()).traverse(document);
+		List<XpathExpression> list = new DomTraverser<XpathConverterWithSeparatedAttr, List<XpathExpression>>(
+			new XpathConverterWithSeparatedAttr()).traverse(document);
 
 		for (XpathExpression x : list) {
 			System.out.format("%s\t%s\n", x.getXpath(), x.getNodeValue());
@@ -35,8 +35,8 @@ public class XpathMapperTest {
 
 		Document document = DomUtils.createDocumentBuilder().parse(is);
 
-		List<XpathExpression> list = new DomTraverser<DomTraverserFunctionAttrInlineImpl, List<XpathExpression>>(
-			new DomTraverserFunctionAttrInlineImpl()).traverse(document);
+		List<XpathExpression> list = new DomTraverser<XpathConverterWithAttrInline, List<XpathExpression>>(
+			new XpathConverterWithAttrInline()).traverse(document);
 
 		for (XpathExpression x : list) {
 			System.out.format("%s\t%s\n", x.getXpath(), x.getNodeValue());
