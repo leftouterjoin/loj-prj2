@@ -28,7 +28,7 @@ import org.w3c.dom.NodeList;
  * <br>
  * ここでは例としてDOMツリーのトラバースを再帰、非再帰で実装してみる。<br>
  */
-public class TraverserSample {
+public class DomTraverseTest {
 
 	int counter;
 

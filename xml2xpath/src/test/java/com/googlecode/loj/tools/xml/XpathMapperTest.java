@@ -7,20 +7,13 @@ import java.util.List;
 import org.junit.Test;
 import org.w3c.dom.Document;
 
-import com.googlecode.loj.tools.xml.DomTraverser;
-import com.googlecode.loj.tools.xml.DomUtils;
-import com.googlecode.loj.tools.xml.XpathConverterWithAttrInline;
-import com.googlecode.loj.tools.xml.XpathConverterWithSeparatedAttr;
-import com.googlecode.loj.tools.xml.XpathExpression;
-
 public class XpathMapperTest {
 
 	@Test
 	public void test1() throws Exception {
 
 		InputStream is = new FileInputStream("./web.xml");
-//		InputStream is = new FileInputStream(
-//			"ChoiceStationMobileActionTest__perform_7.data.in.1.xml");
+//		InputStream is = new FileInputStream("java.beans.XMLDecoder.sample.xml");
 
 		Document document = DomUtils.createDocumentBuilder().parse(is);
 
@@ -36,8 +29,7 @@ public class XpathMapperTest {
 	public void test2() throws Exception {
 
 		InputStream is = new FileInputStream("./web.xml");
-//		InputStream is = new FileInputStream(
-//			"ChoiceStationMobileActionTest__perform_7.data.in.1.xml");
+//		InputStream is = new FileInputStream("java.beans.XMLDecoder.sample.xml");
 
 		Document document = DomUtils.createDocumentBuilder().parse(is);
 
