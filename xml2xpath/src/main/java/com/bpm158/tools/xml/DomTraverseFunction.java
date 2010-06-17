@@ -5,7 +5,7 @@ import org.w3c.dom.Node;
 /**
  * Domトラーバス時の機能テンプレートです。<br>
  */
-public interface DomTraverserFunction {
+public interface DomTraverseFunction<R> {
 
 	/**
 	 * テンプレートメソッド。<br>
@@ -15,4 +15,6 @@ public interface DomTraverserFunction {
 	 * @return 処理を中断する場合 true
 	 */
 	boolean found(Node node);
+
+	R get();
 }
