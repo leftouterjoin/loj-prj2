@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.util.List;
 
 import org.junit.Test;
+import org.w3c.dom.Document;
 
 public class XpathMapperTest {
 
@@ -15,7 +16,27 @@ public class XpathMapperTest {
 //		InputStream is = new FileInputStream(
 //			"ChoiceStationMobileActionTest__perform_7.data.in.1.xml");
 
-		List<XpathExpression> list = XpathMapper.toXpath(is, false);
+		Document document = DomUtils.createDocumentBuilder().parse(is);
+
+		List<XpathExpression> list = new DomTraverser<DomTraverserFunctionImpl, List<XpathExpression>>(
+			new DomTraverserFunctionImpl()).traverse(document);
+
+		for (XpathExpression x : list) {
+			System.out.format("%s\t%s\n", x.getXpath(), x.getNodeValue());
+		}
+	}
+
+	@Test
+	public void test2() throws Exception {
+
+		InputStream is = new FileInputStream("./web.xml");
+//		InputStream is = new FileInputStream(
+//			"ChoiceStationMobileActionTest__perform_7.data.in.1.xml");
+
+		Document document = DomUtils.createDocumentBuilder().parse(is);
+
+		List<XpathExpression> list = new DomTraverser<DomTraverserFunctionAttrInlineImpl, List<XpathExpression>>(
+			new DomTraverserFunctionAttrInlineImpl()).traverse(document);
 
 		for (XpathExpression x : list) {
 			System.out.format("%s\t%s\n", x.getXpath(), x.getNodeValue());
