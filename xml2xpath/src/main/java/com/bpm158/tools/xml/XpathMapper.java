@@ -18,15 +18,18 @@ public class XpathMapper {
 	private static final Log LOG = LogFactory.getLog(XpathMapper.class);
 
 	public static List<XpathExpression> toXpath(InputStream is,
-												boolean fullFlat) {
+												boolean inlineAttr) {
 
 		try {
-			if (fullFlat) {
-				return toXpathFullFlat(DomUtils.createDocumentBuilder().parse(
-					is));
+			Document document = DomUtils.createDocumentBuilder().parse(is);
+			if (inlineAttr) {
+				DomTraverserFunctionImpl f = new DomTraverserFunctionImpl();
+				new DomTraverser(f).traverse(document);
+				return f.list;
 			} else {
-				return toXpathIndexed(DomUtils.createDocumentBuilder()
-					.parse(is));
+				AttrInlineDomTraverserFunctionImpl f = new AttrInlineDomTraverserFunctionImpl();
+				new DomTraverser(f).traverse(document);
+				return f.list;
 			}
 		} catch (SAXException e) {
 			throw new RuntimeException(e);
@@ -35,72 +38,63 @@ public class XpathMapper {
 		}
 	}
 
-	public static List<XpathExpression> toXpathFullFlat(Document document) {
+	static class AttrInlineDomTraverserFunctionImpl implements
+													DomTraverserFunction {
 
-		final List<XpathExpression> list = new ArrayList<XpathExpression>();
+		List<XpathExpression> list = new ArrayList<XpathExpression>();
 
-		new DomTraverser() {
+		@Override
+		public boolean found(Node node) {
 
-			@Override
-			public boolean found(Node node) {
-
-				if (isIgnoreNode(node)) {
-					LOG.debug("ignored. " + node.getNodeName()
-						+ node.getNodeValue());
-					return false;
-				}
-
-				String xpath = XpathMapper.calculateXPath(node, true);
-				String value = (node.getNodeValue() == null) ? "" : node
-					.getNodeValue().trim();
-				list.add(new XpathExpression(xpath, value));
-
+			if (isIgnoreNode(node)) {
+				LOG.debug("ignored. " + node.getNodeName()
+					+ node.getNodeValue());
 				return false;
 			}
-		}.start(document);
 
-		return list;
+			String xpath = calculateXPath(node, true);
+			String value = (node.getNodeValue() == null) ? "" : node
+				.getNodeValue().trim();
+			list.add(new XpathExpression(xpath, value));
+
+			return false;
+		}
 	}
 
-	public static List<XpathExpression> toXpathIndexed(Document document) {
+	static class DomTraverserFunctionImpl implements DomTraverserFunction {
 
-		final List<XpathExpression> list = new ArrayList<XpathExpression>();
+		private List<XpathExpression> list = new ArrayList<XpathExpression>();
 
-		new DomTraverser() {
+		@Override
+		public boolean found(Node node) {
 
-			@Override
-			public boolean found(Node node) {
-
-				// 属性を編集する
-				NamedNodeMap nnm = node.getAttributes();
-				if (nnm != null) {
-					String xpath = XpathMapper.calculateXPath(node, false);
-					for (int i = 0; i < nnm.getLength(); i++) {
-						Node n = nnm.item(i);
-						String value = (n.getNodeValue() == null) ? "" : n
-							.getNodeValue().trim();
-						list.add(new XpathExpression(xpath + "/@"
-							+ n.getNodeName(), value));
-					}
+			// 属性を編集する
+			NamedNodeMap nnm = node.getAttributes();
+			if (nnm != null) {
+				String xpath = calculateXPath(node, false);
+				for (int i = 0; i < nnm.getLength(); i++) {
+					Node n = nnm.item(i);
+					String value = (n.getNodeValue() == null) ? "" : n
+						.getNodeValue().trim();
+					list.add(new XpathExpression(
+						xpath + "/@" + n.getNodeName(), value));
 				}
+			}
 
-				// ボディを編集する
-				if (isIgnoreNode(node)) {
-					LOG.debug("ignored. " + node.getNodeName()
-						+ node.getNodeValue());
-					return false;
-				}
-
-				String xpath = XpathMapper.calculateXPath(node, false);
-				String value = (node.getNodeValue() == null) ? "" : node
-					.getNodeValue().trim();
-				list.add(new XpathExpression(xpath, value));
-
+			// ボディを編集する
+			if (isIgnoreNode(node)) {
+				LOG.debug("ignored. " + node.getNodeName()
+					+ node.getNodeValue());
 				return false;
 			}
-		}.start(document);
 
-		return list;
+			String xpath = calculateXPath(node, false);
+			String value = (node.getNodeValue() == null) ? "" : node
+				.getNodeValue().trim();
+			list.add(new XpathExpression(xpath, value));
+
+			return false;
+		}
 	}
 
 	private static boolean isIgnoreNode(Node node) {
