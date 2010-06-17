@@ -13,9 +13,9 @@ import org.w3c.dom.NodeList;
  */
 public class DomTraverser<F extends DomTraverseFunction<R>, R> {
 
-	private DomTraverseFunction<R> function;
+	private F function;
 
-	public DomTraverser(DomTraverseFunction<R> function) {
+	public DomTraverser(F function) {
 
 		this.function = function;
 	}
@@ -37,7 +37,7 @@ public class DomTraverser<F extends DomTraverseFunction<R>, R> {
 			Node current = q.poll();
 
 			// 現在のノードを処理する
-			if (function.found(current)) return function.get();
+			if (function.whenFound(current)) return function.get();
 
 			// 子ノードをキューに積む
 			List<Node> list = new ArrayList<Node>();
