@@ -44,7 +44,7 @@ public class XpathMapper {
 		private List<XpathExpression> list = new ArrayList<XpathExpression>();
 
 		@Override
-		public boolean whenFound(Node node) {
+		public boolean whenNodeFound(Node node) {
 
 			if (isIgnoreNode(node)) {
 				LOG.debug("ignored. " + node.getNodeName()
@@ -61,7 +61,7 @@ public class XpathMapper {
 		}
 
 		@Override
-		public List<XpathExpression> get() {
+		public List<XpathExpression> whenDoneTraverse() {
 
 			return list;
 		}
@@ -74,7 +74,7 @@ public class XpathMapper {
 		private List<XpathExpression> list = new ArrayList<XpathExpression>();
 
 		@Override
-		public boolean whenFound(Node node) {
+		public boolean whenNodeFound(Node node) {
 
 			// ‘®«‚ğ•ÒW‚·‚é
 			NamedNodeMap nnm = node.getAttributes();
@@ -105,7 +105,7 @@ public class XpathMapper {
 		}
 
 		@Override
-		public List<XpathExpression> get() {
+		public List<XpathExpression> whenDoneTraverse() {
 
 			return list;
 		}
