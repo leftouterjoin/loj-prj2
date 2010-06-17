@@ -25,6 +25,16 @@ public class TraverserSample {
 		traverseByRecursive(document);
 	}
 
+	@Test
+	public void test2() throws Exception {
+
+		InputStream is = new FileInputStream("./manyA.xml");
+		Document document = DocumentBuilderFactory.newInstance()
+			.newDocumentBuilder().parse(is);
+
+		traverseByLifo(document);
+	}
+
 	private void traverseByRecursive(Node node) {
 
 		// –Ú“I‚Ìˆ—
@@ -35,16 +45,6 @@ public class TraverserSample {
 		NodeList nl = node.getChildNodes();
 		for (int i = 0; i < nl.getLength(); i++)
 			traverseByRecursive(nl.item(i));
-	}
-
-	@Test
-	public void test2() throws Exception {
-
-		InputStream is = new FileInputStream("./manyA.xml");
-		Document document = DocumentBuilderFactory.newInstance()
-			.newDocumentBuilder().parse(is);
-
-		traverseByLifo(document);
 	}
 
 	private void traverseByLifo(Node node) {
