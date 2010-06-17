@@ -14,7 +14,7 @@ public interface DomTraverseFunction<R> {
 	 * @param node Œ©‚Â‚©‚Á‚½ƒm[ƒh
 	 * @return ˆ—‚ğ’†’f‚·‚éê‡ true
 	 */
-	boolean whenNodeFound(Node node);
+	boolean whenFoundNode(Node node);
 
 	R whenDoneTraverse();
 }

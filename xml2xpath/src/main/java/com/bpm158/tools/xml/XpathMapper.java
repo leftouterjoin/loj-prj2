@@ -44,7 +44,7 @@ public class XpathMapper {
 		private List<XpathExpression> list = new ArrayList<XpathExpression>();
 
 		@Override
-		public boolean whenNodeFound(Node node) {
+		public boolean whenFoundNode(Node node) {
 
 			if (isIgnoreNode(node)) {
 				LOG.debug("ignored. " + node.getNodeName()
@@ -74,7 +74,7 @@ public class XpathMapper {
 		private List<XpathExpression> list = new ArrayList<XpathExpression>();
 
 		@Override
-		public boolean whenNodeFound(Node node) {
+		public boolean whenFoundNode(Node node) {
 
 			// ‘®«‚ğ•ÒW‚·‚é
 			NamedNodeMap nnm = node.getAttributes();
