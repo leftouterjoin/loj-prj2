@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
-	<display-name>jrqNetReserve_main_web</display-name>
+	<display-name>webApp1</display-name>
 
 	<!-- コンテキストパラメータ(全サーブレット共通) -->
 	<context-param>
 		<param-name>jndiDataSourceName</param-name>
-		<param-value>java:comp/env/JRKDB</param-value>
+		<param-value>java:comp/env/db1</param-value>
 	</context-param>
 	<context-param>
 		<param-name>jndiMailSessionName</param-name>
-		<param-value>JRKMail</param-value>
+		<param-value>mail1</param-value>
 	</context-param>
 	<context-param>
 		<param-name>debug</param-name>
@@ -20,7 +20,7 @@
 	<filter>
 		<!-- エンコーディングをwindows-31j前提に設定する -->
 		<filter-name>servletFilter1</filter-name>
-		<filter-class>jp.co.jrkyushu.presentation.common.servlet.SetCharacterEncodingFilter</filter-class>
+		<filter-class>hoge.presentation.common.servlet.SetCharacterEncodingFilter</filter-class>
 		<init-param>
 			<param-name>encoding</param-name>
 			<param-value>windows-31j</param-value>
@@ -36,7 +36,7 @@
 	<filter>
 		<!-- エンコーディングをutf-8前提に設定する -->
 		<filter-name>servletFilter2</filter-name>
-		<filter-class>jp.co.jrkyushu.presentation.common.servlet.SetCharacterEncodingFilter</filter-class>
+		<filter-class>hoge.presentation.common.servlet.SetCharacterEncodingFilter</filter-class>
 		<init-param>
 			<param-name>encoding</param-name>
 			<param-value>utf-8</param-value>
@@ -56,7 +56,7 @@
 	<filter>
 		<!-- サーブレットリクエストコンテキストの初期化フィルタを設定する -->
 		<filter-name>servletFilter3</filter-name>
-		<filter-class>jp.co.jrkyushu.presentation.common.servlet.ServletRequestContextInitFilter</filter-class>
+		<filter-class>hoge.presentation.common.servlet.ServletRequestContextInitFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>servletFilter3</filter-name>
@@ -66,7 +66,7 @@
 	<!-- セッションリスナ -->
 	<listener>
 		<!-- セッショントレースフィルタを設定する -->
-		<listener-class>jp.co.jrkyushu.presentation.common.servlet.HttpSessionTraceListener</listener-class>
+		<listener-class>hoge.presentation.common.servlet.HttpSessionTraceListener</listener-class>
 	</listener>
 
 	<!-- Strutsのアクションサーブレット -->
@@ -93,7 +93,7 @@
 	<!-- EPOSのサーブレット -->
 	<servlet>
 		<servlet-name>e-pos</servlet-name>
-		<servlet-class>jp.co.jrkyushu.presentation.servlet.epos.PosReserveServlet</servlet-class>
+		<servlet-class>hoge.presentation.servlet.epos.PosReserveServlet</servlet-class>
 		<load-on-startup>2</load-on-startup>
 	</servlet>
 	<servlet-mapping>
@@ -132,7 +132,7 @@
 
 	<!-- データソース設定 -->
 	<resource-ref>
-		<res-ref-name>JRKDB</res-ref-name>
+		<res-ref-name>db1</res-ref-name>
 		<res-type>javax.sql.DataSource</res-type>
 		<res-auth>Container</res-auth>
 	</resource-ref>
