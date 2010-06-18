@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <java version="1.6.0_05" class="java.beans.XMLDecoder">
-	<object class="jp.co.jrkyushu.service.business.consumer.point.fragment.PointReserveBean">
-	  <void property="jRLoginBean_">
-	   <object class="jp.co.jrkyushu.service.business.common.user.JRLoginBean">
+	<object class="hoge.service.business.consumer.point.fragment.PointReserveBean">
+	  <void property="LoginBean_">
+	   <object class="hoge.service.business.common.user.LoginBean">
 	    <void property="loginId">
-	     <string>ngccard_testuser@yahoo.co.jp</string>
+	     <string>hogehoge1</string>
 	    </void>
 	    <void property="loginId">
-	     <string>ngccard_testuser@yahoo.co.jp</string>
+	     <string>hogehoge1</string>
 	    </void>
 	    <void property="customerId">
 	     <string>0000000012345</string>
@@ -18,8 +18,8 @@
 	    <void property="MemberKind">
 	     <int>1</int>
 	    </void>
-	    <void property="jrCustomBean">
-	     <object class="jp.co.jrkyushu.service.business.common.user.JRCustomBean">
+	    <void property="CustomBean">
+	     <object class="hoge.service.business.common.user.CustomBean">
 	      <void property="creditCompany1">
 	       <string> </string>
 	      </void>
@@ -66,7 +66,7 @@
 	       <string></string>
 	      </void>
 	      <void property="customData">
-	       <object class="jp.co.jrkyushu.dbaccess.entity.JRCustomDataBean">
+	       <object class="hoge.dbaccess.entity.CustomDataBean">
 	        <void property="userId">
 	         <string>0000000012345</string>
 	        </void>
