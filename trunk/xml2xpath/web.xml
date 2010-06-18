@@ -16,7 +16,7 @@
 		<param-value>false</param-value>
 	</context-param>
 
-	<!-- 携帯とEPOS向けのサーブレット・フィルタ -->
+	<!-- 携帯向けのサーブレット・フィルタ -->
 	<filter>
 		<!-- エンコーディングをwindows-31j前提に設定する -->
 		<filter-name>servletFilter1</filter-name>
@@ -32,7 +32,7 @@
 		<url-pattern>/reserve/epos</url-pattern>
 	</filter-mapping>
 
-	<!-- PCとAPバッチ向け(携帯とEPOS以外)のサーブレット・フィルタ -->
+	<!-- PCとAPバッチ向け(携帯以外)のサーブレット・フィルタ -->
 	<filter>
 		<!-- エンコーディングをutf-8前提に設定する -->
 		<filter-name>servletFilter2</filter-name>
