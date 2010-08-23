@@ -1,0 +1,95 @@
+#parse("common/PageHead.html")
+
+	<script type="text/javascript" src="./ls/littlesoft.js?load=resizemanager"></script>
+	<script type="text/javascript" src="./lsg/littlesoft_gw.js?load=tabcontainer"></script>
+	<script type="text/javascript">
+	<!--
+	var  tab;
+	var tabMaxRight = 160;
+	var bottomFix   = 32;
+	var tabTitle = ['トップ'];
+	## window load 時の処理
+	Event.observe(document, 'dom:loaded', function() {
+		try {
+			if (ls.isMSIE6()) {
+				bottomFix = bottomFix + 3;
+			}
+			## ヘッダ、フッタを追加
+			if (!ls.isPopup()) {
+				var _header =
+					'	<div id="ls_header">' +
+					##'		<a class="btn_back" href="javascript:void(0);" title="前の画面に戻る"></a>' +
+					'		<div id="menu_container" class="menu_container">' +
+					'			<span class="menu_text"id="menu_txt"></span>' +
+					'			<span class="menu_btn" id="menu_btn" title="メニューを表示する"></span>' +
+					'		</div>' +
+					'		<a class="btn_ptab" href="javascript:void(0);" title="前のタブを表示する" onclick="tab.prev();"></a>' +
+					'		<div id="main_tab_menu" class="lsTabMenu"></div>' +
+					'		<a class="btn_ntab" href="javascript:void(0);" title="次のタブを表示する" onclick="tab.next();"></a>' +
+					'		<a id="ls_header_logo" href="http://www.littlesoft.jp/" target="_blank"></a>' +
+					'	</div>';
+		    	new Insertion.Top($('ls_container'), _header);
+				var _footer =
+					'	<div id="ls_footer">' +
+					'		<div id="ls_footer_copy">Copyright (C) 2010 LittleSoft Corporation. All Rights Reserved. </div>' +
+					'	</div>';
+		    	new Insertion.Bottom($('ls_container'), _footer);
+				new ls.ResizeManager({minWidth:700, minHeight:500, timer:25});
+				ls.ResizeInstance.setAnchor('ls_container', {bottom: 0, right: 0});
+				ls.ResizeInstance.setAnchor('ls_contents',  {bottom: bottomFix, right: 0});
+				ls.ResizeInstance.setAnchor('main_tab',     {bottom: bottomFix});
+				ls.ResizeInstance.setAnchor('main_tab_menu',{right: tabMaxRight});
+				ls.ResizeInstance.setAnchor('error_contents',  {bottom: bottomFix, right: 0});
+				## メニュー名を設定
+				$('menu_txt').update('[エラー発生]');
+				## [タブコンテナ] オブジェクトを生成
+				tab = new lsg.TabContainer('main_tab_menu', 'main_tab', {tabs: tabTitle, defaultTab: 0, maxRight: tabMaxRight});
+			}
+			
+		}
+		catch(e) {
+			alert(e);
+		}
+	});
+	## 強制リロード
+	function retry() {
+		ls.exec('doRetryLogin');
+	}
+	## 強制ログイン
+	function login() {
+}		ls.exec('doLogout');
+	}
+	//-->
+	</script>
+</head>
+<body onload="setTimeout('retry();', 3000);">
+<form id="${_form}" name="${_form}" method="post" action="${_self}">
+
+## ls_container
+<div id="ls_container">
+
+	## ls_contents
+	<div id="ls_contents" style="overflow:hidden;">
+
+		## main_box
+		<div id="main_box">
+			<div id="main_tab" class="lsTabContainer">
+
+				## タブ 0
+				<div class="lsTabContent" _lstabidx="0" style="background:#FFF;">
+					<div id="error_contents" style="line-height:30px;padding:30px;color:#444;font-weight:bold;">
+						${message}
+						<br/>
+						<a href="JavaScript:login();">初期画面表示を中止して、ログイン画面に戻る</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+</div>
+#parse("common/lsjcontrol.html")
+</form>
+</body>
+</html>

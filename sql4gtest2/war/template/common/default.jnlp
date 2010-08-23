@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<jnlp spec="1.0+" codebase="${codebase}">
+  <information>
+    <title>${title}</title>
+    <vendor>${vendor}</vendor>
+    <offline-allowed/>
+  </information>
+  <security>
+    <all-permissions />
+  </security>
+  <resources>
+    <j2se version="1.6+"/>
+    <jar href="ContentsUploadDownload.jar"/>
+    <jar href="./commons-codec-1.4.jar"/>
+    <jar href="./lsj-1.3.jar"/>
+  </resources>
+  <application-desc main-class="${mainClass}">
+    <argument>${appParams}</argument>
+  </application-desc>
+</jnlp>

@@ -1,0 +1,246 @@
+@charset "UTF-8";
+/*
+ *  Copyright (c) 2006-2009 LittleSoft Corporation
+ *  http://www.littlesoft.jp/lsj/license.html
+ */
+
+/*
+ * カレンダー用 スタイルシート calendar.css
+ *
+ * @author LittleSoft Corporation
+ * @version 1.2.3
+ */
+
+/*  lsCalendar
+=======================================================================*/
+.lsCalendar,
+.lsCalendarDummyFrame {
+	width: 205px;
+}
+
+.lsCalendar {
+	position:absolute;
+}
+
+/*  lsCalendarCloseBtn
+=======================================================================*/
+.lsCalendarCloseBtn {
+	position: absolute;
+	top: 9px;
+	right: 16px;
+	cursor: pointer;
+	background: transparent url(./i/cal_btn_close.png) no-repeat scroll left top;
+	width: 23px;
+	height: 15px;
+	display: block;
+}
+
+/*  lsCalendarLayerTable
+=======================================================================*/
+.lsCalendarLayerTable {
+	border-collapse: collapse;
+}
+
+.lsCalendarLayerTable tr th,
+.lsCalendarLayerTable tr td {
+	margin: 0px;
+	padding: 0px;
+	border: 0px;
+	text-align: left;
+}
+
+.lsCalendarLayerTableHL,
+.lsCalendarLayerTableHC,
+.lsCalendarLayerTableHR {
+	height: 31px !important;
+}
+.lsCalendarLayerTableBL,
+.lsCalendarLayerTableBC,
+.lsCalendarLayerTableBR {
+	height: 100px !important;
+}
+.lsCalendarLayerTableFL,
+.lsCalendarLayerTableFC,
+.lsCalendarLayerTableFR {
+	min-height: 18px !important;
+	line-height: 18px !important;
+	height: 18px !important;
+}
+.lsCalendarLayerTableHL,
+.lsCalendarLayerTableBL,
+.lsCalendarLayerTableFL {
+	width: 8px;
+}
+.lsCalendarLayerTableHC,
+.lsCalendarLayerTableBC,
+.lsCalendarLayerTableFC {
+	width: 180px;
+}
+.lsCalendarLayerTableHR,
+.lsCalendarLayerTableBR,
+.lsCalendarLayerTableFR {
+	width: 18px;
+}
+.lsCalendarLayerTableHL {
+	background: transparent url(./i/cal_head_l.png) no-repeat scroll left top;
+}
+.lsCalendarLayerTableHC {
+	background: transparent url(./i/cal_head_c.png) repeat-x scroll left top;
+}
+.lsCalendarLayerTableHR {
+	background: transparent url(./i/cal_head_r.png) no-repeat scroll left top;
+}
+.lsCalendarLayerTableBL {
+	background: transparent url(./i/cal_body_l.png) repeat-y scroll left top;
+}
+.lsCalendarLayerTableBC {
+	overflow: auto;
+	background-color: #FFFFFF;
+	padding: 0px 0px 0px 5px !important;
+	vertical-align: top;
+}
+.lsCalendarLayerTableBR {
+	background: transparent url(./i/cal_body_r.png) repeat-y scroll left top;
+}
+.lsCalendarLayerTableFL {
+	background: transparent url(./i/cal_foot_l.png) no-repeat scroll left top;
+}
+.lsCalendarLayerTableFC {
+	background: transparent url(./i/cal_foot_c.png) repeat-x scroll left top;
+}
+.lsCalendarLayerTableFR {
+	background: transparent url(./i/cal_foot_r.png) repeat-y scroll left top;
+}
+
+/*  lsCalendarTopTable
+=======================================================================*/
+.lsCalendarTopTable {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 0px;
+	padding: 0px;
+	border: 0px;
+	text-align: left;
+}
+.lsCalendarTopTable tr {
+	height: 30px;
+	line-height: 30px;
+}
+.lsCalendarTopTable tr td {
+	vertical-align:middle;
+	text-align: center;
+	font-size: 12px;
+	font-weight: bold;
+	padding: 4px 0px 2px;
+	color: #333;
+}
+
+/*  lsCalendarPrevBtn
+=======================================================================*/
+.lsCalendarPrevBtn {
+	display: block;
+	float: left;
+	width: 23px;
+	height: 15px;
+	background: transparent url(./i/cal_btn_prev.png) no-repeat scroll left top;
+	cursor: pointer;
+}
+
+/*  lsCalendarNextBtn
+=======================================================================*/
+.lsCalendarNextBtn {
+	display: block;
+	float: right;
+	width: 23px;
+	height: 15px;
+	background: transparent url(./i/cal_btn_next.png) no-repeat scroll left top;
+	cursor: pointer;
+}
+
+/*  lsCalendarWeekTable
+=======================================================================*/
+.lsCalendarWeekTable {
+	width: 100%;
+	border-collapse: collapse;
+	margin-bottom: 3px;
+}
+
+.lsCalendarWeekTable tr {
+	height: 20px !important;
+	line-height: 20px !important;
+}
+
+.lsCalendarWeekTable tr td {
+	padding: 2px 0px;
+	font-size: 12px;
+	font-weight: bold;
+	text-align: center;
+	height: 20px !important;
+	line-height: 20px !important;
+}
+
+/*  lsCalendarDaysTable
+=======================================================================*/
+.lsCalendarDaysTable {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.lsCalendarDaysTable tr {
+	height: 18px !important;
+	line-height: 18px !important;
+}
+.lsCalendarDaysTable tr td {
+	padding: 1px;
+	text-align: center;
+	font-size: 12px;
+	font-weight: bold;
+	cursor: pointer;
+	height: 18px !important;
+	line-height: 18px !important;
+}
+
+/*  文字色、背景色の定義
+=======================================================================*/
+.lsCalendarWeekTable tr td {
+	background-color: #F0F0F0;	/* 週 背景色*/
+	color: #404040;				/* 週 文字色*/
+}
+
+.lsCalendarWeekTable tr td.sun {
+	color: #FF3366;				/* 週 文字色（日曜日）*/
+}
+
+.lsCalendarWeekTable tr td.sat {
+	color: #0066FF;				/* 週 文字色（土曜日）*/
+}
+
+.lsCalendarDaysTable tr td {
+	color: #404040;				/* 日 背景色 */
+}
+
+.lsCalendarDaysTable tr td.daybg_mover {
+	background-color: #99CCFF;	/* 日 背景色（マウスオーバー時）*/
+}
+.lsCalendarDaysTable tr td.daybg_mout {
+	background-color: #FFFFFF;	/* 日 背景色（マウスアウト時）*/
+}
+.lsCalendarDaysTable tr td.selected {
+	background-color: #FFC0CB;	/* 日 背景色（選択日）*/
+}
+.lsCalendarDaysTable tr td.e_selected {
+	background-color: #FFF8CD;	/* 日 背景色（組み込み選択日）*/
+}
+.lsCalendarDaysTable tr td.sat {
+	color: #0066FF;				/* 日 文字色（土曜日）*/
+}
+.lsCalendarDaysTable tr td.sun {
+	color: #FF3366;				/* 日 文字色（日曜日）*/
+}
+.lsCalendarDaysTable tr td.today {
+	color: #33CC66;				/* 日 文字色（今日）*/
+}
+.lsCalendarDaysTable tr td.other {
+	color: #999999;				/* 日 文字色（上記以外）*/
+	cursor: default;
+}

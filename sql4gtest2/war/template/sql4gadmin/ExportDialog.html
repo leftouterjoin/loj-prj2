@@ -1,0 +1,116 @@
+<!doctype html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <title>LittleSoft CloudWare</title>
+  <link rel="stylesheet" href="./css/import.css" type="text/css" media="screen, tv" />
+  <style><!--
+    
+* { overflow:hidden; }  
+
+#main_box_d {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  background: #FFFFFF;
+  border-top: 1px solid #009999;
+  border-bottom: 1px solid #009999;
+  position: relative;
+  table-layout: fixed;
+  margin-top:1px;
+}
+
+.sub_main_box_d1 {
+  border-bottom: 1px dotted #00AFAF;
+  padding: 5px 10px;
+  height: 1.2em;
+  line-height: 1.0em;
+}
+
+.sub_main_box_d2 {
+  padding-top: 10px;
+  padding-bottom: 5px;
+  padding-left: 15px;
+  height: 1.4em;
+  line-height: 1.2em;
+}
+
+.sub_main_box_d3 {
+  padding: 10px 15px;
+  height: 250px;
+}
+
+#result_text { margin: 0px; padding: 0; width: 100%; height: 100%; }
+
+.navigation_box {
+  margin-top:8px;
+}
+// --></style>
+  <script type="text/javascript" src="./js/prototype/prototype_1_6_1.js"></script>
+  <script type="text/javascript" src="./ls/littlesoft.js?load=dialog,boot"></script>
+  <script type="text/javascript"><!--
+var hide,onButtonClick,onConfirmed,afterButtonClick;
+  
+function windowLoaded() {
+  parent.defaultDialog.setTitle('${title}');
+  hide = function(){
+    parent.defaultDialog.hide();
+  }
+  onButtonClick = function(b){
+    ls.ajax('onButtonClick',afterButtonClick,b);
+  }
+  onConfirmed = function(){
+    ls.ajax('onButtonClick',afterButtonClick,{button:'CONFIRMED'});
+  }
+  afterButtonClick = {
+    asynchronous: 'false',
+    onComplete: function(response) {
+      var result = eval('(' + response.content + ')');
+      result(); 
+    }
+  }
+
+  if ('$errorMessage' != '') {
+    parent.msg.error('$errorMessage');
+  }
+  
+}
+
+## ラジオボタンのアクションの処理
+function radioChange() {
+  if (!$('export_type').checked) {
+    $('sel_schema').selectedIndex = 0;
+    $('sel_table').selectedIndex = 0;
+	}
+  $('sel_schema').disabled = !$('export_type').checked;
+  $('sel_table').disabled = !$('export_type').checked;
+  $('checkbox_simple').disabled = $('export_type').checked;
+  $('checkbox_nodata').disabled = $('export_type').checked;
+  $('checkbox_nopasswords').disabled = $('export_type').checked;
+  $('checkbox_nosettings').disabled = $('export_type').checked;
+  $('checkbox_drop').disabled = $('export_type').checked;
+  	
+	ls.ajax('chengeSchema',ajaxUpdateTableSelect);
+}
+
+## ajaxアクションの処理
+var ajaxUpdateTableSelect = {
+  asynchronous: 'false',
+  onComplete: function(response) {
+    Element.Methods.update('table_select', response.table_select);
+  }
+}
+
+--></script>
+</head>
+<body onload="windowLoaded();">
+<form id="${_form}" name="${_form}" method="post" action="${_self}">
+<div id="main_box_d">$formElements</div>
+<div class="navigation_box">
+  <div class="buttons right">${buttons}</div>
+</div>
+#parse(${tplLsjControl})
+</form>
+</body>
+</html>

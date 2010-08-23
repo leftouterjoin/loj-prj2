@@ -1,0 +1,65 @@
+@charset "UTF-8";
+/*
+ *  Copyright (c) 2006-2009 LittleSoft Corporation
+ *  http://www.littlesoft.jp/lsj/license.html
+ */
+
+/*
+ * タブコンテナ用 スタイルシート tabcontainer.css
+ * 
+ * @author LittleSoft Corporation
+ * @version 1.2.3
+ */
+
+/*  lsTabMenu
+=======================================================================*/
+.lsTabMenu {
+	float: left;
+	width: 1px;
+	overflow: hidden;
+}
+
+/*  lsTabContainer
+=======================================================================*/
+.lsTabContainer {
+	position: relative;
+}
+
+/*  lsTabContentBox
+=======================================================================*/
+.lsTabContentBox {
+	border: 2px solid #AAAAAA;
+	margin-top: 27px;
+	overflow-y: auto;
+}
+
+/*  lsTabContent
+=======================================================================*/
+.lsTabContent {
+	clear: both;
+	overflow: hidden;
+}
+
+/*  lsTabTitle
+=======================================================================*/
+/*.lsTabTitle {
+	position: absolute;
+	padding-left: 3px;
+}*/
+
+.lsTabTitleForward,
+.lsTabTitleHide {
+	border: 2px solid #AAAAAA;
+	float: left;
+	line-height: 25px;
+	height: 25px;
+	margin: 0 6px 0 0;
+	text-align: center;
+	text-decoration: none;
+	color: #000;
+	width: 100px;
+	cursor: pointer;
+}
+.lsTabTitleForward {
+	border-bottom: 2px solid #FFF;
+}

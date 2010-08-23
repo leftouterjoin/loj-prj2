@@ -1,0 +1,230 @@
+@charset "UTF-8";
+/*
+ *  Copyright (c) 2006-2009 LittleSoft Corporation
+ *  http://www.littlesoft.jp/lsj/license.html
+ */
+
+/*
+ * LittleSoft製品 アプリケーション共通 スタイルシート stylecommon.css
+ *
+ * body
+ *  │
+ *  └ ls_container 
+ *          │
+ *          ├ ls_header
+ *          │      │
+ *          │      └ 共通ボタン等
+ *          │
+ *          ├ ls_contents
+ *          │      │
+ *          │      └ アプリケーション個別（style.css）
+ *          │
+ *          └ ls_footer
+ *                  │
+ *                  └ ls_footer_copy
+ *
+ *
+ * @author LittleSoft Corporation
+ * @version 1.0.0
+ */
+
+/*===========================================================================================
+  *
+============================================================================================*/
+* {
+	margin: 0px;
+	padding: 0px;
+	color: #000000;
+	font-size: 100%;
+	font-weight: normal;
+	font-style: normal;
+	font-family: 'ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','メイリオ',Meiryo,'ＭＳ Ｐゴシック',sans-serif;
+}
+
+/*===========================================================================================
+  html
+============================================================================================*/
+html {
+	overflow-y: auto;
+}
+
+/*===========================================================================================
+  body
+============================================================================================*/
+body {
+	font-size: 77%;
+}
+
+/*===========================================================================================
+  ls_container
+============================================================================================*/
+#ls_container {
+	background: #FFF;
+}
+
+#ls_container_d {
+	border: 1px solid #666666;
+	margin: 0px;
+	padding: 0px;
+}
+
+/*===========================================================================================
+  ls_header
+============================================================================================*/
+#ls_header {
+    height: 32px;
+	background: url(i/lsg_title_back.gif) 0px 0px repeat-x;
+}
+
+/*===========================================================================================
+  ls_contents
+============================================================================================*/
+#ls_contents {
+	position: relative;
+	clear: both;
+	background: #F2F2F2;
+}
+
+#ls_contents_d {
+	position: relative;
+	margin: 5px 5px 0px 5px;
+}
+
+/*===========================================================================================
+  ls_footer
+============================================================================================*/
+#ls_footer {
+	clear: both;
+	background:transparent url(i/lsg_title_back.gif) repeat-x scroll 0 0;
+	height:32px;
+}
+
+/* ls_footer_copy */
+#ls_footer_copy {
+	text-align: right;
+	margin-right: 10px;
+	line-height: 32px;
+	color: #FFFFFF;
+	float: right;
+}
+
+.footer_logo {
+	height: 28px;
+	float: right;
+	margin-top: 2px;
+	margin-right: 5px;
+}
+
+#footer_logo_gae {
+	background: url(i/logo_gae.gif) no-repeat scroll 0 0;
+	width: 112px;
+}
+
+#footer_logo_h2 {
+	background: url(i/logo_h2.gif) no-repeat scroll 0 0;
+	width: 51px;
+}
+
+/*===========================================================================================
+  ls_nowLoading_box
+============================================================================================*/
+#ls_nowLoading_box {
+	position: absolute;
+	top:0;
+	left:0;
+	background-color: #00C2C2;
+	filter: alpha(opacity=10);
+	-moz-opacity:0.10;
+	opacity:0.10;
+	width: 70px;
+	height: 70px;
+	text-align: center;
+}
+
+/*===========================================================================================
+  ls_nowLoading_image
+============================================================================================*/
+#ls_nowLoading_image {
+	position: absolute;
+	top:0;
+	left:0;
+	width: 32px;
+	height: 32px;
+	background: url(./i/lsg_loading.gif) no-repeat;
+}
+
+/*===========================================================================================
+  共通
+============================================================================================*/
+/* width */
+.w_10 { width: 10px !important; }
+.w_15 { width: 15px !important; }
+.w_20 { width: 20px !important; }
+.w_25 { width: 25px !important; }
+.w_30 { width: 30px !important; }
+.w_35 { width: 35px !important; }
+.w_40 { width: 40px !important; }
+.w_45 { width: 45px !important; }
+.w_50 { width: 50px !important; }
+.w_55 { width: 55px !important; }
+.w_60 { width: 60px !important; }
+.w_65 { width: 65px !important; }
+.w_70 { width: 70px !important; }
+.w_75 { width: 75px !important; }
+.w_80 { width: 80px !important; }
+.w_85 { width: 85px !important; }
+.w_90 { width: 90px !important; }
+.w_95 { width: 95px !important; }
+.w_100{ width: 100px !important; }
+.w_105{ width: 105px !important; }
+.w_110{ width: 110px !important; }
+.w_120{ width: 120px !important; }
+.w_130{ width: 130px !important; }
+.w_140{ width: 140px !important; }
+.w_150{ width: 150px !important; }
+.w_160{ width: 160px !important; }
+.w_170{ width: 170px !important; }
+.w_180{ width: 180px !important; }
+.w_190{ width: 190px !important; }
+.w_200{ width: 200px !important; }
+.w_250{ width: 250px !important; }
+.w_300{ width: 300px !important; }
+.w_400{ width: 400px !important; }
+.w_500{ width: 500px !important; }
+
+.w_5p { width: 5%; }
+.w_10p{ width: 10%;}
+.w_15p{ width: 15%;}
+.w_20p{ width: 20%;}
+.w_25p{ width: 25%;}
+.w_30p{ width: 30%;}
+.w_35p{ width: 35%;}
+.w_40p{ width: 40%;}
+.w_45p{ width: 45%;}
+.w_50p{ width: 50%;}
+.w_55p{ width: 55%;}
+.w_60p{ width: 60%;}
+.w_65p{ width: 65%;}
+.w_70p{ width: 70%;}
+.w_75p{ width: 75%;}
+.w_80p{ width: 80%;}
+.w_85p{ width: 85%;}
+.w_90p{ width: 90%;}
+.w_95p{ width: 95%;}
+.w_100p{ width: 100%;}
+
+.txt_bold { font-weight: bold;}
+
+/* text-align */
+.txt_a_right  { text-align: right  !important; }
+.txt_a_left   { text-align: left   !important; }
+.txt_a_center { text-align: center !important; }
+
+/* float */
+.float_right { float: right !important; }
+.float_left  { float: left  !important; }
+
+/* ime */
+.ime_active   { ime-mode: active;   }
+.ime_inactive { ime-mode: inactive; }
+.ime_disabled { ime-mode: disabled; }

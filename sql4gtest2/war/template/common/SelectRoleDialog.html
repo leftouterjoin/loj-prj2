@@ -1,0 +1,61 @@
+#parse("common/PageHead.html")
+
+	<script type="text/javascript" src="./ls/littlesoft.js?load=treeview,dialog,boot"></script>
+	<script type="text/javascript">
+	<!--
+
+	var p, treeView;
+
+	##--------------------------------------------------------------------------------------------------
+	## onload 時にコールされる関数
+	function windowLoaded() {
+
+		##----------------------------------------------------------------------------------------------
+		## ツリー
+		treeView = new ls.TreeView('roleTree', {onExpand:function(){}, onCollapse:function(){}, movable:false, updateWrapper:'tree_wrap'});
+		$roleTree.script
+
+	}
+
+	##--------------------------------------------------------------------------------------------------
+	Event.observe(window, 'load', function() {
+		ls.ajax('refreshTree', {
+			asynchronous: 'true',
+			onComplete: function(response) {
+				treeView.update(response.content);
+				$('roleTree').firstDescendant().addClassName('role_root');
+			}
+		});
+	});
+
+	##----------------------------------------------------------------------------------------------
+	## [ツリー] ロール名クリック時の処理
+	var onClickTreeRole = function(roleId, roleName) {
+		parent.hideSelectRoleDialog(roleId, roleName);
+	};
+
+	//-->
+	</script>
+</head>
+<body onload="windowLoaded();">
+<form id="${_form}" name="${_form}" method="post" action="${_self}">
+<div id="ls_container_d" style="border:0;">
+	<div id="ls_contents_d" style="overflow:hidden;">
+		<div id="main_box_d">
+			<div id="tree_wrap" class="tree_wrap" style="overflow:auto;height:215px;">
+				<div id="roleTree" class="lsTreeView">
+					<div class="ls_nowLoading_image_class" style="width:100%;height:100%;"></div>
+				</div>
+			</div>
+		</div>
+		<div class="dlg_r_buttons">
+			<span class="link_button">
+				<span><button type="button" onclick="parent.hideSelectRoleDialog();"><img src="/css/i/icon_close.png"/>閉じる</button></span>
+			</span>
+		</div>
+	</div>
+</div>
+#parse("common/lsjcontrol.html")
+</form>
+</body>
+</html>
