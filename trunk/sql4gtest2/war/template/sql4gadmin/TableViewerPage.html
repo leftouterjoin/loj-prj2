@@ -1,0 +1,207 @@
+<!doctype html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja" style="overflow:hidden;">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Content-Script-Type" content="text/javascript" />
+	<title>LittleSoft CloudWare</title>
+	<link rel="stylesheet" href="./css/import.css" type="text/css" media="screen, tv" />
+	<script type="text/javascript" src="./js/prototype/prototype_1_6_1.js"></script>
+	<script type="text/javascript" src="./js/animator.js"></script>
+	<script type="text/javascript" src="./ls/littlesoft.js?load=resizemanager,datagrid,splitter,dialog,boot"></script>
+
+<!--スタイルはCSSファイルに移動！-->
+<style><!--
+.navigation_box { margin: 0; }
+#sqlPanelUpper  { border: 1px solid #CCCCCC; }
+#sqlPanelLower  { border: 1px solid #CCCCCC; }
+#sql_result { border: 1px solid #CCCCCC; }
+#sql_text { margin: 0; padding: 0; width: 100%; height: 100%; border: 0; }
+table.sql_result_table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	width: 100%;
+    background: #FFFFFF;
+	position: relative;
+	table-layout: fixed;
+}
+table.sql_result_table tr th {
+    background: #DDDDDD;
+    color:#808080;
+	border-right: 1px solid #CCCCCC;
+	border-bottom: 1px solid #CCCCCC;
+	text-align: center;
+	white-space: nowrap;
+    height: 1.25em;
+    line-height: 1em;
+    padding:1px 2px 0px 2px;
+    vertical-align:middle;
+}
+table.sql_result_table tr th.initial {
+    background: #FFFFFF;
+	color: #444;
+	border-right: 0;
+	border-bottom: 0;
+	font-weight: normal;
+	white-space: nowrap;
+    height: 1.25em;
+    line-height: 1em;
+    padding:1px 2px 0px 2px;
+}
+table.sql_result_table tr td {
+	border-bottom: 1px solid #CCCCCC;
+	border-right: 1px solid #CCCCCC;
+    height: 1.25em;
+    line-height: 1em;
+	white-space: nowrap;
+    padding:1px 0px 0px 3px;
+    vertical-align:middle;
+}
+.toolButton {
+    padding: 0px;
+    margin: 0px;
+    text-align: center;
+    border:none;
+    border-left:double 3px #CCCCCC;
+    background:none;
+    color:#808080;
+}
+.toolButton:hover {
+    color:#008080;
+    background:#66FFFF;
+}
+.toolButton:active {
+    color:#CCFFFF;
+    background:#33CCCC;
+}
+#sql_result_count {
+    padding:2px 3px 1px 50px;
+    color:#9999FF;
+    font-weight:bold;
+}
+// --></style>
+
+	<script type="text/javascript">
+	<!--
+	## JSオブジェクト
+	var grid;
+
+	##--------------------------------------------------------------------------------------------------
+	## onload 時にコールされる処理
+	function bodyOnLoad() {
+		grid  = new ls.DataGrid('sql_result', {colHeaderSize:0, bottomFooter:false});
+		grid.hsBar.style.top = '-1px';
+    grid.vsBar.style.left = '-1px';
+		new ls.ResizeManager({minWidth:490, minHeight:400, timer:25});
+		ls.ResizeInstance.setAnchor('sql_result', {bottom: 0, right: 0});
+		parent._tableViewerLoad = loadTable.bind(this);
+	}
+
+	##--------------------------------------------------------------------------------------------------
+	## 実行ボタン押下 時にコールされる処理
+	function loadTable(databaseName, schemaName, tableName) {
+		disbleButtons();
+		ls.ajax('loadTable', ajaxUpdateUITable, databaseName, schemaName, tableName);
+	}
+	
+	function pagingTable(dir) {
+		disbleButtons();
+		ls.ajax('paging', ajaxUpdateUITable, dir);
+	}
+
+	function isColumn(col) {
+		var tag = col.tagName;
+		return (tag=='td' || tag=='th' || tag=='TD' || tag=='TH');
+	}
+
+	##--------------------------------------------------------------------------------------------------
+	## ajaxアクションの処理
+	var ajaxUpdateUITable = {
+		asynchronous: 'false',
+		onComplete: function(response) {
+			Element.Methods.update('result_head', response.result_head);
+			Element.Methods.update('result_body', response.result_body);
+			if (response.result_count) {
+				if (response.result_count == '0') {
+					Element.Methods.update('sql_result_count', 'No Rows Found ...');
+				}
+				else {
+					Element.Methods.update('sql_result_count', response.result_count + ' Rows Found.');
+				}
+				var map = eval('(' + response.result_head_max + ')');
+				var colW = [];
+				var hRows = Element.childElements($('result_head'));
+				var col = hRows[0].firstChild;
+				var i = 0;
+				for (; col; col = col.nextSibling) {
+					if (!isColumn(col)) continue;
+					colW[i] = map.values[col.innerHTML] * 9;
+					i++;
+				}
+				grid.adjust({colHeaderSize:1, colWidths:colW});
+				enableButtons();
+			}
+			else {
+				Element.Methods.update('sql_result_count', '※ Select Target Table From Left Tree.');
+			}
+			if (response.errorMessage != '') {
+				parent.msg.error(response.errorMessage);
+			}
+			$('btnFirst').disabled = !response.tableResult.hasPreviousPage;
+			$('btnPrev').disabled  = !response.tableResult.hasPreviousPage;
+			$('btnNext').disabled  = !response.tableResult.hasNextPage;
+			$('btnLast').disabled  = !response.tableResult.hasNextPage;
+		}
+	}
+
+	##--------------------------------------------------------------------------------------------------
+	## ボタンのenable処理
+	function enableButtons() {
+		window.cursor = 'default';
+		//$('btnExecute').enable();
+	}
+
+	##--------------------------------------------------------------------------------------------------
+	## ボタンのdisble処理
+	function disbleButtons() {
+		window.cursor = 'wait';
+		//$('btnExecute').disable();
+	}
+
+	//-->
+	</script>
+</head>
+<body onload="bodyOnLoad();">
+<form id="$_form" name="${_form}" method="post" action="${_self}">
+#set( $input = $tableInput.getRow('0'))
+## ls_container
+<div id="ls_container">
+	## ls_contents
+	<div id="ls_contents" style="overflow:hidden;">
+		## main_box
+		<div class="navigation_box">
+			<div class="buttons left">
+				<input type="button" class="w_60 toolButton" id="btnFirst" value=" First " onclick="pagingTable('first');" disabled="disabled" />
+				<input type="button" class="w_60 toolButton" id="btnPrev"  value=" Prev "  onclick="pagingTable('prev');"  disabled="disabled" />
+				<input type="button" class="w_60 toolButton" id="btnNext"  value=" Next "  onclick="pagingTable('next');"  disabled="disabled" />
+				<input type="button" class="w_60 toolButton" id="btnLast"  value=" Last "  onclick="pagingTable('last');"  disabled="disabled" />
+			</div>
+		</div>
+		<div id="main_box">
+			<div id="sql_result" class="lsDataGrid">
+				<div id="sql_result_count" >※ Select Target Table From Left Tree.</div>
+				<table class="sql_result_table">
+          <thead id="result_head">
+            <tr><th class="initial"></th></tr>
+          </thead>
+          <tbody id="result_body">
+          </tbody>
+				</table>
+			</div>
+
+		</div>
+	</div>
+</div>
+#parse(${tplLsjControl})
+</form>
+</body>
+</html>

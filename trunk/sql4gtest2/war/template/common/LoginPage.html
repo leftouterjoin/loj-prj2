@@ -1,0 +1,123 @@
+<!doctype html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Content-Script-Type" content="text/javascript" />
+	<title>LittleSoft CloudWare</title>
+	<link rel="stylesheet" href="./css/import.css" type="text/css" media="screen, tv" />
+	<script type="text/javascript" src="./js/prototype/prototype_1_6_1.js"></script>
+	<script type="text/javascript" src="./js/animator.js"></script>
+	<script type="text/javascript" src="./ls/littlesoft.js?load=resizemanager,dialog,boot"></script>
+	<script type="text/javascript" src="./lsg/littlesoft_gw.js?load=simplemsg"></script>
+	<script type="text/javascript">
+	<!--
+
+	## JSオブジェクト
+	var dialog, msg;
+
+	##--------------------------------------------------------------------------------------------------
+	## onload 時にコールされる関数
+	Event.observe(document, 'dom:loaded', function() {
+		## ポップアップで開かれた場合は親画面のリロード
+		if (ls.isPopup()) {
+			parent.forceReload();
+			return false;
+		}
+		msg = new lsg.SimpleMsg();
+#if(!$isSSO)
+		new ls.ResizeManager({minWidth:700, minHeight:500, timer:25});
+		ls.ResizeInstance.setAnchor('ls_container', {bottom: 0, right: 0});
+		ls.ResizeInstance.setAnchor('ls_contents',  {bottom: 0, right: 0});
+		ls.ResizeInstance.setAnchor('login_container',  {bottom: 0, right: 0});
+		
+		##----------------------------------------------------------------------------------------------
+		## [ダイアログ] オブジェクトを生成する。
+		dialog = new ls.Dialog('login_help', {
+							modal    : true,
+							width    : 400,
+							height   : 330,
+							title    : 'ヘルプ',
+							resizable: false,
+							backGroundElement: $('ls_container')
+						});
+		## 初期フォーカス
+		$('PARAM_USER_ID').focus();
+#else
+		$('PARAM_USER_ID').value = '$ssoUserId';
+		$('PARAM_PASSWORD').value = '$ssoPassword';
+		ls.exec('doLogin');
+#end
+	});
+
+	Event.observe(document, 'keydown', function(e) {
+		if (e.keyCode == 13) {
+			$('LOGIN_BUTTON').focus();
+		}
+	});
+
+	##--------------------------------------------------------------------------------------------------
+	## ログインヘルプダイアログを開く処理。
+	function showLoginHelpDialog() {
+		dialog.exec('showDialog');
+	}
+
+	//-->
+	</script>
+</head>
+<body>
+<form id="${_form}" name="${_form}" method="post" action="${_self}">
+
+## ls_container
+<div id="ls_container">
+	## ls_contents
+	<div id="ls_contents" style="overflow:hidden;background-color:#FFF;">
+		## main_box
+		<div id="main_box">
+			<table id="login_container" #if($isSSO) style="display:none;" #end>
+				<tr>
+					<td>
+						<div id="login_box">
+							<table>
+								<tr>
+									<td></td>
+									<td>
+										<table id="login_form_table">
+											<tr>
+												<td>ユーザーID</td>
+											</tr>
+											<tr>
+												<td><input type="text" id="PARAM_USER_ID" name="PARAM_USER_ID" class="w_120" maxlength="20" value=""/></td>
+											</tr>
+											<tr>
+												<td>パスワード</td>
+											</tr>
+											<tr>
+												<td><input type="password" id="PARAM_PASSWORD" name="PARAM_PASSWORD" class="w_120" value=""/></td>
+											</tr>
+											<tr>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td>
+													<input type="button" class="w_90" value="ログイン" onclick="ls.exec('doLogin');" id="LOGIN_BUTTON" />&nbsp;
+													<a href="javascript:void(0);" onclick="showLoginHelpDialog();" title="ヘルプ">ヘルプ</a>
+												</td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+							</table>
+						</div>
+						<div id="login_err_message_box">&nbsp;<span>$errorMessage</span></div>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>
+
+#parse("common/lsjcontrol.html")
+</form>
+
+</body>
+</html>

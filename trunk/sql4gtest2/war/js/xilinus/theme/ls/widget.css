@@ -1,0 +1,74 @@
+/* Sliding doors technique */
+
+.widget {
+	margin: 0px 5px 10px 5px;
+}
+
+.widget_nw {
+	/*background:transparent url(images/top_left.gif) no-repeat;*/
+	height: 30px;
+	/*margin-top: 10px;*/
+	border-top: 1px solid #CCC;
+	border-right: 1px solid #CCC;
+	border-left: 1px solid #CCC;
+	background-color: #BBB;
+}
+
+.widget_w {
+	/*border-left: 1px solid #B9B9B9;*/
+	/*margin-left: 5px;*/
+	border: 1px solid #CCC;
+}
+
+.widget_sw {
+	/* background:transparent url(images/bottom_left.gif) no-repeat;*/
+	height: 10px;
+}
+
+.widget_title {
+	/* background: url(images/top_right.gif) repeat-x right top;*/
+	/*color: #02827E;*/
+	/* font:bold 14px/25px Tahoma, Arial, sans-serif;*/
+	font-family: arial, sans-serif;
+	height: 30px;
+	line-height: 30px;
+	/*margin: 0 0 0 15px;*/
+	/*padding: 5px 0 0 0 ;*/
+	/*text-align: center;*/
+	/*margin-left: 15px;*/
+	padding-left:10px;
+	font-weight: bold;
+}
+
+.widget_content {
+	background-color: #FDFDFD;
+	color: #71777A;
+	/*font: normal 12px/1em Tahoma, Arial, sans-serif;*/
+	font-family: arial, sans-serif;
+	overflow: hidden;
+	padding: 5px;
+	/*border-right: 1px solid #B9B9B9;*/
+	margin-right: 5px;
+}
+
+.widget_statusbar {
+	/* background:transparent url(images/bottom_right.gif) repeat-x right top;*/
+	font-size: 8px;
+	height: 15px;
+	margin-left: 11px;
+}
+
+.widget_draggable {
+	cursor: pointer;
+}
+
+/* Ghost */
+.widget_ghost {
+	background: #FFF;
+	opacity: 0.5;
+	filter: alpha(opacity=50);
+	position: relative;
+	border: 2px dotted #F00;
+	margin: 0px;
+	padding: 0;
+} 

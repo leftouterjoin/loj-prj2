@@ -1,0 +1,340 @@
+	<script type="text/javascript">
+	<!--
+##	
+##	画面共通Javascript
+##	
+##	[既知の問題]
+##	   ・IE6/7でタブオープン時にObjectError。→たぶん解決
+##	
+	var menu, menus, tab, msg;
+	var menuTitle;
+	var tabMaxRight = 160;
+	var bottomFix   = 32;
+	var resizeElement = [];
+	var currentDate   = '';
+	var userId = '$sessionUserInfo.userId';
+	var userName = '$sessionUserInfo.userName';
+	var groupId = '$sessionUserInfo.groupId';
+	var groupName  = '$sessionUserInfo.groupName';
+	var tabTitle = [
+#foreach( $title in $tabTitleList )
+	#if($velocityCount!=1) , #end
+	'$title'
+#end
+	];
+	var menuInfo = [
+#foreach( $service in $menuInfo )
+	#if($velocityCount!=1) , #end
+    {title:'$service.get('title')', 
+    　link:'changeAppliction(\'${service.get('link')}\',\'$sessionUserInfo.encryptUserId\',\'$sessionUserInfo.encryptPassword\',\'${service.get('id')}\');' }
+#end
+	];
+	var menuHeight  = 26 * (menuInfo.length + 1) + 1;
+	var menuSHeight  = 26 * (tabTitle.length);
+	var isMAC = ${isMAC};
+	
+	## window load 時の処理
+	Event.observe(document, 'dom:loaded', function() {
+		try {
+			## [アラート] オブジェクト生成
+			if (typeof(lsg.SimpleMsg) != 'undefined') {
+				msg = new lsg.SimpleMsg();
+				ls.onException = function(response){
+					msg.error(response.__exception);
+				}
+			}
+			if (ls.isMSIE6()) {
+				bottomFix = bottomFix + 3;
+			}
+			## 今日の日付
+			var _date = new Date();
+			var _y = _date.getFullYear().toString();
+			var _m = ((_date.getMonth() + 1) < 10) ? ('0' + (_date.getMonth() + 1)) : (_date.getMonth() + 1).toString();
+			var _d = (_date.getDate() < 10) ? ('0' + _date.getDate()) : _date.getDate().toString();
+			currentDate = (_y + '/' + _m + '/' + _d);
+			## ヘッダ、フッタを追加
+			if (!ls.isPopup()) {
+				var _tag = (ls.isMSIE6()) ? 'span' : 'marquee';
+				var _header =
+					'	<div id="ls_header">' +
+					##'		<a class="btn_back" href="javascript:void(0);" title="前の画面に戻る"></a>' +
+					'		<div id="menu_container" class="menu_container">' +
+					'			<span class="menu_text"id="menu_txt"></span>' +
+					'			<span class="menu_btn" id="menu_btn" title="メニューを表示する"></span>' +
+					'		</div>' +
+					//'		<a   id="btn_ptab" class="btn_ptab" href="javascript:void(0);" title="前のタブを表示する" onclick=""></a>' +
+					'		<div id="main_tab_menu" class="lsTabMenu"></div>' +
+					//'		<a   id="btn_ntab" class="btn_ntab" href="javascript:void(0);" title="次のタブを表示する" onclick=""></a>' +
+					'		<div id="main_tab_menu_s" class="menu_container" style="display:none;">' +
+					'			<span class="menu_text"id="menu_s_txt"></span>' +
+					'			<span class="menu_btn" id="menu_s_btn" title="メニューを表示する"></span>' +
+					'		</div>' +
+					'		<a id="ls_header_logo" href="http://www.littlesoft.jp/" target="_blank"></a>' +
+					'	</div>';
+		    	new Insertion.Top($('ls_container'), _header);
+				var _footer =
+					'	<div id="ls_footer">' +
+					'		<div id="login_info">' +
+					'			<' + _tag + ' id="login_info_text" scrolldelay="100">[ ' + dateFormat(currentDate) + ' ] ' + userName + ' さんが ログイン中．．．</' + _tag + '>' +
+					'		</div>' +
+					'		<div id="footer_logo_h2" class="footer_logo"></div>' +
+					'		<div id="footer_logo_gae" class="footer_logo"></div>' +
+					'		<div id="ls_footer_copy">Copyright (C) 2010 LittleSoft Corporation. All Rights Reserved. </div>' +
+					'	</div>';
+		    	new Insertion.Bottom($('ls_container'), _footer);
+		    }
+			## リサイズマネージャー オブジェクト生成
+			if (!ls.isPopup()) {
+				new ls.ResizeManager({minWidth:700, minHeight:500, timer:25});
+				ls.ResizeInstance.setAnchor('ls_container', {bottom: 0, right: 0});
+				ls.ResizeInstance.setAnchor('ls_contents',  {bottom: bottomFix, right: 0});
+				ls.ResizeInstance.setAnchor('main_tab',     {bottom: bottomFix});
+			}
+			## リサイズ設定
+			for (var i = 0; i < resizeElement.length; i++) {
+				var _arr = resizeElement[i];
+				ls.ResizeInstance.setAnchor(_arr[0], _arr[1]);
+			}
+			## メニューを生成
+			menu = new lsg.SelectableMenu('menu_btn', 'menu_txt', {
+				 menuItemSize  : (menuInfo.length + 1) 
+				,menuItemWidth : $('menu_container').getWidth()
+			});
+			for (var i = 0; i < menuInfo.length; i++) {
+				menu.add(menuInfo[i].title, menuInfo[i].link);
+			}
+			menu.add(null);
+			menu.add('ログアウト', 'ls.exec(\'doLogout\');');
+			## メニュータイトル
+			menuTitle = menuInfo[$menuInfoIndex].title;
+			## メニュー名を設定
+			setMenuName(tabTitle[$initialTabIndex]);
+			## [タブコンテナ] オブジェクトを生成
+			tab = new lsg.TabContainer('main_tab_menu', 'main_tab', {tabs: tabTitle, defaultTab: $initialTabIndex, onTabClick: onMainTabClick, maxRight: tabMaxRight});
+			changeTabView.doLayout();
+			menus = new lsg.SelectableMenu('menu_s_btn', 'menu_s_txt', {
+				 menuItemSize  : (tabTitle.length) 
+				,menuItemWidth : $('main_tab_menu_s').getWidth()
+				,container     : $('main_tab_menu_s')
+				,isButtonDropdown : true
+				,alignRight : true
+			});
+			for (var i = 0; i < tabTitle.length; i++) {
+				menus.add(tabTitle[i], 'onMainTabSClick(' + i + ');');
+			}
+			menus.setText(tabTitle[$initialTabIndex]);
+			## コールバック
+			windowLoaded();
+			$('main_tab')._lsUIWidget = changeTabView;
+		  var _formChangeAppliction =
+      '<div style="display:none">' +
+      '<form method="post" id="ls_formChangeAppliction" name="ls_formChangeAppliction">' +
+      '<input type="hidden" id="ls_formChangeApplictionUser" name="u"/>' +
+      '<input type="hidden" id="ls_formChangeApplictionPass" name="p"/></form></div>';
+      new Insertion.Bottom($(document.body), _formChangeAppliction);
+		}
+		catch(e) {
+			alert(e);
+		}
+	});
+	## タブ表示切り替えオブジェクト
+	var changeTabView = {
+		doLayout: function() {
+			//$('btn_ptab').show();
+			//$('btn_ntab').show();
+			$('main_tab_menu').show();
+			$('main_tab_menu_s').hide();
+			ls.ResizeInstance.setAnchor('main_tab_menu',{right: tabMaxRight});
+			tab._initializeSize(false);
+			if (tab.isHidden()) {
+				//$('btn_ptab').hide();
+				//$('btn_ntab').hide();
+				$('main_tab_menu').hide();
+				$('main_tab_menu_s').show();
+			}
+		}
+	};
+	## ダミー関数
+	function windowLoaded() {}
+	function mainTabClick(index) {}
+	## タブがクリックされた際にコールバックされるファンクション
+	var onMainTabClick = function(index) {
+		## メニュー名を設定
+		setMenuName(tabTitle[index]);
+		menus.setText(tabTitle[index]);
+		## コールバック
+		mainTabClick(index);
+	}
+	var onMainTabSClick = function(i) {
+		## メニュー名を設定
+		setMenuName(tabTitle[i]);
+		menus.setText(tabTitle[i]);
+		## 非表示になっているタブに関して移動処理
+		$(tab.tabContents[tab.currentTab]).hide();
+		tab.currentTab = i;
+		$(tab.tabContents[tab.currentTab]).show();
+		tab._move();
+	}
+	## メニューラベル設定
+	function setMenuName(name) {
+		menu.setText(menuTitle);
+	}
+	## 日付フォーマット
+	function dateFormat(date) {
+		var _date = (date.length == 7) ? (date.replace('/', '年') + '月') : (date.replace('/', '年').replace('/', '月') + '日');
+		return _date;
+	}
+	## 強制リロード
+	function forceReload() {
+		ls.exec('doLogout');
+	}
+	## メニュークラス定義
+	if (!ls.isPopup()) {
+		lsg.SelectableMenu = Class.create({
+			initialize: function(id, text_id, options) {
+				this.id = id;
+				this.text = $(text_id);
+				this.options = Object.extend({
+						 menuItemSize  :  2
+						,menuNullSize  :  0
+						,menuItemWidth :  120
+						,borderColor   :  '#009B9B'
+						,isButtonDropdown : false
+						,alignRight    : false
+						,container     : $('menu_container')
+            ,top           : 30
+            ,left          : 5
+            ,scrollTop     : null
+            ,scrollLeft    : null
+					}, options);
+				this.menuHeight = ((this.options.menuItemSize) * 26 + this.options.menuNullSize);
+				this._seq = 0;
+				var _src = '';
+				if (ls.isMSIE6()) {
+					_src = 'src="/?scid=dummy.htm"';
+				}
+				 new Insertion.Bottom(this.options.container,
+					'<div id="' + id + '_menu_wrapper" style="top:' + this.options.top + 'px;left:' + this.options.left + 'px;position:absolute;height:0px;overflow:hidden;border:1px solid ' + this.options.borderColor + ';" class="lsSelectableMenu"></div>'+
+					'<iframe ' + _src + ' id="' + id + '_menu_floating_frame" class="lsSelectableMenuFrame" name="_menu_floating_frame" frameborder="0" marginwidth="0" marginheight="0" style="top:34px;position:absolute;"></iframe>'
+				);
+				this._menu_btn  = $(id);
+				this._menu_wrapper = $(id + '_menu_wrapper');
+				this._menuframe    = $(id + '_menu_floating_frame');
+				var _eventTarget = (Prototype.Browser.IE) ? window.document : window;
+				Event.observe(_eventTarget, "click", this._onClick.bindAsEventListener(this));
+				this._menuframe.setOpacity(0.5);
+				this._menuframe.hide();
+				this._menu_wrapper.hide();
+				this._menuAnim = new Animator({transition: Animator.makeEaseOut(2),duration: 250, onComplete: this._onComplete.bind(this)});
+				this._menuAnim.addSubject(new NumericalStyleSubject(this._menu_wrapper, 'height', 0, this.menuHeight));
+			},
+			_onComplete: function() {
+				if (this._menu_wrapper.getHeight() > 2) {
+					this._menuframe.setOpacity(0.5);
+				}
+				else {
+					this._menuframe.hide();
+				}
+			},
+			add: function(title, action) {
+				if (title == null) {
+					new Insertion.Bottom(this._menu_wrapper, '<div class="sep"></div>');
+				}
+				else {
+					var _id = this.id + '_' + this._seq++;
+					var _loc = '';
+					if (action) {
+						if (action.indexOf('javascript:') == 0) {
+							new Insertion.Bottom(this._menu_wrapper, '<a id="' + _id + '"class="menu_link" href="' + action + '">' + title + '</a>');
+							return;
+						}
+						else if (action.indexOf('http://') == 0 || action.indexOf('https://') == 0) {
+							_loc = 'location.href=\''+action+'\';';
+						}
+						else {
+							_loc = action;
+						}
+					}
+					new Insertion.Bottom(this._menu_wrapper, '<a id="' + _id + '"class="menu_link" href="javascript:void(0);" onclick="' + _loc + ' return false;">' + title + '</a>');
+				}
+			},
+			_onClick: function(event) {
+				var _e = Event.element(event);
+				if (_e == this._menu_btn) {
+					if (this._menu_wrapper.getHeight() > 2) {
+						if (this.options.isButtonDropdown) {
+							this._menuframe.hide();
+							this._menu_wrapper.hide();
+						}
+						this._menuframe.setOpacity(0.0);
+						this._menuAnim.reverse();
+					}
+					else {
+						this._menu_wrapper.setStyle({
+							'width' : (this.options.menuItemWidth + 'px')
+						});
+						if (this.options.isButtonDropdown) {
+							var _b = this._menu_btn.cumulativeOffset();
+							if (this.options.alignRight) {
+                var top = _b.top + this._menu_btn.offsetHeight + 2;
+                var left = _b.left + this._menu_btn.getWidth() + 2 - this.options.menuItemWidth;
+                if (this.options.scrollTop)
+                  top = top - this.options.scrollTop.scrollTop;
+                if (this.options.scrollLeft)
+                  left = left - this.options.scrollLeft.scrollLeft;
+                top += 'px';
+                left += 'px';
+								this._menu_wrapper.setStyle({
+									 'top'  : top
+									,'left' : left 
+								});
+							}
+							else {
+								this._menu_wrapper.setStyle({
+									 'top'  : ((_b.top + this._menu_btn.offsetHeight + 2) + 'px')
+									,'left' : ((_b.left + 2) + 'px') 
+								});
+							}
+						}
+						if (!this._menu_wrapper.visible()) this._menu_wrapper.show();
+						var _o = this._menu_wrapper.cumulativeOffset();
+						this._menuframe.show();
+						this._menuframe.setOpacity(0);
+						this._menuframe.setStyle({
+							 'top'   : ((_o.top) + 'px')
+							,'left'  : ((_o.left - 1) + 'px')
+							,'width' : ((this._menu_wrapper.getWidth()+2) + 'px')
+							,'height': ((this.menuHeight+3) + 'px')
+						});
+						this._menuAnim.play();
+					}
+				}
+				else {
+					if (this._menu_wrapper.getHeight() > 2) {
+						if (this.options.isButtonDropdown) {
+							this._menuframe.hide();
+							this._menu_wrapper.hide();
+						}
+						this._menuframe.setOpacity(0.0);
+						this._menuAnim.reverse();
+					}
+				}
+			},
+			setText: function(text) {
+				this.text.update(text);
+			}
+		});
+	}
+	
+	
+	 ## アプリケーション変更
+  function changeAppliction(action, user, password, serviceId) {
+    var winName = 'lscw_window_${_seq}' + serviceId;
+    $('ls_formChangeAppliction').action = action;
+    $('ls_formChangeAppliction').target = winName;
+    $('ls_formChangeApplictionUser').value = user;
+    $('ls_formChangeApplictionPass').value = password;
+    $('ls_formChangeAppliction').submit();
+  }
+	//-->
+	</script>

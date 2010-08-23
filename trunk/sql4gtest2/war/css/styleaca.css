@@ -1,0 +1,133 @@
+@charset "UTF-8";
+/*
+ *  Copyright (c) 2006-2009 LittleSoft Corporation
+ *  http://www.littlesoft.jp/lsj/license.html
+ */
+
+/**
+ * LittleSoft CloudWare
+ * 
+ * [Account Manager] スタイルシート styleaca.css (利用申込み)
+ *
+ * @author LittleSoft Corporation
+ * @version 1.0.0
+ */
+
+/*===========================================================================================
+  form_table
+============================================================================================*/
+#ls_top_contents table.form_table {
+	border-collapse: collapse;
+	margin-left: 30px;
+	margin-right: 10px;
+	margin-top: 5px;
+	width: 600px;
+}
+
+#ls_top_contents table.comp_table {
+	border-collapse: collapse;
+	margin: 20px 10px 30px 50px;
+	width: 600px;
+}
+
+#ls_top_contents table.form_table tr th, 
+#ls_top_contents table.comp_table tr th {
+	font-size: 0.9em;
+	text-align: left;
+	height: 35px;
+	line-height: 35px;
+	vertical-align: top;
+	width: 75px;
+}
+
+#ls_top_contents table.form_table tr th.sep_col, 
+#ls_top_contents table.comp_table tr th.sep_col {
+	width: 20px;
+}
+
+#ls_top_contents table.form_table tr td,
+#ls_top_contents table.comp_table tr td {
+	font-size: 0.9em;
+	height: 35px;
+	line-height: 35px;
+}
+
+#ls_top_contents div.regulations {
+	margin: 15px;
+	width: 770px;
+	height: 200px;
+	border: 3px double #777;
+	overflow-y: scroll;
+}
+
+#ls_top_contents div.buttons {
+	margin-top: 20px;
+	text-align: center;
+	font-size: 0.9em;
+}
+
+#ls_top_contents input.button {
+	width: 180px;
+	line-height: 19px;
+}
+
+span.disable {
+	color: #FF3366;
+	font-weight: bold;
+}
+
+span.enable {
+	color: #00C2C2;
+	font-weight: bold;
+}
+
+/* ime */
+.ime_active   { ime-mode: active;   }
+.ime_inactive { ime-mode: inactive; }
+.ime_disabled { ime-mode: disabled; }
+
+#temp_apply_btn {
+	background: url(i/btn_temp_apply.gif) no-repeat scroll 0 0;
+	width: 202px;
+	height: 32px;
+	display: block;
+	margin: 0 auto;
+}
+
+#apply_btn {
+	background: url(i/btn_apply.gif) no-repeat scroll right top;
+	width: 202px;
+	height: 32px;
+	display: block;
+	margin: 0 auto;
+}
+
+#apply_btn2 {
+	background: url(i/btn_apply2.gif) no-repeat scroll right top;
+	width: 202px;
+	height: 32px;
+	display: block;
+	margin: 0 auto;
+}
+
+#loading_box {
+	position: absolute;
+	top:0;
+	left:0;
+	background-color: #00C2C2;
+	filter: alpha(opacity=10);
+	-moz-opacity:0.10;
+	opacity:0.10;
+	width: 70px;
+	height: 70px;
+	text-align: center;
+}
+
+#loading_image {
+	position: absolute;
+	top:0;
+	left:0;
+	width: 32px;
+	height: 32px;
+	background: url(./i/lsg_loading.gif) no-repeat;
+}

@@ -1,0 +1,192 @@
+@charset "UTF-8";
+/*
+ *  Copyright (c) 2006-2009 LittleSoft Corporation
+ *  http://www.littlesoft.jp/lsj/license.html
+ */
+
+/*
+ * ダイアログ用 スタイルシート dialog.css
+ * 
+ * @author LittleSoft Corporation
+ * @version 1.2.3
+ */
+
+/*  lsDialog
+=======================================================================*/
+.lsDialog {
+	position: absolute;
+}
+
+.lsDialogHeadClose {
+	position: absolute;
+	top: 9px;
+	right: 16px;
+	cursor: pointer;
+	background: transparent url(./i/dlg_btn_close.png) no-repeat scroll left top;
+	width: 23px;
+	height: 15px;
+	display: block;
+	z-index: 9999;
+}
+
+.lsDialog table {
+	border-collapse: collapse;
+}
+/* IE6 */
+* html .lsDialog table {
+	border: 1px solid #CCC;
+}
+
+.lsDialog table th,
+.lsDialog table td {
+	margin: 0px;
+	padding: 0px;
+	border: 0px;
+	text-align: left;
+}
+
+.lsDialogHeadL {
+	background: transparent url(./i/dlg_head_l.png) no-repeat scroll left top;
+	height: 31px;
+	width: 8px;
+}
+/* IE6 */
+* html .lsDialogHeadL {
+	background: #CCC;
+}
+.lsDialogHeadC {
+	background: transparent url(./i/dlg_head_c.png) repeat-x scroll left top;
+	cursor: move;
+	height: 31px;
+}
+/* IE6 */
+* html .lsDialogHeadC {
+	background: #CCC;
+}
+.lsDialogHeadR {
+	background: transparent url(./i/dlg_head_r.png) no-repeat scroll left top;
+	height: 31px;
+	width: 18px;
+}
+/* IE6 */
+* html .lsDialogHeadR {
+	background: #CCC;
+}
+.lsDialogBodyL {
+	background: transparent url(./i/dlg_body_l.png) repeat-y scroll left top;
+	height: 100%;
+	width: 8px;
+}
+/* IE6 */
+* html .lsDialogBodyL {
+	background: #FFF;
+}
+.lsDialogBodyC {
+	background-color: #FFFFFF;
+	overflow: auto;
+	vertical-align: middle !important;
+	text-align: center !important;
+}
+.lsDialogBodyR {
+	background: transparent url(./i/dlg_body_r.png) repeat-y scroll left top;
+	height: 100%;
+	width: 18px;
+}
+/* IE6 */
+* html .lsDialogBodyR {
+	background: #FFF;
+}
+.lsDialogFootL {
+	background: transparent url(./i/dlg_foot_l.png) no-repeat scroll left top;
+	height: 18px;
+	width: 8px;
+}
+/* IE6 */
+* html .lsDialogFootL {
+	background: #FFF;
+}
+.lsDialogFootC {
+	background: transparent url(./i/dlg_foot_c.png) repeat-x scroll left top;
+	height: 18px;
+	margin: 0 9px 0 8px;
+}
+/* IE6 */
+* html .lsDialogFootC {
+	background: #FFF;
+}
+.lsDialogFootR {
+	background: transparent url(./i/dlg_foot_r.png) repeat-y scroll left top;
+	height: 18px;
+	width: 18px;
+}
+/* IE6 */
+* html .lsDialogFootR {
+	background: #FFF;
+}
+.lsDialogFootRResize {
+	background: transparent url(./i/dlg_foot_r_resize.png) no-repeat scroll left top;
+	height: 18px;
+	width: 18px;
+	cursor: nw-resize;
+}
+/* IE6 */
+* html .lsDialogFootRResize {
+	background: transparent url(./i/dlg_foot_r_resize_ie6.gif) no-repeat scroll left top;
+}
+
+/*  lsDialogHead
+=======================================================================*/
+.lsDialogHead {
+	position: relative;
+	height: 31px;
+	line-height: 31px;
+	border: 0px;
+	font-weight: bold;
+	text-align: center;
+	cursor: move;
+}
+
+/*  lsDialogFrame
+=======================================================================*/
+.lsDialogFrame {
+}
+
+/*  lsDialogTab
+=======================================================================*/
+.lsDialogTab {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	background-color: #339966;
+}
+
+/*  lsDialogDummy
+=======================================================================*/
+.lsDialogDummy {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	background-color: #FFFFFF;
+	/*background: transparent url(./i/dlg_dummy.gif) repeat scroll left top;*/
+}
+
+/*  lsDialogBackImage
+=======================================================================*/
+.lsDialogBackImage {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	background-color: #999999;
+	/*background: transparent url(./i/dlg_dummy.gif) repeat scroll left top;*/
+}
+
+/*  lsDialogLoading
+=======================================================================*/
+.lsDialogLoading {
+	position: absolute;
+	height: 32px;
+	width: 32px;
+	top: 0px;
+	left: 0px;
+	background: transparent url(./i/loading.gif) no-repeat scroll left top;
+}

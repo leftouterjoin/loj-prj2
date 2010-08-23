@@ -1,0 +1,42 @@
+@charset "UTF-8";
+/*
+ *  Copyright (c) 2006-2009 LittleSoft Corporation
+ *  http://www.littlesoft.jp/lsj/license.html
+ */
+
+/*
+ * データグリッド用 スタイルシート datagrid.css
+ * 
+ * @author LittleSoft Corporation
+ * @version 1.2.3
+ */
+
+/*  div.lsDataGrid
+=======================================================================*/
+div.lsDataGrid {
+	padding: 0px;
+	margin: 0px;
+	border: 1px solid #CCCCCC;
+}
+
+div.lsDataGrid table {
+	border-collapse: collapse;
+}
+
+div.lsDataGrid table tr {
+	height: 20px;
+	line-height: 20px;
+}
+
+div.lsDataGrid table tr th,
+div.lsDataGrid table tr td {
+	margin: 0px;
+	border-top-width: 0px;
+	border-right: 1px solid #CCCCCC;
+	border-bottom: 1px solid #CCCCCC;
+	border-left-width: 0px;
+}
+
+div.lsDataGrid table tr th {
+	font-weight: bold;
+}

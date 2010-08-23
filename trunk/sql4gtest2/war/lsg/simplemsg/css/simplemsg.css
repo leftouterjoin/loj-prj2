@@ -1,0 +1,91 @@
+@charset "UTF-8";
+/*
+ *  Copyright (c) 2006-2009 LittleSoft Corporation
+ *  http://www.littlesoft.jp/lsj/license.html
+ */
+
+/*
+ * シンプルメッセージ用 スタイルシート simplemsg.css
+ * 
+ * @author LittleSoft Corporation
+ * @version 1.0.0
+ */
+.ls_smsg {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 400px;
+	height: 135px;
+	background-color: #DCF4F4;
+	border: 2px solid #009999;
+}
+
+.ls_smsg_title {
+	height: 22px;
+	width: 390px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	cursor: move;
+	background-color: #00AFAF;
+	color: #FFFFFF;
+	font-weight: bold;
+	line-height: 22px;
+	padding-left: 10px;
+}
+
+.ls_smsg_table {
+	height: 78px;
+	width: 400px;
+	border-collapse: collapse;
+	margin-top: 20px;
+}
+
+.ls_smsg_icon_td {
+	width: 80px;
+}
+
+.ls_smsg_msg_td {
+	height: 78px;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+.ls_smsg_msg_td_div {
+	width: 320px;
+	height: 78px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.ls_smsg_msg_td_div table tr td {
+	color: #333333;
+	line-height: 18px;
+}
+
+.ls_smsg_msg_td_div table tr td ul {
+	margin: 0 0 2px;
+	padding: 0 25px;
+}
+
+.ls_smsg_msg_td_div table tr td ul li {
+	color: #333333;
+	line-height: 16px;
+	margin-top: 2px;
+}
+
+/* コンファーム */
+.ls_smsg_confirm .ls_smsg_icon_td {
+	background: transparent url(./i/smsg_ques.png) no-repeat scroll 50% 50%;
+}
+
+/* インフォ */
+.ls_smsg_info .ls_smsg_icon_td {
+	background: transparent url(./i/smsg_info.png) no-repeat scroll 50% 50%;
+}
+
+/* エラー */
+.ls_smsg_error .ls_smsg_icon_td {
+	background: transparent url(./i/smsg_err.png) no-repeat scroll 50% 50%;
+}
+

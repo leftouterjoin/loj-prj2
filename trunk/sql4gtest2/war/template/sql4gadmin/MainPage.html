@@ -1,0 +1,578 @@
+#parse(${tplPageHead})
+  <style><!--
+  #lsTabPanelLeftUpper  { border:solid 1px #CCCCCC; padding:2px;margin:1px 0px 0px 2px }
+  #lsTabPanelLeftLower  { border:solid 1px #CCCCCC; padding:0px;margin:0px 0px 2px 2px }
+  #lsTabPanelRight      { /*border:solid 1px #CCCCCC;*/ padding:2px;margin:1px 2px 2px 0px }
+  #main_tab             { /*border:solid 1px #CCCCCC;*/ /*padding:2px;*/margin:1px 2px 2px 0px }
+  .lsTreeView           { overflow:auto; width:100%; height:100%; margin:-2px; padding:2px; background:#ffffff; }
+  .lsTreeView ul        { margin-left: 15px; }
+  .lsTreeView li        { margin-left: 5px; padding-top: 2px; padding-bottom: 1px;}
+  .lsTabContent         { width:100%; height:100%; }
+  span.lsTreeViewItem   { 
+    white-space: nowrap;
+    color: #316AC5;
+    /*padding-left: 25px;*/
+    padding-left: 20px;
+    line-height: 1.1em;
+    height: 1.5em;
+    cursor: pointer;
+  }
+  span.lsTreeViewToggleOpen,
+  span.lsTreeViewToggleClose {
+    line-height: 1.1em;
+    height: 1.5em;
+    cursor: pointer;
+  }
+  .toolButton {
+    padding: 0px;
+    margin: 0px;
+    text-align: center;
+    border:none;
+    border-left:double 3px #CCCCCC;
+    background:none;
+    color:#808080;
+  }
+  
+  .toolButton:hover {
+    color:#008080;
+    background:#66FFFF;
+  }
+  .toolButton:active {
+    color:#CCFFFF;
+    background:#33CCCC;
+  }
+  
+  #columnGridTitle {
+    padding:2px 3px 1px 20px;
+    color:#9999FF;
+    font-weight:bold;
+  }
+  
+  table.simpleGrid {
+    border-collapse: collapse;
+    border-spacing: 0;
+    background: #FFFFFF;
+    position: relative;
+    table-layout: fixed;
+  }
+
+  table.simpleGrid th {
+    background: #DDDDDD;
+    color:#808080;
+    border-right:solid 1px #CCCCCC;
+    border-bottom:solid 1px #CCCCCC;
+    text-align: center;
+    white-space: nowrap;
+    height: 1.25em;
+    line-height: 1em;
+    padding:1px 0px 0px 3px;
+    vertical-align:middle;
+  }
+
+  table.simpleGrid td {
+    background: #FFFFFF;
+    color:#444;
+    border-right:solid 1px #CCCCCC;
+    border-bottom:solid 1px #CCCCCC;
+    white-space: nowrap;
+    height: 1.25em;
+    line-height: 1em;
+    padding:1px 0px 0px 3px;
+    vertical-align:middle;
+  }
+  .main_tab_border {
+    border:solid 1px #CCCCCC;
+  }
+
+#tab0 {
+  /*padding: 10px;*/
+  background:#FFF;
+  overflow-y:scroll;
+}
+
+#tab0 h2 {
+  width: 90%;
+  height: 30px;
+  line-height: 30px;
+  color: #008787;
+  font-weight: bold;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 110%;
+  border-bottom: 2px solid #008787;
+  /*margin-bottom:15px;*/
+  margin-left:10px;
+}
+
+#tab0 h3 {
+  width: 90%;
+  height: 22px;
+  line-height: 22px;
+  color: #008787;
+  font-weight: bold;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 110%;
+  margin-top:15px;
+  /*margin-bottom:5px;*/
+  margin-left:10px;
+}
+
+#tab0 h4 {
+  width: 90%;
+  height: 25px;
+  line-height: 26px;
+  color: #008787;
+  font-weight: bold;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-top:5px;
+  margin-left:10px;
+}
+
+#tab0 p {
+  width: 90%;
+  text-indent: 10px;
+  margin: 5px 15px 0 15px;
+  padding: 0 10px;
+  color: #444;
+  margin-left:10px;
+}
+#tab0 ul {
+  margin-left: 30px;
+}
+ / --></style>
+  <script type="text/javascript" src="./js/animator.js"></script>
+  <script type="text/javascript" src="./ls/littlesoft.js?load=resizemanager,dialog,splitter,treeview,datagrid,embedded,boot"></script>
+  <script type="text/javascript" src="./lsg/littlesoft_gw.js?load=tabcontainer,simplemsg"></script>
+#parse(${tplPageCommonJs})
+  <script type="text/javascript"><!--
+
+  ##--------------------------------------------------------------------------------------------------
+  ## [共通] ページ毎設定
+
+  ## メニュータイトル
+  menuTitle = menuInfo[0].title;
+
+  ## リサイズ要素
+  resizeElement = [
+     ['lsTabPanel', {right:0, bottom:32}],
+     ['infomation_text', {right:0}]
+  ];
+
+  ## JSオブジェクト
+  var defaultDialog, week, vSplit, hSplit, treeView, tab1Page, tab2Page, tab3Page,
+      columnGrid, miDatabase;
+      
+  ##--------------------------------------------------------------------------------------------------
+  ## [共通] 「common.js」により onload 時にコールされる関数
+  function windowLoaded() {
+    ##----------------------------------------------------------------------------------------------
+    ## [ダイアログ] オブジェクトを生成する。
+    defaultDialog = new ls.Dialog('_defaultDialog', {
+              modal    : true,
+              title    : ' ',
+              resizable: false,
+              backGroundElement: $('ls_container')
+            });
+    ##----------------------------------------------------------------------------------------------
+    columnGrid  = new ls.DataGrid('lsTabPanelLeftLower', {colWidths:[20,160,80,80,80,80], colHeaderSize:2, bottomFooter:false});
+    //columnGrid.hsBar.style.top = '-2px';
+    columnGrid.hsBar.style.top = '-1px';
+    columnGrid.vsBar.style.left = '-1px';
+    
+    hSplit = new ls.Splitter('lsTabPanelLeft','main_tab',{size:3, horizontal:true, weight : 0.3});
+    vSplit = new ls.Splitter('lsTabPanelLeftUpper','lsTabPanelLeftLower',{size:3, horizontal:false, weight : 0.5});
+    treeView = new ls.TreeView('objectTree', {onExpand:onItemExpand, onCollapse:onItemCollapse, movable:false});
+    $objectTree.script
+
+    tab1Page = new ls.EmbeddedPage('tab1',{className:'jp.littlesoft.sql4g.console.SqlWindowPage'});
+    tab2Page = new ls.EmbeddedPage('tab2',{className:'jp.littlesoft.sql4g.console.TableViewerPage'});
+    tab3Page = new ls.EmbeddedPage('tab3',{url:'http://www.h2database.com/html/grammar.html'});
+    //Database MenuItems
+    miDatabase = new lsg.SelectableMenu('btDatabase', 'dummy',{
+      isButtonDropdown : true
+     ,borderColor      : '#CCCCCC'
+     ,menuItemSize     : 7
+     ,menuItemWidth    : 160
+    });
+    miDatabase.add('Create New' , 'createNewDatabase();');
+    miDatabase.add('Open'    , 'javascript:connectDatabase();');
+    miDatabase.add('Close' , 'javascript:disconnectDatabase();');
+    miDatabase.add(null);
+    //miDatabase.add('Startup'    , 'javascript:startupDatabase();');
+    //miDatabase.add('Shutdown',    'javascript:shutdownDatabase();');
+    // miDatabase.add('Change Properties', 'changeProperties();');
+    miDatabase.add('Refresh' ,    'javascript:refreshDatabaseList();');
+    miDatabase.add(null);
+    //miDatabase.add('Import', 'javascript:importDatabase();');
+    miDatabase.add('Import Script (JWS)', 'javascript:import();');
+	
+    miDatabase.add('Export', 'javascript:exportDatabase();');
+    miDatabase.add(null);
+    miDatabase.add('Recovery', 'javascript:recoverDatabase();');
+  }
+
+  ##--------------------------------------------------------------------------------------------------
+  ## [共通] 「common.js」により タブがクリックされた際にコールされる関数
+  function mainTabClick(index) {
+    _tableViewerLoad = null;
+    //$('main_tab').addClassName('main_tab_border');
+    if (index == 1) {
+      //$('main_tab').removeClassName('main_tab_border');
+      tab1Page.show();
+    }
+    else if (index == 2) {
+      //$('main_tab').removeClassName('main_tab_border');
+      tab2Page.show();
+    }
+    else if (index == 3) {
+      tab3Page.show();
+    }
+  else {
+    }
+  }
+  ##--------------------------------------------------------------------------------------------------
+  function onItemExpand(response) {
+    if (response.content && response.content!='') {
+      $('objectTree_selected').value = response.content;
+      connectDatabase();
+    }
+  }
+  
+  function onItemCollapse() {
+    //alert("onItemCollapse:" + arguments[0]);
+  }
+  
+  var ajaxOnSelectionTreeNode = {
+    asynchronous: 'false',
+    onComplete: function(response){
+      //$('nodeName').value = response.nodeName;
+      Element.Methods.update('objectTree_defaultInformation', response.pathString);
+      try {
+        var result;
+        var temp = '(' + response.content + ')';
+        if (Prototype.Browser.IE) 
+          eval('result = ' + response.content);
+        else
+          result = eval('(' + response.content + ')');
+        result();
+      } catch (e) {}
+    }
+  } 
+  
+  var ajaxUpdateTreeNode = {
+    asynchronous: 'false',
+    onComplete: function(response){
+      Element.Methods.update(response.nodeId, response.nodeHTML);
+      treeView._adjust($(response.nodeId), -1);
+      if (response.selectNodeId) {
+        $('label' + response.selectNodeId).onclick();
+      }
+    }
+  } 
+  
+  function refreshTree(nodeId) {
+    if (nodeId) {
+      ls.ajax('refreshTree',ajaxUpdateTreeNode,{'nodeId':nodeId});
+    } else {
+      ls.ajax('refreshTree',ajaxUpdateTreeNode,{});
+    }
+  }
+  
+  var dlgDatabaseInfo = 'jp.littlesoft.sql4g.console.DatabaseInfoDialog';
+  var dlgConsole      = 'jp.littlesoft.sql4g.console.ConsoleDialog';
+  var dlgImport       = 'jp.littlesoft.sql4g.console.ImportDialog';
+  var dlgExport       = 'jp.littlesoft.sql4g.console.ExportDialog';
+
+  function createNewDatabase() {
+    defaultDialog.width = 480;
+    defaultDialog.height = 180;
+    defaultDialog.exec('showDialog',{className:dlgDatabaseInfo,mode:'CREATE'});
+  }
+
+  function connectDatabase() {
+    if ($('objectTree_selected').value == '') {
+      msg.error('接続するデータベースをツリービューで選択してください.');
+      return;
+    }
+    defaultDialog.width = 480;
+    defaultDialog.height = 150;
+    defaultDialog.exec('showDialog',{className:dlgDatabaseInfo,mode:'CONNECT'});
+  }
+
+  function disconnectDatabase() {
+    if ($('objectTree_selected').value == '') {
+      msg.error('切断するデータベースをツリービューで選択してください.');
+      return;
+    }
+    ls.ajax('disconnectDatabase',ajaxUpdateTreeNode,{});
+  }
+
+  function recoverDatabase() {
+    if ($('objectTree_selected').value == '') {
+      msg.error('回復するデータベースをツリービューで選択してください.');
+      return;
+    }
+    defaultDialog.width = 480;
+    defaultDialog.height = 150;
+    defaultDialog.exec('showDialog',{className:dlgDatabaseInfo,mode:'RECOVERY'});
+  }
+
+  function startupDatabase() {
+    if ($('objectTree_selected').value == '') {
+      msg.error('起動するデータベースをツリービューで選択してください.');
+      return;
+    }
+    defaultDialog.width = 480;
+    defaultDialog.height = 150;
+    defaultDialog.exec('showDialog',{className:dlgDatabaseInfo,mode:'STARTUP'});
+  }
+  
+  function shutdownDatabase() {
+      if ($('objectTree_selected').value == '') {
+      msg.error('停止するデータベースをツリービューで選択してください.');
+      return;
+    }
+    defaultDialog.width = 480;
+    defaultDialog.height = 150;
+    defaultDialog.exec('showDialog',{className:dlgDatabaseInfo,mode:'SHUTDOWN'});
+  }
+    
+  function showConsole(arg) {
+    defaultDialog.hide();
+    defaultDialog.width = 610;
+    defaultDialog.height = 270;
+    defaultDialog.exec('showDialog',{className:dlgConsole,title:'データベース回復中',databaseName:arg});
+  }
+  
+  function recovery(arg) {
+    //recoveryLog = '> データベース[' + arg + ']の回復を開始します.<br/>';
+    //ls.ajax('recovery',ajaxRecoveryResponse1,{databaseName : arg, startRecovery : true});
+    ls.exec('recovery',{databaseName : arg, startRecovery : true});
+  }
+  
+  var recoveryLog;
+  
+  var ajaxRecoveryResponse1 = {
+    asynchronous: 'false',
+    onComplete: function(response){
+      recoveryLog += '> ' + response.content + '<br/>';
+      if (response.isRecoveryExit==true) {
+        recoveryLog = '> データベース[' + arg + ']の回復が完了しました.';
+      } else {
+        window.setTimeout(function(){ 
+          ls.ajax('recovery', ajaxRecoveryResponse2
+            ,{databaseName:response.databaseName}); 
+        },100);
+      }
+    }
+  }
+    
+  var ajaxRecoveryResponse2 = {
+    asynchronous: 'false',
+    onComplete: function(response){
+      recoveryLog += '> ' + response.content + '<br/>';
+      if (response.isRecoveryExit==true) {
+        recoveryLog = '> データベース[' + arg + ']のリカバリー起動が完了しました.';
+      } else {
+        window.setTimeout(function(){
+          ls.ajax('recovery', ajaxRecoveryResponse1
+            ,{databaseName:response.databaseName});
+        },100);
+      }
+    }
+  }
+
+  
+  function shutdownDatabase() {
+    defaultDialog.width = 480;
+    defaultDialog.height = 160;
+    defaultDialog.exec('showDialog',{className:dlgDatabaseInfo,mode:'SHUTDOWN'});
+  }
+  
+  
+
+               
+  function refreshDatabaseList() {
+    ls.ajax('refreshDatabaseList',ajaxUpdateTreeNode,{});
+  }
+  
+  function importDatabase() {
+    if ($('objectTree_selected').value == '') {
+      msg.error('インポートするデータベースをツリービューで選択してください.');
+      return;
+    }
+    defaultDialog.width = 680;
+    defaultDialog.height = 480;
+    defaultDialog.exec('showDialog',{className:dlgImport});
+  }
+  
+  function exportDatabase() {
+    if ($('objectTree_selected').value == '') {
+      msg.error('エクスポートするデータベースをツリービューで選択してください.');
+      return;
+    }
+    defaultDialog.width = 550;
+    defaultDialog.height = 210;
+    defaultDialog.exec('showDialog',{className:dlgExport});
+  }
+
+	function import() {
+		//ls.ajax('startImport', startImportComp);
+		ls.exec('startJavaApp', {service:'upload'});
+	}
+
+	var startImportComp = {
+		asynchronous: 'false',
+		onComplete: function(response) {
+			window.setTimeout(function(){ 
+				ls.ajax(response.action, checkImport1); 
+			}, 5000);
+			ls.exec('startJavaApp', {service:'upload'});
+		}
+	}
+
+	var checkImport1 = {
+		asynchronous: 'false',
+		onComplete: function(response) {
+			if (response.isUploading) {
+				window.setTimeout(function(){ 
+					ls.ajax(response.action, checkImport2); 
+				}, 2500);
+			}
+			else {
+				
+			}
+		}
+	}
+
+	var checkImport2 = {
+		asynchronous: 'false',
+		onComplete: function(response) {
+			if (response.isUploading) {
+				window.setTimeout(function(){ 
+					ls.ajax(response.action, checkImport1); 
+				}, 2500);
+			}
+			else {
+				
+			}
+		}
+	}
+
+  //-->
+  </script>  
+</head>
+<body>
+<form id="${_form}" name="${_form}" method="post" action="${_self}">
+
+<!-- ls_container -->
+<div id="ls_container">
+
+  <!-- ls_contents -->
+  <div id="ls_contents" style="overflow:hidden;">
+
+    <!-- main_box -->
+    <div id="main_box">
+
+      <div class="navigation_box">
+        <div class="buttons left">
+          <input id="btDatabase" type="button" class="w_60 toolButton" value="Database">
+          <!--<input type="button" class="w_60 toolButton" value="New" onclick="showConnectionInfoDialog();" disabled="disabled" />
+          <input type="button" class="w_60 toolButton" value="Edit" onclick="ls.ajax('createTree', ajaxUpdateTreeNode);" disabled="disabled" />
+          <input type="button" class="w_60 toolButton" value="Save" onclick="ls.ajax('saveTree', ajaxUpdateTreeNode);" disabled="disabled" />-->
+          <input type="button" class="w_60 toolButton" value="New" onclick="msg.error('Sorry. This feature is not implemented yet.');"  />
+          <input type="button" class="w_60 toolButton" value="Edit" onclick="msg.error('Sorry. This feature is not implemented yet.');"  />
+          <input type="button" class="w_60 toolButton" value="Save" onclick="msg.error('Sorry. This feature is not implemented yet.');"  />
+        </div>
+        <div class="infomation">
+          <span id="infomation_text" class="infomation_text"><span id="objectTree_defaultInformation"></span></span>
+        </div>
+      </div>
+          
+      <div id="lsTabPanel">
+        <div id="lsTabPanelLeft">
+          <div id="lsTabPanelLeftUpper">$objectTree</div>
+          <div id="lsTabPanelLeftLower">
+          <div id="columnGridTitle" >&nbsp;</div>
+          <div class="lsDataGrid">
+            <table class="simpleGrid">
+              <thead><tr><th>*</th><th>Column Name</th><th>Type</th><th>Size</th><th>Scale</th><th>Null</th></tr></thead>
+              <tbody id="columnGridBody"></tbody>
+            </table>
+          </div>          
+          </div>          
+        </div>
+      
+        <div id="main_tab" class="lsTabContainer main_tab_border"><!-- main_tab ( Right Area )-->
+              
+          <!-- タブ 1-0 -->
+          <div id="tab0"  class="lsTabContent" _lstabidx="0">
+
+<h2>SQL4G Database Admin 使用方法&nbsp;&nbsp;&nbsp;(Alpha評価版)</h2>
+<h3>▼&nbsp;&nbsp;データベース操作</h3>
+<h4>データベースを作成する</h4>
+<p>「Database」→「Create New」をクリックし、ダイアログにデータベース名、ユーザーID、パスワードを入力して「OK」をクリックすると、新規データベースが作成されます。</p>
+<h4>データベースに接続する</h4>
+<p>ツリーでデータベースをクリック後、「Database」→「Open」をクリックしてダイアログにパスワードを入力して「OK」をクリックしてデータベースに接続します。</p>
+<h4>データベース接続を切断する</h4>
+<p>ツリーでデータベースをクリック後、「Database」→「Close」をクリックしてデータベースに接続を切断します。</p>
+<br />
+<h4>データベースを起動する</h4>
+<p>ツリーでデータベースをクリック後、「Database」→「Startup」をクリックしてダイアログにパスワードを入力して「OK」をクリックしてデータベースを起動します。</p>
+<h4>データベースを停止する</h4>
+<p>ツリーでデータベースをクリック後、「Database」→「Shutdown」をクリックしてデータベースを停止します。</p>
+<h4>表示を更新する</h4>
+<p>「Database」→「Refresh」をクリックして表示を更新します。</p>
+<h3>▼&nbsp;&nbsp;ツリー構造</h3>
+<p>ウインドウ左上のツリーは、データベース構造を表示しています。</p>
+<br />
+<p style="font-weight:bold;">[&nbsp;SQL4G&nbsp;]</p>
+<p style="text-indent:30px;">－&nbsp;データベース1</p>
+<p style="text-indent:60px;">－&nbsp;スキーマ1</p>
+<p style="text-indent:90px;">－&nbsp;テーブル1</p>
+<p style="text-indent:90px;">－&nbsp;テーブル2</p>
+<p style="text-indent:30px;">－&nbsp;データベース2</p>
+<p style="text-indent:60px;">－&nbsp;スキーマ2</p>
+<p style="text-indent:90px;">－&nbsp;テーブル3</p>
+<p style="text-indent:90px;">－&nbsp;テーブル4</p>
+<h3>▼&nbsp;&nbsp;SQL文の実行</h3>
+<h4>任意のSQL文を実行する</h4>
+<p>1.&nbsp;あらかじめ、データベースに接続しておきます。</p>
+<p>2.&nbsp;ウインドウ上部の「SQL Window」タブをクリックして、SQL実行画面を開きます。</p>
+<p>3.&nbsp;テキストエリアに任意のSQL文を記述します。</p>
+<p>4.&nbsp;「Execute」をクリックするとSQL文が実行され、結果が一覧に表示（SELECT文のみ）されます。その際、トランザクションは自動的にコミットされます。</p>
+<h3>▼&nbsp;&nbsp;テーブル情報の参照</h3>
+<h4>テーブル定義を参照する</h4>
+<p>ツリーでテーブル名をクリックすると、ウインドウ左下にテーブル定義が表示されます。</p>
+<h4>テーブルデータを参照する</h4>
+<p>1.&nbsp;ウインドウ上部の「Table Viewer」タブをクリックして、データ参照画面を開きます。</p>
+<p>2.&nbsp;ツリーでテーブル名をクリックすると、参照画面にテーブルデータが表示されます。</p>
+<p>3.&nbsp;データは100件まで表示されます。「First」「Prev」「Next」「Last」をクリックすることで表示しているページを切り替えることが可能です。</p>
+<br />
+<br />
+<br />
+          </div><!-- タブ 1-0 end.-->
+              
+          <!-- タブ 1-1 -->
+          <div id="tab1" class="lsTabContent" _lstabidx="1"></div><!-- タブ 1-1 end.-->
+
+          <!-- タブ 1-2 -->
+          <div id="tab2" class="lsTabContent" _lstabidx="2"></div><!-- タブ 1-2 end.-->
+
+          <!-- タブ 1-3 -->
+          <div id="tab3" class="lsTabContent" _lstabidx="3"></div><!-- タブ 1-3 end.-->
+
+          <!-- タブ 1-4 -->
+          <div class="lsTabContent" _lstabidx="4">Sorry. This feature is not implemented yet.</div><!-- タブ 1-4 end.-->
+        </div><!-- main_tab end.-->
+      </div><!-- end of lsTabPanel -->
+    </div><!-- end of main_box -->
+  </div><!-- end of ls_contents -->
+</div><!-- end of ls_container -->
+#parse(${tplLsjControl})
+</form>
+<span id="dummy" style="display:none"></span>
+</body>
+</html>

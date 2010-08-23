@@ -1,0 +1,299 @@
+@charset "UTF-8";
+/*
+ *  Copyright (c) 2006-2009 LittleSoft Corporation
+ *  http://www.littlesoft.jp/lsj/license.html
+ */
+
+/**
+ * LittleSoft CloudWare
+ * 
+ * [Account Manager] スタイルシート styleacm.css
+ *
+ * @author LittleSoft Corporation
+ * @version 1.0.0
+ */
+
+/*===========================================================================================
+  [メニュー]
+============================================================================================*/
+/*#ls_header .menu_container .menu_text {
+	min-width: 180px;
+	width: auto !important;
+	width: 180px;
+}
+div.lsSelectableMenu {
+	width: 180px;
+}*/
+
+
+/*===========================================================================================
+  [個人設定]
+============================================================================================*/
+#pain_personal,
+#pain_acm {
+	border: 1px solid #AAAAAA;
+	background-color: #FFFFFF;
+}
+#personal_info_edit {
+	overflow-y: scroll;
+}
+
+#personal_info_edit_table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	background: #FFFFFF;
+	border-top: 1px solid #CCCCCC;
+	position: relative;
+	table-layout: fixed;
+}
+
+#personal_info_edit_table tr th {
+	background: #DCF4F4;
+	color: #444;
+	border-bottom: 1px solid #CCCCCC;
+	font-weight: bold;
+	text-align: center;
+	white-space: nowrap;
+	height: 25px;
+  width: 200px;
+	line-height: 25px;
+}
+
+#personal_info_edit_table tr td {
+	border-bottom: 1px solid #CCCCCC;
+	padding: 5px 10px;
+	height: 25px;
+	line-height: 25px;
+	white-space: nowrap;
+}
+
+#personal_info_edit_table tr td input {
+	margin: 0;
+}
+
+#personal_info_edit_table tr td input.i_radio {
+	clear: both;
+	display: block;
+	float: left;
+	line-height: 25px;
+	margin-top: 5px;
+}
+
+#personal_info_edit_table tr td label {
+	display: block;
+	line-height: 25px;
+	padding-left: 5px;
+	margin-left: 15px;
+}
+
+
+/*===========================================================================================
+  [リスト]
+============================================================================================*/
+table.list_tbl tr.disabled {
+	background: #DDD;
+}
+
+
+
+
+/*===========================================================================================
+  [メンテナンス]
+============================================================================================*/
+#account_maintenance {
+	padding: 5px;
+}
+
+#service_maintenance {
+	padding: 5px;
+}
+
+#group_maintenance {
+	padding: 5px;
+}
+
+#member_maintenance {
+	padding: 5px;
+}
+
+table.account_maintenance_table,
+table.service_maintenance_table,
+table.group_maintenance_table,
+table.member_maintenance_table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	width: 100%;
+	background: #FFFFFF;
+	border-top: 1px solid #009999;
+	border-bottom: 1px solid #009999;
+	position: relative;
+	table-layout: fixed;
+}
+
+table.account_maintenance_table tr th,
+table.service_maintenance_table tr th,
+table.group_maintenance_table tr th,
+table.member_maintenance_table tr th {
+	background: #DCF4F4;
+	color: #444;
+	border-bottom: 1px dotted #00AFAF;
+	font-weight: bold;
+	text-align: center;
+	white-space: nowrap;
+	height: 25px;
+	line-height: 25px;
+}
+
+table.account_maintenance_table tr td,
+table.service_maintenance_table tr td,
+table.group_maintenance_table tr td,
+table.member_maintenance_table tr td {
+	border-bottom: 1px dotted #00AFAF;
+	height: 25px;
+	line-height: 25px;
+	white-space: nowrap;
+	text-align: center;
+	/*padding: 5px 10px;*/
+	padding: 5px 3px;
+}
+
+table.account_maintenance_table tr td input.i_text,
+table.service_maintenance_table tr td input.i_text,
+table.group_maintenance_table tr td input.i_text,
+table.member_maintenance_table tr td input.i_text,
+table.account_maintenance_table tr td select.i_select,
+table.service_maintenance_table tr td select.i_select,
+table.group_maintenance_table tr td select.i_select,
+table.member_maintenance_table tr td select.i_select {
+	width: 90%;
+}
+
+table.account_maintenance_table tr td input.i_check,
+table.service_maintenance_table tr td input.i_check,
+table.group_maintenance_table tr td input.i_check,
+table.member_maintenance_table tr td input.i_check {
+	vertical-align: middle;
+}
+
+table.new_member_form_table {
+	margin-top: 10px;
+	border-collapse: collapse;
+	border-spacing: 0;
+	width: 100%;
+	background: #FFFFFF;
+	border-top: 1px solid #009999;
+	border-bottom: 1px solid #009999;
+	position: relative;
+	table-layout: fixed;
+}
+
+table.new_member_form_table tr th {
+	background: #DCF4F4;
+	color: #444;
+	border-bottom: 1px dotted #00AFAF;
+	font-weight: bold;
+	text-align: center;
+	white-space: nowrap;
+	height: 25px;
+	line-height: 25px;
+	width: 100px;
+}
+
+table.new_member_form_table tr td {
+	border-bottom: 1px dotted #00AFAF;
+	padding: 5px 3px;
+	height: 25px;
+	line-height: 25px;
+	white-space: nowrap;
+}
+
+table.new_member_form_table tr td img {
+	vertical-align: middle;
+}
+
+#new_member div.form_info {
+	/*margin-top: 20px;*/
+	height: 30px;
+	line-height: 30px;
+	color: #444;
+	padding-left: 1em;
+}
+
+.account_search_box {
+	margin-top: 1px;
+	height: 32px;
+	line-height: 30px;
+}
+
+.account_search_box span {
+	margin-left: 5px;
+	margin-right: 3px;
+	padding: 2px;
+}
+
+table.account_maintenance_table tr.disabled,
+table.service_maintenance_table tr.disabled,
+table.group_maintenance_table tr.disabled,
+table.member_maintenance_table tr.disabled {
+	background: #DDD;
+}
+
+
+
+
+
+
+/*===========================================================================================
+  [インフォメーション]
+============================================================================================*/
+.navigation_box div.infomation_l {
+	float: left;
+    height: 22px;
+	margin: 5px 0px 0px 4px;
+	padding-right: 9px;
+	background: url(i/lsg_text_r.gif) no-repeat scroll right top;
+}
+* html .navigation_box div.infomation_l {
+	margin: 5px 0px 0px 2px;
+}
+
+.navigation_box div.infomation_l span.infomation_text {
+	display: block;
+	float: left;
+	position: relative;
+    height: 22px;
+	line-height: 23px;
+	padding-left: 9px;
+	white-space: nowrap;
+	overflow: hidden;
+	width: 230px;
+	text-align:center;
+	color:#0066FF;
+	background: url(i/lsg_text_l.gif) no-repeat scroll left top;
+}
+
+.navigation_box div.infomation span.infomation_text {
+	color:#444444;
+}
+
+
+
+/*===========================================================================================
+  [ペイン]
+============================================================================================*/
+#pain_base {
+	position: relative;
+	margin: 0 2px 2px 2px;
+}
+
+div.pain_title_acm {
+  border-bottom: 1px solid #AAAAAA;
+  height: 25px;
+  line-height: 22px;
+  background: #DCF4F4;
+}
+
+.pain_title_acm span.button {
+  margin-top: 1px;
+}
+

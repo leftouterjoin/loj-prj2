@@ -1,0 +1,341 @@
+<div id="lsjcontrol" style="display: none;">
+  <input type="hidden" name="_sbsid" value="$_sbsid" />
+  <input type="hidden" name="_seq" value="$_seq" />
+  <input type="hidden" name="_method" value="doDefault" />
+  <input type="hidden" name="_args" value="" />
+  <input type="hidden" name="_apid" value="$_apid" />
+  <input type="hidden" name="_papid" value="$_papid" />
+</div>
+
+<input type="text" name="__dummy" style="display:none;" value="" />
+
+<div id="ls_nowLoading_box" style="display:none;"></div>
+<div id="ls_nowLoading_image" style="display:none;"></div>
+
+
+<script type="text/javascript">
+<!--
+  if (!(ls)) var ls = {};
+  ls.lastLoaded = new Date().getTime();
+  ls.isAjaxRequest = false;
+  ls.formTarget = '';
+  ls.defaultFormName   = '${_form}';
+  ls.defaultFormAction = '${_self}';
+  ls.checkBoot = ${checkBoot};
+  ls.exec = function(){
+    if (ls._isExecutingExec || ls._isExecutingAjax) {
+      return false;
+    }
+    if (document[ls.defaultFormName].target == '' || document[ls.defaultFormName].target == '_self') {
+      ls._isExecutingExec = true;
+      ls.setVisibleLoading(true);
+      ls.formTarget = '';
+    } else {
+      ls.formTarget = document[ls.defaultFormName].target;
+    }
+    ls.isAjaxRequest = false;
+    var _a = arguments;
+    //if (new Date().getTime()-ls.lastLoaded) > (1000*60)) {
+    if (ls.checkBoot) {
+      ls._checkBootAlpha.apply(this, _a);
+    } else {
+      ls._exec.apply(this, _a);
+    }
+  }
+  
+  ls._exec = function(){
+    document[ls.defaultFormName]._method.value = arguments[0];
+    var args = ''; 
+    for (i = 1; i < arguments.length; i++){ 
+      if (args != '') args += '$$\_%_$$';
+      if (!Object.isString(arguments[i]) && !Object.isNumber(arguments[i]) ) {
+        var obj = { 'class' : 'java.util.HashMap', values : arguments[i] };
+        if (Object.isArray(arguments[i])) {
+          obj['class'] = 'java.util.ArrayList';
+        }
+        args += Object.toJSON(obj);
+      } else if (arguments[i]=='') {
+        args += 'ls_ajax_arguments_is_NULLSTRING';
+      } else {
+        args += arguments[i];
+      }
+    }
+
+    document[ls.defaultFormName]._args.value = args;
+    try {
+      document[ls.defaultFormName].submit();
+    }
+    catch (e) {
+      alert(e);
+    }
+    try {
+      var _f = function(){ls.setVisibleLoading(false);};
+      setTimeout(_f, 1000);
+    }
+    catch (e) {
+    }
+  }
+  
+  var exec = ls.exec; //for lower compatible.
+  
+  ls.open = function(){
+    this.exec('forward', arguments[0]);
+  }
+
+  ls.enterProgress  = function(){};
+  ls.updateProgress = function(text, progress){};  
+  ls.exitProgress   = function(){};
+  ls._checkBootAlpha = function(){
+    var _alpha = arguments;
+    new Ajax.Request(ls.defaultFormAction + '?checkBoot=true', {
+      onComplete: function(data) { ls._checkBoot(data, ls._checkBootBeta, _alpha); }
+    });
+  }
+  
+  ls._checkBootBeta = function(){
+    var _beta = arguments;
+    new Ajax.Request(ls.defaultFormAction + '?checkBoot=true', {
+      onComplete: function(data) { ls._checkBoot(data, ls._checkBootAlpha, _beta); }
+    });
+  }
+
+  ls._checkBoot =  function (data, next, ajaxArgs) {
+    try {
+      var response = eval('(' + data.responseText + ')');
+      if (response.result != 'OK') {
+        alert('サービスが起動中にエラーが発生しました.[' + response.statusText + ']');
+        throw new Error('サービスが起動中にエラーが発生しました.[' + response.statusText + ']');
+      } else if (response.processExit==true) {
+        var _arg = ajaxArgs;
+        if (ls.isAjaxRequest) {
+          var _exit = function(){ls._ajax.apply(this, _arg);};
+          window.setTimeout(_exit, 50);
+        } else {
+          if (ls.formTarget!='') {
+            document[ls.defaultFormName].target = ls.formTarget;
+          }
+          ls._exec.apply(this, _arg);
+        }
+      } else {
+        ls.updateProgress(response.statusText, response.progress);
+        var _arg = ajaxArgs;
+        var _next = function(){ next.apply(this, _arg); };
+        window.setTimeout(_next, 50);
+      }    
+    } catch (ex) {
+      alert('check Boot process error:' + ex);
+      throw ex;
+    }
+  }
+  
+#if($_useajax)
+  
+  ls.ajax = function(){
+    
+    if (ls._isExecutingExec || ls._isExecutingAjax) {
+      return false;
+    }
+    ls._isExecutingAjax = true;
+    ls.setVisibleLoading(true);
+    ls.isAjaxRequest = true;
+    var _a = arguments;
+    var _f = function(){ls._ajax.apply(this, _a);};
+    setTimeout(_f, 10);
+  }
+  
+
+    
+  ls._ajax = function(){
+    
+    document[ls.defaultFormName]._method.value = arguments[0];
+    var _ax = arguments;
+    var args = ''; 
+    for (i = 2; i < arguments.length; i++){ 
+      if (args != '') args += '$$\_%_$$'; 
+      if (!Object.isString(arguments[i]) && !Object.isNumber(arguments[i]) ) {
+        var obj = { 'class' : 'java.util.HashMap', values : arguments[i] };
+        if (Object.isArray(arguments[i])) {
+          obj['class'] = 'java.util.ArrayList';
+        }
+        args += Object.toJSON(obj);
+      } else if (arguments[i]=='') {
+        args += 'ls_ajax_arguments_is_NULLSTRING';
+      }
+      else {
+        args += arguments[i];
+      }
+    }
+    document[ls.defaultFormName]._args.value = args;
+    var ajaxRequest
+    if (arguments.length>1) {
+      ajaxRequest = arguments[1];
+    }
+    else {
+      ajaxRequest = new Object();
+    }
+    if (!ajaxRequest.parameters || ajaxRequest.parameters==null) {
+      //ajaxRequest.parameters = $(document.${_form}).serialize();
+      ajaxRequest.parameters = Form.serialize($(document.${_form}));
+    }
+    else {
+      ajaxRequest.parameters = ls.serialize($$('#lsjcontrol'), ajaxRequest.parameters);
+    }
+    if (!ajaxRequest.__onComplete && ajaxRequest.onComplete) {
+      ajaxRequest.__onComplete = ajaxRequest.onComplete;
+      ajaxRequest.onComplete = function(data){
+        try {
+          var res = eval('(' + data.responseText + ')');
+          if (res.processExit==false) {
+            ls.updateProgress(res.statusText, res.progress);
+            var _check = function(){ls._checkBootAlpha.apply(this, _ax);};
+            setTimeout(_check, 100);
+            return; 
+          }
+        } catch (e) {
+          ls._isExecutingAjax = false;
+          ls.exec('');
+          return;
+        }
+        document[ls.defaultFormName]._seq.value = res.newSequence;
+        
+        ls._isExecutingAjax = false;
+
+        try {
+          if (res.__exception) {
+            ls.onException(res);
+          }
+          else if (res.__sequenceerror) {
+            ls.onSequenceError(res);
+          }
+          else {
+            ajaxRequest.__onComplete(res);
+          }
+          ajaxRequest.parameters = null;
+        }
+        finally {
+          try {
+            ls.setVisibleLoading(false);
+          }
+          catch (e) {
+          }
+        }
+        ajaxRequest.parameters = null;
+      }
+    }
+    if (!ajaxRequest.onFailure) {
+      ajaxRequest.onFailure = function(data){
+        alert(data.responseText);
+        try {
+          ls._isExecutingAjax = false;
+          ls.setVisibleLoading(false);
+        }
+        catch (e) {
+        }
+      }
+    }
+    new Ajax.Request(ls.defaultFormAction, ajaxRequest);
+  }
+  
+
+ls.onException = function(response){
+  alert(response.__exception);
+}
+
+ls.onSequenceError = function(response){
+  alert(response.__sequenceerror);
+}
+#end
+ls.args = {};
+ls.loadScript = function(){
+  try {
+    ${_loadscript}
+  } catch (e) { alert('ls.loadScript error:' + e); }
+}
+
+ls.stringToCookies = function(str) {
+  var result = new Object();
+  var c = str.split(";");
+  for (var i=0; i<c.length; i++) {
+    var temp = c[i].toString().split("=");
+    result[temp[0].strip()] = temp[1].strip();
+  }
+  return result;
+}
+
+ls.cookiesToStirng = function(cookies) {
+  var str = '';
+  for (var n in cookies) { 
+    str += ( str=='' ? '' : '; '); 
+    str += ( n + '=' + cookies[n] );
+  }
+  return str;
+}
+
+Event.observe(document, 'dom:loaded', function(){
+  ls.loadScript();
+});
+
+Event.observe(window, 'dom:loaded', function(){
+  ## Chrome/Safari用のEnterキーSubmit制御
+  if (Prototype.Browser.WebKit) {
+    var _elms = Element.getElementsBySelector(document.${_form}, 'input[type="text"]');
+    for (var i = 0; i < _elms.length; i++) {
+      _elms[i].onkeypress = function keyEvent(e) { if (event.keyCode == 13) return false; };
+    }
+  }
+});
+
+ls.setVisibleLoading = function(visible) {
+  var box = $('ls_nowLoading_box');
+  var img = $('ls_nowLoading_image');
+  if (visible) {
+    ls.enterProgress();
+    var viewOffset = document.viewport.getScrollOffsets();
+    var bx = viewOffset.left + (document.viewport.getWidth()  - box.getWidth())  / 2;
+    var by = viewOffset.top  + (document.viewport.getHeight() - box.getHeight()) / 2;
+    var ix = viewOffset.left + (document.viewport.getWidth()  - img.getWidth())  / 2;
+    var iy = viewOffset.top  + (document.viewport.getHeight() - img.getHeight()) / 2;
+    box.setStyle({'top':(by +'px'), 'left':(bx +'px')});
+    img.setStyle({'top':(iy +'px'), 'left':(ix +'px')});
+    box.show();
+    img.show();
+  }
+  else {
+    var checkTarget = document.readyState;
+    if (window.name.indexOf('_Frame',0) >= 0) {
+      checkTarget = parent.document.getElementById(window.name).readyState;
+    }
+    if (checkTarget == 'complete' || checkTarget == 'interactive' || checkTarget == undefined) {
+      ls._isExecutingExec = false;
+      box.hide();
+      img.hide();
+    }
+    else {
+      var _f = function(){ls.setVisibleLoading(false);};
+      setTimeout(_f, 1000);
+    }
+    ls.exitProgress();
+    ls.lastLoaded = new Date().getTime();
+  }
+}
+
+ls._isExecutingExec = false;
+ls._isExecutingAjax = false;
+
+//-->
+</script>
+<script type="text/javascript">
+<!--
+ls.serialize = function() {
+  var q = (arguments[1]) ? arguments[1] : '';
+  var objects = arguments[0];
+  objects.each(function(obj) {
+    var tmp = Form.serialize(obj);
+    if (q != '') tmp = '&' + tmp;
+    q = q + tmp;
+  }.bind(this));
+  return q;
+}
+//-->
+</script>
+

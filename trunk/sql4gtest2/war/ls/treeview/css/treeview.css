@@ -1,0 +1,93 @@
+@charset "UTF-8";
+/*
+ *  Copyright (c) 2006-2009 LittleSoft Corporation
+ *  http://www.littlesoft.jp/lsj/license.html
+ */
+
+/*
+ * ツリービュー用 スタイルシート treeview.css
+ * 
+ * @author LittleSoft Corporation
+ * @version 1.2.3
+ */
+
+/*  lsTreeView
+=======================================================================*/
+.lsTreeView {
+	position: relative;
+	overflow: auto;
+	padding: 5px 0px 0px 5px;
+}
+
+.lsTreeView ul {
+	display: block;
+	/*margin-left: 15px;*/
+}
+
+.lsTreeView li {
+	display: block;
+	padding-top: 5px;
+	list-style:none;
+}
+
+/*  lsTreeViewItem
+=======================================================================*/
+span.lsTreeViewItem {
+	color: #316AC5;
+	/*padding-left: 25px;*/
+	padding-left: 20px;
+	line-height: 18px;
+	height: 18px;
+	background: url(./i/icon_item.gif) left no-repeat;        /* 18 x 18 */
+	cursor: pointer;
+}
+
+/*  lsTreeViewToggleOpen
+    lsTreeViewToggleClose
+=======================================================================*/
+span.lsTreeViewToggleOpen,
+span.lsTreeViewToggleClose {
+	/*padding-left: 25px;*/
+	padding-left: 20px;
+	line-height: 18px;
+	height: 18px;
+	cursor: pointer;
+}
+
+span.lsTreeViewToggleOpen {
+	background: url(./i/icon_toggle_open.gif) left no-repeat;  /* 18 x 18 */
+}
+
+span.lsTreeViewToggleClose {
+	background: url(./i/icon_toggle_close.gif) left no-repeat; /* 18 x 18 */
+}
+
+/*  lsTreeViewToggleLabel
+    lsTreeViewToggleLabelSelected
+=======================================================================*/
+span.lsTreeViewToggleLabel {
+	cursor: default;
+}
+
+span.lsTreeViewToggleLabelSelected {
+	background-color: #316AC5;
+	color: #FFF;
+}
+
+/*  lsTreeViewFloatingArea
+=======================================================================*/
+.lsTreeViewFloatingArea {
+	display: block;
+	position: absolute;
+	list-style-type: none;
+}
+
+.lsTreeViewFloatingArea li {
+	list-style-type: none;
+	padding-top: 5px;
+	/*padding-left: 25px;*/
+	padding-left: 20px;
+	line-height: 18px;
+	height: 18px;
+	width:100px;
+}
