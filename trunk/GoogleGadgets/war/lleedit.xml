@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+<script src="http://www.gmodules.com/ig/ifr?url=http://loj-gg1.appspot.com/lleedit102.xml&amp;synd=open&amp;w=200&amp;h=160&amp;title=LLEval!&amp;border=%23ffffff%7C3px%2C1px+solid+%23999999&amp;output=js"></script>
+-->
+<Module>
+	<ModulePrefs
+		title="LLEEdit"
+		description="LLEEdit"
+		author=""
+		author_location="Japan"
+		height="170" scrolling="true" /> 
+
+	<Content type="html">
+		<![CDATA[
+
+<link href="http://blog.livedoor.jp/dankogai/google/prettify.css" rel="stylesheet" type="text/css"/>
+
+<select id="sel_lang" style="width: 190px;"></select
+><div><textarea id="txt_in" rows="4" style="width: 190px;"></textarea></div
+><div><textarea id="txt_out" rows="1" wrap="off" style="width: 190px;"></textarea></div
+><input value="eval" type="submit"
+onclick="lleval()"
+><input value="クリア" type="submit" onclick="this.nextSibling.nextSibling.innerHTML=''" 
+><input value="コードを取得" type="submit" onclick="toTag()" 
+><div id="box_res" style="width: 190px;"></div>
+
+<script type="text/javascript" src="http://blog.livedoor.jp/dankogai/google/prettify.js"></script> 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script> 
+(function($) {
+	var URI = "http://loj-gg1.appspot.com/lleprint.xml";
+
+	askLanguages = function(){
+		if (! this['JSONP']) JSONP = {};
+		JSONP['q'] = function(json){
+			var keys = [];
+			for (var k in json) keys[keys.length] = k;
+			keys.sort();
+			for (var i = 0, l = keys.length; i < l; i++){
+				var k = keys[i]; var v = json[k];
+				if (k == "rb") {
+					$('#sel_lang').append($('<option>').attr({ value: k, selected: "selected" }).text(v));
+				} else {
+					$('#sel_lang').append($('<option>').attr({ value: k }).text(v));
+				}
+			}
+		};
+
+		(function(d, uri){
+			var s = d.createElement('script');
+			s.charset = 'UTF-8';
+			s.src = uri + '&q=1';
+			s.id = s.src;
+			d.body.appendChild(s);
+		})(document, 'http://api.dan.co.jp/lleval.cgi?c=JSONP.q');
+	};
+
+	askLanguages();
+	$("#txt_in").val(decodeURIComponent("class%20String%0A%20%20def%20camelize%0A%20%20%20%20gsub%20(%2F_(%5Cw)%2F)%20%7B%20%241.upcase%20%7D%20%0A%20%20end%0Aend%0A%20%0Aputs%20'get_element_by_id'.camelize%0A"));
+
+	keysOf = function(o) { 
+		var keys = [];
+		for (var k in o) keys[keys.length] = k;
+		return keys;
+	};
+
+	json2table = function(json) {
+		var tbody = $('<table/>');
+		$.each(keysOf(json).sort(), function(i, k) {
+			var tr = $('<tr/>').css({verticalAlign:'top'});
+			$('<th/>').text(k).css({textAlign:'right'}).appendTo(tr);
+			var td = $('<td/>').text(json[k])
+			if (k.match(/^std/)) td.css({fontFamily:'monospace',whiteSpace:'pre'});
+			td.appendTo(tr);
+			tr.appendTo(tbody);
+		});
+		return tbody.appendTo($('<table/>'));
+	};
+
+	lleval = function() {
+		var code = $("#txt_in").val();
+		var lang = $("#sel_lang").val();
+
+		var query = {s:code};
+		if (lang) query['l'] = lang;
+		var url = 'http://api.dan.co.jp/lleval.cgi';
+		var proto = 'json';
+		if ($.browser.msie || $.browser.opera) { 
+			url   += '?c=?';
+			proto += 'p';
+		} /* falls back to JSONP */
+		$.get(url, query, function(json) {
+			$("#box_res").html(json2table(json)).hide().show('slow');
+		}, proto);
+	};
+
+	toTag = function(){
+		var lang = $("#sel_lang").val();
+		var text = $("#txt_in").val();
+
+		text = encodeURIComponent(text);
+		text = "<script src=\"http://www.gmodules.com/ig/ifr?url=" + URI + "&amp;up_code=" + text + "&amp;lang=" + lang + "&amp;synd=open&amp;w=500&amp;h=200&amp;title=LLEval!&amp;border=%23ffffff%7C3px%2C1px+solid+%23999999&amp;output=js\"></script\>";
+
+		$("#txt_out").val(text);
+	};
+
+})(jQuery);
+</script>
+
+		]]>
+	</Content>
+</Module>
