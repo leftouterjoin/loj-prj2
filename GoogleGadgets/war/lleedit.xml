@@ -15,14 +15,14 @@
 
 <link href="http://blog.livedoor.jp/dankogai/google/prettify.css" rel="stylesheet" type="text/css"/>
 
-<select id="sel_lang" style="width: 190px;"></select
-><div><textarea id="txt_in" rows="4" style="width: 190px;"></textarea></div
-><div><textarea id="txt_out" rows="1" wrap="off" style="width: 190px;"></textarea></div
+<select id="sel_lang" style="width: 185px; font-size:9pt;"></select
+><div><textarea id="txt_in" rows="4" style="width: 185px; font-size:9pt;"></textarea></div
+><div><input type="text" id="txt_out" rows="1" wrap="off" style="width: 185px; font-size:9pt;"></textarea></div
 ><input value="eval" type="submit"
 onclick="lleval()"
 ><input value="クリア" type="submit" onclick="this.nextSibling.nextSibling.innerHTML=''" 
 ><input value="コードを取得" type="submit" onclick="toTag()" 
-><div id="box_res" style="width: 190px;"></div>
+><div id="box_res" style="width: 185px; font-size:9pt;"></div>
 
 <script type="text/javascript" src="http://blog.livedoor.jp/dankogai/google/prettify.js"></script> 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
