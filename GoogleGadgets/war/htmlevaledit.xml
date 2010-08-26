@@ -18,21 +18,23 @@
 ><input value="eval" type="submit"
 onclick='$("#box_res").html($("#txt_in").val())'
 ><input value="クリア" type="submit" onclick="this.nextSibling.nextSibling.innerHTML=''" 
-><input value="コードを取得" type="submit" onclick="toTag()" 
+><div  style="font-size:9pt;"><input value="コードを取得" type="submit" onclick="toTag()" 
+><input type="checkbox" id="chk_codeoff" checked="true"><label for="chk_codeoff">コード非表示</label></div
 ><div id="box_res" style="width: 185px; font-size:9pt;"></div>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
 <script> 
 (function($) {
-	var URI = "http://loj-gg1.appspot.com/lleprint.xml";
+	var URI = "http://loj-gg1.appspot.com/htmlevalprint.xml";
 
 	$("#txt_in").val(decodeURIComponent("%3Cscript%3E%0AString.prototype.camelize%20%3D%20function()%20%7B%0A%09return%20this.replace(%2F_(%5Ba-z%5D)%2Fg%2C%20function(m)%20%7B%0A%09%09return%20m.charAt(1).toUpperCase()%3B%0A%09%7D)%3B%0A%7D%3B%0A%0Aalert(%22get_element_by_id%22.camelize())%3B%0A%3C%2Fscript%3E%0A"));
 
 	toTag = function(){
 		var text = $("#txt_in").val();
+		var codeoff = $("#chk_codeoff").attr("checked");
 
 		text = encodeURIComponent(text);
-		text = "<script src=\"http://www.gmodules.com/ig/ifr?url=" + URI + "&amp;up_code=" + text + "&amp;synd=open&amp;w=500&amp;h=200&amp;title=HtmlEval!&amp;border=%23ffffff%7C3px%2C1px+solid+%23999999&amp;output=js\"></script\>";
+		text = "<script src=\"http://www.gmodules.com/ig/ifr?url=" + URI + "&amp;up_code=" + text + "&amp;up_codeoff=" + codeoff + "&amp;synd=open&amp;w=500&amp;h=200&amp;title=HtmlEval!&amp;border=%23ffffff%7C3px%2C1px+solid+%23999999&amp;output=js\"></script\>";
 
 		$("#txt_out").val(text);
 	};
