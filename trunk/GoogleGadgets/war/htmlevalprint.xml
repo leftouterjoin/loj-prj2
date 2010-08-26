@@ -2,8 +2,7 @@
 <Module>
 	<ModulePrefs
 		title="HtmlEvalEPrint"
-		description="HtmlEvalEPrint"
-		author=""
+        description="htmlをブラウザに表示します。貼り付け専用です。"
 		author_location="Japan"
 		height="150" scrolling="true" /> 
 

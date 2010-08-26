@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
 	<ModulePrefs
-		title="LLEPrint"
-		description="LLEPrint"
-		author=""
+		title="LLEValPrint"
+        description="LLなコードを実行します。貼り付け専用です。"
 		author_location="Japan"
 		height="150" scrolling="true" /> 
 

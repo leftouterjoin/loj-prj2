@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!-- 
-<script src="http://www.gmodules.com/ig/ifr?url=http://loj-gg1.appspot.com/lleedit102.xml&amp;synd=open&amp;w=200&amp;h=160&amp;title=LLEval!&amp;border=%23ffffff%7C3px%2C1px+solid+%23999999&amp;output=js"></script>
--->
 <Module>
 	<ModulePrefs
-		title="LLEEdit"
-		description="LLEEdit"
-		author=""
+		title="LLEvalEdit"
+		description="LLなコードを実行したり、貼り付け用ガジェットのタグを生成します。"
 		author_location="Japan"
 		height="170" scrolling="true" /> 
 
 	<Content type="html">
 		<![CDATA[
-
+<!-- 
+<script src="http://www.gmodules.com/ig/ifr?url=http://loj-gg1.appspot.com/lleedit102.xml&amp;synd=open&amp;w=200&amp;h=160&amp;title=LLEval!&amp;border=%23ffffff%7C3px%2C1px+solid+%23999999&amp;output=js"></script>
+-->
 <select id="sel_lang" style="width: 185px; font-size:9pt;"></select
 ><div><textarea id="txt_in" rows="4" style="width: 185px; font-size:9pt;"></textarea></div
 ><div><input type="text" id="txt_out" rows="1" wrap="off" style="width: 185px; font-size:9pt;"></textarea></div
