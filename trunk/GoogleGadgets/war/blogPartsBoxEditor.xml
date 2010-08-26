@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
 	<ModulePrefs
-		title="HtmlEval"
+		title="BlogPartsBoxEditor"
         description="htmlコードをガジェット内で実行します。貼り付け用ガジェットのタグを生成します。"
 		author_location="Japan"
 		height="170" scrolling="true" /> 
@@ -10,7 +10,7 @@
 		<![CDATA[
 
 <!-- 
-<script src="http://www.gmodules.com/ig/ifr?url=http://loj-gg1.appspot.com/htmlevaledit.xml&amp;synd=open&amp;w=200&amp;h=160&amp;title=HtmlEval!&amp;border=%23ffffff%7C3px%2C1px+solid+%23999999&amp;output=js"></script>
+<script src="http://www.gmodules.com/ig/ifr?url=http://loj-gg1.appspot.com/blogPartsBoxEditor.xml&amp;synd=open&amp;w=200&amp;h=160&amp;title=HtmlEval!&amp;border=%23ffffff%7C3px%2C1px+solid+%23999999&amp;output=js"></script>
 -->
 <div><textarea id="txt_in" rows="4" style="width:100%; font-size:9pt;"></textarea></div
 ><div><input type="text" id="txt_out" style="width:100%; font-size:9pt;"></input></div
@@ -27,7 +27,7 @@ onclick='$("#box_res").html($("#txt_in").val())'
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
 <script> 
 (function($) {
-	var URI = "http://loj-gg1.appspot.com/htmlevalprint.xml";
+	var URI = "http://loj-gg1.appspot.com/blogPartsBox.xml";
 
 	$("#txt_in").val(decodeURIComponent("%3Cscript%3E%0AString.prototype.camelize%20%3D%20function()%20%7B%0A%09return%20this.replace(%2F_(%5Ba-z%5D)%2Fg%2C%20function(m)%20%7B%0A%09%09return%20m.charAt(1).toUpperCase()%3B%0A%09%7D)%3B%0A%7D%3B%0A%0Aalert(%22get_element_by_id%22.camelize())%3B%0A%3C%2Fscript%3E%0A"));
 
@@ -38,7 +38,7 @@ onclick='$("#box_res").html($("#txt_in").val())'
 		var h = $("#txt_h").val();
 
 		text = encodeURIComponent(text);
-		text = "<script src=\"http://www.gmodules.com/ig/ifr?url=" + URI + "&amp;up_code=" + text + "&amp;up_codeoff=" + codeoff + "&amp;synd=open&amp;w=" + w + "&amp;h=" + h + "&amp;title=HtmlEval!&amp;border=%23ffffff%7C3px%2C1px+solid+%23999999&amp;output=js\"></script\>";
+		text = "<script src=\"http://www.gmodules.com/ig/ifr?url=" + URI + "&amp;up_code=" + text + "&amp;up_codeoff=" + codeoff + "&amp;synd=open&amp;w=" + w + "&amp;h=" + h + "&amp;title=BlogPartsBox&amp;border=%23ffffff%7C3px%2C1px+solid+%23999999&amp;output=js\"></script\>";
 
 		$("#txt_out").val(text);
 	};
