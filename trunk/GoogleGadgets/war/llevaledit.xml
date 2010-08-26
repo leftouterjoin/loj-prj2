@@ -8,17 +8,22 @@
 
 	<Content type="html">
 		<![CDATA[
+
 <!-- 
-<script src="http://www.gmodules.com/ig/ifr?url=http://loj-gg1.appspot.com/lleedit102.xml&amp;synd=open&amp;w=200&amp;h=160&amp;title=LLEval!&amp;border=%23ffffff%7C3px%2C1px+solid+%23999999&amp;output=js"></script>
+<script src="http://www.gmodules.com/ig/ifr?url=http://loj-gg1.appspot.com/llevaledit_1.xml&amp;synd=open&amp;w=200&amp;h=190&amp;title=LLEval!&amp;border=%23ffffff%7C3px%2C1px+solid+%23999999&amp;output=js"></script>
 -->
 <select id="sel_lang" style="width:100%; font-size:9pt;"></select
 ><div><textarea id="txt_in" rows="4" style="width:100%; font-size:9pt;"></textarea></div
 ><div><input type="text" id="txt_out" style="width:100%; font-size:9pt;"></input></div
-><input value="eval" type="submit"
+><input value="eval" type="submit" style="font-size:9pt;"
 onclick="lleval()"
-><input value="クリア" type="submit" onclick="this.nextSibling.nextSibling.innerHTML=''" 
-><input value="コードを取得" type="submit" onclick="toTag()" 
-><div id="box_res" style="width:100%; font-size:9pt;"></div>
+><input value="クリア" type="submit" style="font-size:9pt;" onclick="this.nextSibling.nextSibling.innerHTML=''" 
+><input value="コードを取得" type="submit" style="font-size:9pt;" onclick="toTag()" 
+><div id="box_res" style="width:100%; font-size:9pt;"></div
+><table style="font-size:9pt; border-spacing: 0px;"><tbody>
+<tr><th>W</th><th>H</th></tr>
+<tr style="text-align: center;"><td><input type="text" id="txt_w" maxlength="3" size="3" style="text-align: right; font-size:9pt;" value="500"></input></td><td><input type="text" id="txt_h" maxlength="3" size="3" style="text-align: right; font-size:9pt;" value="200"></input></td></tr>
+</tbody></table>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
 <script> 
@@ -92,9 +97,11 @@ onclick="lleval()"
 	toTag = function(){
 		var lang = $("#sel_lang").val();
 		var text = $("#txt_in").val();
+		var w = $("#txt_w").val();
+		var h = $("#txt_h").val();
 
 		text = encodeURIComponent(text);
-		text = "<script src=\"http://www.gmodules.com/ig/ifr?url=" + URI + "&amp;up_code=" + text + "&amp;lang=" + lang + "&amp;synd=open&amp;w=500&amp;h=200&amp;title=LLEval!&amp;border=%23ffffff%7C3px%2C1px+solid+%23999999&amp;output=js\"></script\>";
+		text = "<script src=\"http://www.gmodules.com/ig/ifr?url=" + URI + "&amp;up_code=" + text + "&amp;lang=" + lang + "&amp;synd=open&amp;w=" + w + "&amp;h=" + h + "&amp;title=LLEval!&amp;border=%23ffffff%7C3px%2C1px+solid+%23999999&amp;output=js\"></script\>";
 
 		$("#txt_out").val(text);
 	};

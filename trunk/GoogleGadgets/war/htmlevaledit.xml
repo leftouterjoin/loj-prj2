@@ -17,7 +17,7 @@
 ><input value="eval" type="submit" style="font-size:9pt;"
 onclick='$("#box_res").html($("#txt_in").val())'
 ><input value="クリア" type="submit" style="font-size:9pt;" onclick="this.nextSibling.nextSibling.innerHTML=''" 
-><input value="コードを取得" style="font-size:9pt;" type="submit" onclick="toTag()" 
+><input value="コードを取得" type="submit" style="font-size:9pt;" onclick="toTag()" 
 ><div id="box_res" style="width:100%; font-size:9pt;"></div
 ><table style="font-size:9pt; border-spacing: 0px;"><tbody>
 <tr><th>CodeOff?</th><th>W</th><th>H</th></tr>
