@@ -11,19 +11,19 @@
 <!-- 
 <script src="http://www.gmodules.com/ig/ifr?url=http://loj-gg1.appspot.com/lleedit102.xml&amp;synd=open&amp;w=200&amp;h=160&amp;title=LLEval!&amp;border=%23ffffff%7C3px%2C1px+solid+%23999999&amp;output=js"></script>
 -->
-<select id="sel_lang" style="width: 95%; font-size:9pt;"></select
-><div><textarea id="txt_in" rows="4" style="width: 95%; font-size:9pt;"></textarea></div
-><div><input type="text" id="txt_out" rows="1" wrap="off" style="width: 95%; font-size:9pt;"></textarea></div
+<select id="sel_lang" style="width:100%; font-size:9pt;"></select
+><div><textarea id="txt_in" rows="4" style="width:100%; font-size:9pt;"></textarea></div
+><div><input type="text" id="txt_out" rows="1" wrap="off" style="width:100%; font-size:9pt;"></textarea></div
 ><input value="eval" type="submit"
 onclick="lleval()"
 ><input value="クリア" type="submit" onclick="this.nextSibling.nextSibling.innerHTML=''" 
 ><input value="コードを取得" type="submit" onclick="toTag()" 
-><div id="box_res" style="width: 95%; font-size:9pt;"></div>
+><div id="box_res" style="width:100%; font-size:9pt;"></div>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
 <script> 
 (function($) {
-	var URI = "http://loj-gg1.appspot.com/lleprint.xml";
+	var URI = "http://loj-gg1.appspot.com/llevalprint.xml";
 
 	askLanguages = function(){
 		if (! this['JSONP']) JSONP = {};
