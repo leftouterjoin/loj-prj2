@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
 	<ModulePrefs
-		title="LLEvalEdit"
+		title="LLEval"
 		description="LLなコードを実行したり、貼り付け用ガジェットのタグを生成します。"
 		author_location="Japan"
 		height="170" scrolling="true" />
@@ -13,7 +13,7 @@
 -->
 <select id="sel_lang" style="width:100%; font-size:9pt;"></select
 ><div><textarea id="txt_in" rows="4" style="width:100%; font-size:9pt;"></textarea></div
-><div><input type="text" id="txt_out" rows="1" wrap="off" style="width:100%; font-size:9pt;"></textarea></div
+><div><input type="text" id="txt_out" style="width:100%; font-size:9pt;"></input></div
 ><input value="eval" type="submit"
 onclick="lleval()"
 ><input value="クリア" type="submit" onclick="this.nextSibling.nextSibling.innerHTML=''" 

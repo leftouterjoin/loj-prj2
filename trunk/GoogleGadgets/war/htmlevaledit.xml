@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
 	<ModulePrefs
-		title="HtmlEvalEdit"
+		title="HtmlEval"
         description="htmlをブラウザに表示したり、貼り付け用ガジェットのタグを生成します。"
 		author_location="Japan"
 		height="170" scrolling="true" /> 
@@ -12,7 +12,7 @@
 <script src="http://www.gmodules.com/ig/ifr?url=http://loj-gg1.appspot.com/htmlevaledit.xml&amp;synd=open&amp;w=200&amp;h=160&amp;title=HtmlEval!&amp;border=%23ffffff%7C3px%2C1px+solid+%23999999&amp;output=js"></script>
 -->
 <div><textarea id="txt_in" rows="4" style="width:100%; font-size:9pt;"></textarea></div
-><div><input type="text" id="txt_out" rows="1" wrap="off" style="width:100%; font-size:9pt;"></textarea></div
+><div><input type="text" id="txt_out" style="width:100%; font-size:9pt;"></input></div
 ><input value="eval" type="submit"
 onclick='$("#box_res").html($("#txt_in").val())'
 ><input value="クリア" type="submit" onclick="this.nextSibling.nextSibling.innerHTML=''" 
