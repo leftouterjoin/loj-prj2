@@ -8,17 +8,21 @@
 
 	<Content type="html">
 		<![CDATA[
+
 <!-- 
 <script src="http://www.gmodules.com/ig/ifr?url=http://loj-gg1.appspot.com/htmlevaledit.xml&amp;synd=open&amp;w=200&amp;h=160&amp;title=HtmlEval!&amp;border=%23ffffff%7C3px%2C1px+solid+%23999999&amp;output=js"></script>
 -->
 <div><textarea id="txt_in" rows="4" style="width:100%; font-size:9pt;"></textarea></div
 ><div><input type="text" id="txt_out" style="width:100%; font-size:9pt;"></input></div
-><input value="eval" type="submit"
+><input value="eval" type="submit" style="font-size:9pt;"
 onclick='$("#box_res").html($("#txt_in").val())'
-><input value="クリア" type="submit" onclick="this.nextSibling.nextSibling.innerHTML=''" 
-><div  style="font-size:9pt;"><input value="コードを取得" type="submit" onclick="toTag()" 
-><input type="checkbox" id="chk_codeoff" checked="true"><label for="chk_codeoff">コード非表示</label></div
-><div id="box_res" style="width:100%; font-size:9pt;"></div>
+><input value="クリア" type="submit" style="font-size:9pt;" onclick="this.nextSibling.nextSibling.innerHTML=''" 
+><input value="コードを取得" style="font-size:9pt;" type="submit" onclick="toTag()" 
+><div id="box_res" style="width:100%; font-size:9pt;"></div
+><table style="font-size:9pt; border-spacing: 0px;"><tbody>
+<tr><th>CodeOff?</th><th>W</th><th>H</th></tr>
+<tr style="text-align: center;"><td><input type="checkbox" id="chk_codeoff" checked="true"></td><td><input type="text" id="txt_w" maxlength="3" size="3" style="text-align: right; font-size:9pt;" value="500"></input></td><td><input type="text" id="txt_h" maxlength="3" size="3" style="text-align: right; font-size:9pt;" value="200"></input></td></tr>
+</tbody></table>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
 <script> 
@@ -30,9 +34,11 @@ onclick='$("#box_res").html($("#txt_in").val())'
 	toTag = function(){
 		var text = $("#txt_in").val();
 		var codeoff = $("#chk_codeoff").attr("checked");
+		var w = $("#txt_w").val();
+		var h = $("#txt_h").val();
 
 		text = encodeURIComponent(text);
-		text = "<script src=\"http://www.gmodules.com/ig/ifr?url=" + URI + "&amp;up_code=" + text + "&amp;up_codeoff=" + codeoff + "&amp;synd=open&amp;w=500&amp;h=200&amp;title=HtmlEval!&amp;border=%23ffffff%7C3px%2C1px+solid+%23999999&amp;output=js\"></script\>";
+		text = "<script src=\"http://www.gmodules.com/ig/ifr?url=" + URI + "&amp;up_code=" + text + "&amp;up_codeoff=" + codeoff + "&amp;synd=open&amp;w=" + w + "&amp;h=" + h + "&amp;title=HtmlEval!&amp;border=%23ffffff%7C3px%2C1px+solid+%23999999&amp;output=js\"></script\>";
 
 		$("#txt_out").val(text);
 	};
