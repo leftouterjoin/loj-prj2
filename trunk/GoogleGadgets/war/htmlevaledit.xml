@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+<script src="http://www.gmodules.com/ig/ifr?url=http://loj-gg1.appspot.com/htmlevaledit.xml&amp;synd=open&amp;w=200&amp;h=160&amp;title=HtmlEval!&amp;border=%23ffffff%7C3px%2C1px+solid+%23999999&amp;output=js"></script>
+-->
+<Module>
+	<ModulePrefs
+		title="HtmlEvalEdit"
+		description="HtmlEvalEdit"
+		author=""
+		author_location="Japan"
+		height="170" scrolling="true" /> 
+
+	<Content type="html">
+		<![CDATA[
+
+<div><textarea id="txt_in" rows="4" style="width: 185px; font-size:9pt;"></textarea></div
+><div><input type="text" id="txt_out" rows="1" wrap="off" style="width: 185px; font-size:9pt;"></textarea></div
+><input value="eval" type="submit"
+onclick='$("#box_res").html($("#txt_in").val())'
+><input value="クリア" type="submit" onclick="this.nextSibling.nextSibling.innerHTML=''" 
+><input value="コードを取得" type="submit" onclick="toTag()" 
+><div id="box_res" style="width: 185px; font-size:9pt;"></div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script> 
+(function($) {
+	var URI = "http://loj-gg1.appspot.com/lleprint.xml";
+
+	$("#txt_in").val(decodeURIComponent("%3Cscript%3E%0AString.prototype.camelize%20%3D%20function()%20%7B%0A%09return%20this.replace(%2F_(%5Ba-z%5D)%2Fg%2C%20function(m)%20%7B%0A%09%09return%20m.charAt(1).toUpperCase()%3B%0A%09%7D)%3B%0A%7D%3B%0A%0Aalert(%22get_element_by_id%22.camelize())%3B%0A%3C%2Fscript%3E%0A"));
+
+	toTag = function(){
+		var text = $("#txt_in").val();
+
+		text = encodeURIComponent(text);
+		text = "<script src=\"http://www.gmodules.com/ig/ifr?url=" + URI + "&amp;up_code=" + text + "&amp;synd=open&amp;w=500&amp;h=200&amp;title=HtmlEval!&amp;border=%23ffffff%7C3px%2C1px+solid+%23999999&amp;output=js\"></script\>";
+
+		$("#txt_out").val(text);
+	};
+
+})(jQuery);
+</script>
+
+		]]>
+	</Content>
+</Module>
