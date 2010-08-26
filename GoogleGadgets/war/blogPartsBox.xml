@@ -7,7 +7,7 @@
 		height="150" scrolling="true" /> 
 
     <UserPref name="code" display_name="コード" default_value="%3Cscript%3E%0AString.prototype.camelize%20%3D%20function()%20%7B%0A%09return%20this.replace(%2F_(%5Ba-z%5D)%2Fg%2C%20function(m)%20%7B%0A%09%09return%20m.charAt(1).toUpperCase()%3B%0A%09%7D)%3B%0A%7D%3B%0A%0Aalert(%22get_element_by_id%22.camelize())%3B%0A%3C%2Fscript%3E%0A" />
-    <UserPref name="codeoff" display_name="コード非表示" default_value="ture" />
+    <UserPref name="codeoff" display_name="コード非表示" datatype="bool" default_value="true" />
 
 	<Content type="html">
 		<![CDATA[
