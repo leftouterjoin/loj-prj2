@@ -4,7 +4,7 @@
 		title="LLEvalBoxEditor"
 		description="LLコードをガジェット内で実行します。貼り付け用ガジェットのタグを生成します。"
 		author_location="Japan"
-		height="170" scrolling="true" />
+		height="180" scrolling="true" />
 
 	<Content type="html">
 		<![CDATA[
