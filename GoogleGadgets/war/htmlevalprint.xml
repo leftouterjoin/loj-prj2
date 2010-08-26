@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+	<ModulePrefs
+		title="HtmlEvalEPrint"
+		description="HtmlEvalEPrint"
+		author=""
+		author_location="Japan"
+		height="150" scrolling="true" /> 
+
+	<UserPref name="code" display_name="Code" default_value="%3Cscript%3E%0AString.prototype.camelize%20%3D%20function()%20%7B%0A%09return%20this.replace(%2F_(%5Ba-z%5D)%2Fg%2C%20function(m)%20%7B%0A%09%09return%20m.charAt(1).toUpperCase()%3B%0A%09%7D)%3B%0A%7D%3B%0A%0Aalert(%22get_element_by_id%22.camelize())%3B%0A%3C%2Fscript%3E%0A" />
+
+	<Content type="html">
+		<![CDATA[
+
+<link href="http://blog.livedoor.jp/dankogai/google/prettify.css" rel="stylesheet" type="text/css"/>
+
+<pre class="prettyprint" id="box_code"></pre
+><input value="eval" type="submit"
+onclick='$("#box_res").html($("#box_code").text())'
+><input value="clear" type="submit" onclick="this.nextSibling.innerHTML=''" 
+><div id="box_res"></div> 
+
+<script type="text/javascript" src="http://blog.livedoor.jp/dankogai/google/prettify.js"></script> 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script> 
+(function($) {
+	var prefs = typeof _IG_Prefs != "undefined" ? new _IG_Prefs() : null;
+	var code = prefs ? prefs.getString("code") : "";
+
+	$("#box_code").text(decodeURIComponent(code));
+	prettyPrint();
+
+})(jQuery);
+</script>
+
+		]]>
+	</Content>
+</Module>
