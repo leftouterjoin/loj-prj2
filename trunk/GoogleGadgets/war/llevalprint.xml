@@ -2,7 +2,7 @@
 <Module>
 	<ModulePrefs
 		title="LLEValPrint"
-        description="LLなコードを実行します。貼り付け専用です。"
+        description="LLコードをガジェット内で実行します。貼り付け専用です。"
 		author_location="Japan"
 		height="150" scrolling="true" /> 
 
