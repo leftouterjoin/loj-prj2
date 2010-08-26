@@ -11,14 +11,14 @@
 <!-- 
 <script src="http://www.gmodules.com/ig/ifr?url=http://loj-gg1.appspot.com/htmlevaledit.xml&amp;synd=open&amp;w=200&amp;h=160&amp;title=HtmlEval!&amp;border=%23ffffff%7C3px%2C1px+solid+%23999999&amp;output=js"></script>
 -->
-<div><textarea id="txt_in" rows="4" style="width: 185px; font-size:9pt;"></textarea></div
-><div><input type="text" id="txt_out" rows="1" wrap="off" style="width: 185px; font-size:9pt;"></textarea></div
+<div><textarea id="txt_in" rows="4" style="width:100%; font-size:9pt;"></textarea></div
+><div><input type="text" id="txt_out" rows="1" wrap="off" style="width:100%; font-size:9pt;"></textarea></div
 ><input value="eval" type="submit"
 onclick='$("#box_res").html($("#txt_in").val())'
 ><input value="クリア" type="submit" onclick="this.nextSibling.nextSibling.innerHTML=''" 
 ><div  style="font-size:9pt;"><input value="コードを取得" type="submit" onclick="toTag()" 
 ><input type="checkbox" id="chk_codeoff" checked="true"><label for="chk_codeoff">コード非表示</label></div
-><div id="box_res" style="width: 185px; font-size:9pt;"></div>
+><div id="box_res" style="width:100%; font-size:9pt;"></div>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
 <script> 
