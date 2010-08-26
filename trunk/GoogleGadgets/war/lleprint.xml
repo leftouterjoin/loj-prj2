@@ -14,11 +14,11 @@
 
 <link href="http://blog.livedoor.jp/dankogai/google/prettify.css" rel="stylesheet" type="text/css"/>
 
-<pre class="prettyprint"></pre
+<pre class="prettyprint" style="width:100%;"></pre
 ><input value="eval" type="submit"
 onclick="LLEval(this.previousSibling, this.nextSibling.nextSibling)" 
 ><input value="clear" type="submit" onclick="this.nextSibling.innerHTML=''" 
-><div></div> 
+><div style="width:100%;"></div> 
 
 <script type="text/javascript" src="http://blog.livedoor.jp/dankogai/google/prettify.js"></script> 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
