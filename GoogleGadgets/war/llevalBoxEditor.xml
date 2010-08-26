@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
 	<ModulePrefs
-		title="LLEval"
+		title="LLEvalBoxEditor"
 		description="LLコードをガジェット内で実行します。貼り付け用ガジェットのタグを生成します。"
 		author_location="Japan"
 		height="170" scrolling="true" />
@@ -10,7 +10,7 @@
 		<![CDATA[
 
 <!-- 
-<script src="http://www.gmodules.com/ig/ifr?url=http://loj-gg1.appspot.com/llevaledit_1.xml&amp;synd=open&amp;w=200&amp;h=190&amp;title=LLEval!&amp;border=%23ffffff%7C3px%2C1px+solid+%23999999&amp;output=js"></script>
+<script src="http://www.gmodules.com/ig/ifr?url=http://loj-gg1.appspot.com/llevalBoxEditor.xml&amp;synd=open&amp;w=200&amp;h=190&amp;title=LLEval!&amp;border=%23ffffff%7C3px%2C1px+solid+%23999999&amp;output=js"></script>
 -->
 <select id="sel_lang" style="width:100%; font-size:9pt;"></select
 ><div><textarea id="txt_in" rows="4" style="width:100%; font-size:9pt;"></textarea></div
@@ -28,7 +28,7 @@ onclick="lleval()"
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
 <script> 
 (function($) {
-	var URI = "http://loj-gg1.appspot.com/llevalprint.xml";
+	var URI = "http://loj-gg1.appspot.com/llevalBox.xml";
 
 	askLanguages = function(){
 		if (! this['JSONP']) JSONP = {};
@@ -101,7 +101,7 @@ onclick="lleval()"
 		var h = $("#txt_h").val();
 
 		text = encodeURIComponent(text);
-		text = "<script src=\"http://www.gmodules.com/ig/ifr?url=" + URI + "&amp;up_code=" + text + "&amp;lang=" + lang + "&amp;synd=open&amp;w=" + w + "&amp;h=" + h + "&amp;title=LLEval!&amp;border=%23ffffff%7C3px%2C1px+solid+%23999999&amp;output=js\"></script\>";
+		text = "<script src=\"http://www.gmodules.com/ig/ifr?url=" + URI + "&amp;up_code=" + text + "&amp;lang=" + lang + "&amp;synd=open&amp;w=" + w + "&amp;h=" + h + "&amp;title=LLEvalBox&amp;border=%23ffffff%7C3px%2C1px+solid+%23999999&amp;output=js\"></script\>";
 
 		$("#txt_out").val(text);
 	};
