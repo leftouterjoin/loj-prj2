@@ -10,7 +10,7 @@
 		<![CDATA[
 
 <!-- 
-<script src="http://www.gmodules.com/ig/ifr?url=http://loj-gg1.appspot.com/blogPartsBoxEditor.xml&amp;synd=open&amp;w=200&amp;h=160&amp;title=BlogPartsBox&amp;border=%23ffffff%7C3px%2C1px+solid+%23999999&amp;output=js"></script>
+<script src="http://www.gmodules.com/ig/ifr?url=http://loj-gg1.appspot.com/blogPartsBoxEditor.xml&amp;synd=open&amp;w=200&amp;h=160&amp;title=blogPartsBoxEditor&amp;border=%23ffffff%7C3px%2C1px+solid+%23999999&amp;output=js"></script>
 -->
 <div><textarea id="txt_in" rows="4" style="width:100%; font-size:9pt;"></textarea></div
 ><div><input type="text" id="txt_out" style="width:100%; font-size:9pt;"></input></div
