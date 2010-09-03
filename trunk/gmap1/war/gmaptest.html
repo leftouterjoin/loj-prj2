@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title>ルート案内API</title>
+</head>
+<body>
+	<p style="background-image : url(bg.gif); font-size : 16pt; padding : 10px 5px; text-align : center; color : white;">ルート案内API</p>
+	<div id="map" style="width : 700px; height : 450px; border : 1px solid #999999; margin : 1em 0;"></div>
+	<div id="route" style="width : 700px; height : 250px; border : 1px solid #999999; margin : 1em 0; overflow : scroll;"></div>
+	<script src="http://maps.google.com/maps?file=api&amp;v=2.x&amp;sensor=false&amp;key=ABQIAAAAvVPx2fXHMvcxAcTMsb0-_xTVoLNfQbIiWfphRlD7i3tAtUX2NRTY-cR9BnDNSRoyc3USb4i03aq2DQ" type="text/javascript"></script>
+	<script type="text/javascript">
+	if (GBrowserIsCompatible()) {
+		GEvent.addDomListener(window, 'load', function() {
+			// GMap2オブジェクト（map）を作成
+			var map = new GMap2(document.getElementById('map'));
+			// ノーマルタイプの地図にする
+			map.setMapType(G_NORMAL_MAP);
+			// ズームと地図タイプ変更のコントロールを追加する
+			map.addControl(new GLargeMapControl());
+			map.addControl(new GMapTypeControl());
+			// GDirectionsオブジェクトを作成
+			// 地図はmapに表示し、ルートは「route」のIDのdiv要素に表示する
+			var directions = new GDirections(map, document.getElementById('route'));
+			// エラー時の処理を登録
+			GEvent.addListener(directions, "error", function() { showError(directions); })
+			// ルートを検索する
+			directions.load(
+				"from: 東京都新宿区西新宿1丁目 to: 東京都新宿区西新宿4-34-7",
+				{ locale: "ja_JP" }
+			);
+		});
+		GEvent.addDomListener(window, 'unload', function() { GUnload(); });
+	}
+
+	function showError(directions) {
+		var html = 'エラー' + directions.getStatus().code + 'が発生しました。<br />';
+		html += 'エラーコードの詳細は、<a href="http://code.google.com/intl/ja/apis/maps/documentation/reference.html#GGeoStatusCode">こちらのページ</a>を参照してください。';
+		document.getElementById('route').innerHTML = html;
+	}
+	</script>
+</body>
+</html>
