@@ -6,6 +6,6 @@ function initialize() {
     map.setCenter(new GLatLng(35.681379,139.765577), 13);
 
     var directions = new GDirections(map, document.getElementById('route'));
-    directions.load('from: 東京駅 to: 渋谷駅', {locale: 'ja_JP'});
+    directions.load('from: 東京駅 to: 渋谷駅', {locale: 'ja_JP', travelMode: G_TRAVEL_MODE_DRIVING/*G_TRAVEL_MODE_DRIVING*/});
   }
 }
