@@ -22,3 +22,9 @@ function dispRoute() {
   var option = {locale: "ja_JP", getPolyline: true, getSteps: true};
   directions.loadFromWaypoints(pointArray, option);
 }
+
+function test1() {
+  
+	var o = directions.getPolyline();
+	alert(o);
+}
