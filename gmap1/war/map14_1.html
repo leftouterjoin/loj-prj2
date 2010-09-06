@@ -1,0 +1,22 @@
+<!DOCTYPE html "-//W3C//DTD XHTML 1.0 Strict//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <title>サンプル：ルート毎の合計距離と合計時間を取得</title>
+    <script src="http://maps.google.com/maps?file=api&v=2&key=ABQIAAAAUiSm4yE-UDgb8kviBG-3fxTET7FL1OGiEo0132Tsz7xytqsKmxTD2VNE7QBz0JNWWmZzj89DQ44VNA&sensor=false"
+            type="text/javascript" charset="utf-8"></script>
+    <script src="./js/code14_1.js" type="text/javascript"></script>
+  </head>
+  <body onload="initialize()" onunload="GUnload()">
+    <form>
+    <input type="text" size="20" id="from" value="大阪府庁" />
+    --><input type="text" size="20" id="step" value="難波千日前" />
+    --><input type="text" size="20" id="to" value="心斎橋" />
+    <input type="button" id="btn1" value="ルート案内" onclick="dispRoute()" />
+    </form>
+
+    <div id="map_canvas" style="width: 500px; height: 300px"></div>
+    <div id="route" style="width: 500px; height: 100px;overflow: scroll"></div>
+  </body>
+</html>
