@@ -1,6 +1,6 @@
 <html>
 <head>
-	<title>GoogleマップV3 + 拡張による方法 検討中</title>
+	<title>GoogleマップV3 + AOPによる方法 検討中</title>
 </head>
 <body>
 	<div id="map_canvas" style="width:600px; height:200px;"></div>
@@ -8,7 +8,7 @@
 	<script src="http://jquery-aop.googlecode.com/hg/src/aop.js"></script>
 	<script type="text/javascript">
 		(function($) {
-			jQuery.aop.around( {target: document, method: 'write'}, function(invocation) {
+			$.aop.around({target: document, method: 'write'}, function(invocation) {
 				var t = $(invocation.arguments[0]);
 				if (t.get(0) && t.get(0).tagName && t.get(0).tagName.match(/SCRIPT/)) {
 					$.getScript(t.attr("src"), function(){
