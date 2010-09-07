@@ -50,6 +50,25 @@
   }
   var t1 = document.getElementById("t1");
   Object.Aspect.around(t1, "onblur", aspect);
+
+/* AOPライブラリでの例
+  Object.Aspect.around(document, "write", function(invocation) {
+  	alert(invocation.arguments[0]);
+    alert("before");
+    var result = invocation.proceed();
+    alert("after");
+    return result;
+  });
+  */
+ 
+  // 直書き例 
+  (function(f) {
+  	document.write = function(a) {
+  		f.apply(document, [a]);
+  	};
+  })(document.write);
+  
+  document.write("abc");
 </script>
 </body>
 </html>
