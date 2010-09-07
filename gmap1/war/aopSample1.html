@@ -1,0 +1,55 @@
+<html>
+<script type="text/javascript">
+  Object.Aspect = {
+    _around: function(target, methodName, aspect) {
+      var method = target[methodName];
+      target[methodName] = function() {
+        var invocation = {
+          "target" : this,
+          "method" : method,
+          "methodName" : methodName,
+          "arguments" : arguments,
+          "proceed" : function() {
+            return method.apply(target, this.arguments);
+          }
+        };
+        return aspect.apply(null, [invocation]);
+      };
+    },
+    around: function(target, methodName, aspect) {
+      this._around(target, methodName, aspect);
+    }
+  }
+</script>
+<script type="text/javascript">
+  function setComma(element){
+    var destStr = element.value;
+    var tmpStr = "";
+    while (destStr != (tmpStr = destStr.replace(/^([+-]*\d+)(\d\d\d)/,"$1,$2"))) {
+      destStr = tmpStr;
+    }
+    element.value= destStr;
+  }
+  function supComma(element){
+    element.value = element.value.split(",").join("");
+  }
+</script>
+
+<body>
+
+  <input type="text" id="t1" value="1000" onfocus="supComma(this)" onblur="setComma(this)">
+  <input type="text" id="t2">
+
+<script type="text/javascript">
+  var aspect = function(invocation) {
+//  	alert(invocation.arguments[0]);
+    alert("before");
+    var result = invocation.proceed();
+    alert("after");
+    return result;
+  }
+  var t1 = document.getElementById("t1");
+  Object.Aspect.around(t1, "onblur", aspect);
+</script>
+</body>
+</html>
