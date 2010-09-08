@@ -1,25 +1,25 @@
 <html>
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-	<title>GoogleマップV3 + オブジェクト監視 検討中</title>
+	<title>GoogleマップV3 + 直AOPによる方法 検討中</title>
 </head>
 <body>
 	<div id="map_canvas" style="width:600px; height:200px;"></div>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
-	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+	<script src="http://jquery-aop.googlecode.com/hg/src/aop.js"></script>
 	<script type="text/javascript">
 		(function($) {
-			var waitFor = function(a, f) {
-				var a_ = a;
-				var f_ = f;
-				if (google.hasOwnProperty("maps") && google.maps.hasOwnProperty("Map")) {
-					f();
-				} else {
-					setTimeout(function() {waitFor(a_, f_)}, 500);
-				}
+			var startGMap = function(url, f) {
+				var write_ = document.write;
+				document.write = function(arg) {
+					var t = $(arg);
+					$.getScript(t.attr("src"), f);
+					document.write = write_;
+					return null; 
+				};
+				$.getScript("http://maps.google.com/maps/api/js?sensor=false");
 			};
-			waitFor("google.maps.Map", function(){
-				alert("kita");
+			startGMap("http://maps.google.com/maps/api/js?sensor=false", function(){
 				var myOptions = {
 					zoom: 8,
 					center: new google.maps.LatLng(35.5, 140.0),
