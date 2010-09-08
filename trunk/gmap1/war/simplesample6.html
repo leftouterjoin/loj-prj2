@@ -1,0 +1,36 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+	<title>GoogleマップV3 + 直AOPによる方法 検討中</title>
+</head>
+<body>
+	<div id="map_canvas" style="width:600px; height:200px;"></div>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+	<script src="http://jquery-aop.googlecode.com/hg/src/aop.js"></script>
+	<script type="text/javascript">
+		(function($) {
+			(function(f) {
+				var write_ = document.write;
+				document.write = function(arg) {
+					var t = $(arg);
+					if (t.get(0) && t.get(0).tagName && t.get(0).tagName.match(/SCRIPT/)) {
+						$.getScript(t.attr("src"), function(){
+							var myOptions = {
+								zoom: 8,
+								center: new google.maps.LatLng(35.5, 140.0),
+								mapTypeId: google.maps.MapTypeId.ROADMAP
+							};
+							new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+						});
+						document.write = write_;
+						return null; 
+					} else {
+						f.apply(document, [arg]);
+					}
+				};
+			})(document.write);
+			$.getScript("http://maps.google.com/maps/api/js?sensor=false");
+		})(jQuery);
+	</script>
+</body>
+</html>
