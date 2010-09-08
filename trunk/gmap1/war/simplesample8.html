@@ -9,18 +9,17 @@
 	<div id="map_canvas" style="width:600px; height:200px;"></div>
 	<script type="text/javascript">
 		(function($) {
-			$.gmap = {
-				initialize: function() {
-					var myOptions = {
-						zoom: 8,
-						center: new google.maps.LatLng(35.5, 140.0),
-						mapTypeId: google.maps.MapTypeId.ROADMAP
-					};
-					new google.maps.Map($("#map_canvas").get(0), myOptions);
-				}
+			$.initialize = function() {
+				var myOptions = {
+					zoom: 8,
+					center: new google.maps.LatLng(35.5, 140.0),
+					mapTypeId: google.maps.MapTypeId.ROADMAP
+				};
+				new google.maps.Map($("#map_canvas").get(0), myOptions);
 			};
-			$.getScript("http://maps.google.com/maps/api/js?sensor=false&callback=$.gmap.initialize");
+			$.getScript("http://maps.google.com/maps/api/js?sensor=false&callback=$.initialize");
 		})(jQuery);
 	</script>
 </body>
 </html>
+
