@@ -1,0 +1,42 @@
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+	<title>GoogleマップV3 + AOPによる方法 検討中</title>
+	<link href="http://blog.livedoor.jp/dankogai/google/prettify.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div><textarea id="txt_in" rows="4" style="height:200px;width:100%; font-size:9pt;"></textarea></div
+><div><input type="text" id="txt_out" style="width:100%; font-size:9pt;"></input></div
+><input value="eval" type="submit" style="font-size:9pt;"
+onclick='$("#box_res").html($("#txt_in").val())'
+><input value="クリア" type="submit" style="font-size:9pt;" onclick="this.nextSibling.nextSibling.innerHTML=''" 
+><input value="コードを取得" type="submit" style="font-size:9pt;" onclick="toTag()" 
+><div id="box_res" style="width:100%; font-size:9pt;"></div
+><table style="font-size:9pt; border-spacing: 0px;"><tbody>
+<tr><th>CodeOff?</th><th>W</th><th>H</th></tr>
+<tr style="text-align: center;"><td><input type="checkbox" id="chk_codeoff" checked="true"></td><td><input type="text" id="txt_w" maxlength="3" size="3" style="text-align: right; font-size:9pt;" value="500"></input></td><td><input type="text" id="txt_h" maxlength="3" size="3" style="text-align: right; font-size:9pt;" value="200"></input></td></tr>
+</tbody></table>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script> 
+(function($) {
+	var URI = "http://loj-gg1.appspot.com/blogPartsBox.xml";
+
+	$("#txt_in").val(decodeURIComponent("%3Cscript%3E%0AString.prototype.camelize%20%3D%20function()%20%7B%0A%09return%20this.replace(%2F_(%5Ba-z%5D)%2Fg%2C%20function(m)%20%7B%0A%09%09return%20m.charAt(1).toUpperCase()%3B%0A%09%7D)%3B%0A%7D%3B%0A%0Aalert(%22get_element_by_id%22.camelize())%3B%0A%3C%2Fscript%3E%0A"));
+
+	toTag = function(){
+		var text = $("#txt_in").val();
+		var codeoff = $("#chk_codeoff").attr("checked");
+		var w = $("#txt_w").val();
+		var h = $("#txt_h").val();
+
+		text = encodeURIComponent(text);
+		text = "<script src=\"http://www.gmodules.com/ig/ifr?url=" + URI + "&amp;up_code=" + text + "&amp;up_codeoff=" + codeoff + "&amp;synd=open&amp;w=" + w + "&amp;h=" + h + "&amp;title=BlogPartsBox&amp;border=%23ffffff%7C3px%2C1px+solid+%23999999&amp;output=js\"></script\>";
+
+		$("#txt_out").val(text);
+	};
+
+})(jQuery);
+</script>
+</body>
+</html>
