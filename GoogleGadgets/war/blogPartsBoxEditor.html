@@ -6,15 +6,15 @@
 </head>
 <body>
 <div><textarea id="txt_in" rows="4" style="height:200px;width:100%; font-size:9pt;"></textarea></div
-><div><input type="text" id="txt_out" style="width:100%; font-size:9pt;"></input></div
+><div><input type="text" id="txt_out" style="width:100%; font-size:9pt;"/></div
 ><input value="eval" type="submit" style="font-size:9pt;"
-onclick='$("#box_res").html($("#txt_in").val())'
-><input value="クリア" type="submit" style="font-size:9pt;" onclick="this.nextSibling.nextSibling.innerHTML=''" 
-><input value="コードを取得" type="submit" style="font-size:9pt;" onclick="toTag()" 
+onclick='$("#box_res").html($("#txt_in").val())'/
+><input value="クリア" type="submit" style="font-size:9pt;" onclick="this.nextSibling.nextSibling.innerHTML=''"/
+><input value="コードを取得" type="submit" style="font-size:9pt;" onclick="toTag()"/
 ><div id="box_res" style="width:100%; font-size:9pt;"></div
 ><table style="font-size:9pt; border-spacing: 0px;"><tbody>
 <tr><th>CodeOff?</th><th>W</th><th>H</th></tr>
-<tr style="text-align: center;"><td><input type="checkbox" id="chk_codeoff" checked="true"></td><td><input type="text" id="txt_w" maxlength="3" size="3" style="text-align: right; font-size:9pt;" value="500"></input></td><td><input type="text" id="txt_h" maxlength="3" size="3" style="text-align: right; font-size:9pt;" value="200"></input></td></tr>
+<tr style="text-align: center;"><td><input type="checkbox" id="chk_codeoff" checked="true"/></td><td><input type="text" id="txt_w" maxlength="3" size="3" style="text-align: right; font-size:9pt;" value="500"/></td><td><input type="text" id="txt_h" maxlength="3" size="3" style="text-align: right; font-size:9pt;" value="200"/></td></tr>
 </tbody></table>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
