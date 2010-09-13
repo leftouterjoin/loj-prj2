@@ -1,0 +1,192 @@
+<html>
+<head>
+<title>Ajaxでアマゾン　amazon　検索(Ajax Baron サンプル)</title>
+<script src="booksearch?js" type="text/javascript"></script>
+<script type="text/javascript"><!--
+
+function getBookList(){
+
+	//一覧を表示するSPANオブジェクト
+	var viewArea=document.getElementById("viewArea");
+
+	//キーワードを取得する
+	var keyword=document.getElementById("keyword").value;
+	
+	var stub=new AjaxBaronServiceStub();
+	stub.onXmlReceive=getBookList_callback;
+	
+	var requestData=new Object();
+	
+	//アイテムの検索を指示するパラメータ
+	requestData["Operation"]="ItemSearch";
+	
+	//Books（書籍）を対象とする
+	requestData["SearchIndex"]="Books";
+	
+	//レスポンスに含まれる情報量
+	requestData["ResponseGroup"]="Small,Images,ItemAttributes";
+	
+	requestData["Keywords"]=keyword;
+	
+	//Amazonゲートウェイサービスの呼び出し
+	stub.processRequest(requestData,"booksearch");
+	
+	//検索は非同期に実行されるため、検索中を表示することができる
+	viewArea.innerHTML="<font color=red><strong>「"+keyword+"」で書籍を検索中</strong></font>";
+}
+
+function getBookList_callback(responseData){
+
+	//アイテム（書籍）一覧を取得する
+	var itemList=responseData.ItemSearchResponse.Items.Item;
+	
+	//nullでなければテキストボックスに結果を反映
+	if(itemList!=null ){
+
+		//メッセージリストを表示する為の表示用HTML
+		var strInnerHTML="";
+		
+		strInnerHTML+="<table border=1 width=100><tr>"
+
+		
+		//messageList配列の中身をループで取得する
+		for(var idx in itemList){
+			//idx番目のメッセージを取り出す
+			var item=itemList[idx];
+			
+			//表示用HTMLにメッセージを追加する。改行要素(BR)も付加する。
+			strInnerHTML+="<td valign=top>";
+			
+			//画像があれば表示、なければ「画像なし」を表示
+			if(item.ImageSets!=null && item.ImageSets.ImageSet.MediumImage!=null){
+				strInnerHTML+="<img src="+item.ImageSets.ImageSet.MediumImage.URL+" onclick=getBookDetail("+item.ASIN+") ><BR>"
+			}else{
+				strInnerHTML+="<span style=width:100;height:150 onclick=getBookDetail("+item.ASIN+") ><br><br>画像なし</br></br></div>";
+			}
+			strInnerHTML+="<small>"+item.ItemAttributes.ListPrice.FormattedPrice+"</small><BR>";
+			strInnerHTML+="<small>"+item.ItemAttributes.Title+"</small><BR>";
+			strInnerHTML+="</td>";
+
+		}
+		strInnerHTML+="</tr></table>";
+
+		//一覧を表示するSPANオブジェクト
+		var viewArea=document.getElementById("viewArea");
+
+		//メッセージリストを更新する。
+		viewArea.innerHTML=strInnerHTML;
+	}
+}
+
+function getBookDetail(asinId){
+
+	//詳細を表示するSPANオブジェクト
+	var detailArea=document.getElementById("detailArea");
+	
+	var stub=new AjaxBaronServiceStub();
+	stub.onXmlReceive=getBookDetail_callback;
+
+	//Authorは１件または配列となるので、配列として宣言しておく
+	stub.setArrayNodes("Author");
+
+	var requestData=new Object();
+	
+	//書籍の１件の情報取得を指示
+	requestData["Operation"]="ItemLookup";
+	
+	//IDはASIN番号で検索することを指示
+	requestData["IdType"]="ASIN";
+	
+	//レスポンスに含まれる情報量
+	requestData["ResponseGroup"]="Medium,Reviews,Images";
+	
+	//書籍のASIN番号を指定
+	requestData["ItemId"]=asinId;
+
+	stub.processRequest(requestData,"booksearch");
+	
+	//検索は非同期に実行されるため、取得中を表示することができる
+	detailArea.innerHTML="<font color=red><strong>書籍の詳細情報をajaxで取得中</strong></font>";
+}
+
+function getBookDetail_callback(responseData){
+
+	//商品(item)を取得する
+	var item=responseData.ItemLookupResponse.Items.Item;
+
+	//メッセージリストを表示する為の表示用HTML
+	var strInnerHTML="";
+	strInnerHTML+="<table><tr>";
+	//書籍の詳細説明ページへのリンクを設定
+	if(item.MediumImage!=null){
+		strInnerHTML+="<td valign=top><a href="+item.DetailPageURL+" target=_new ><img src="+item.MediumImage.URL+"></a><br></td>";
+	}else{
+		strInnerHTML+="<td valign=top><a href="+item.DetailPageURL+" target=_new ><span style=width:100;height:150 ><br><br>画像なし</br></span></a><br></td>";
+	}
+	strInnerHTML+="<td valign=top>";
+	strInnerHTML+="<strong>"+item.ItemAttributes.Title+"</strong><br>";
+	
+	//著者リストを展開
+	var authorList=item.ItemAttributes.Author;
+	for(var idx in authorList){
+		strInnerHTML+=authorList[idx];
+	}
+	
+	//製造元
+	strInnerHTML+="<br>"+item.ItemAttributes.Manufacturer+"<br>";
+	//ページ数
+	strInnerHTML+=item.ItemAttributes.NumberOfPages+"ページ<br>";
+	//価格
+	strInnerHTML+="<strong>"+item.ItemAttributes.ListPrice.FormattedPrice+"</strong><br>";
+	strInnerHTML+="</td>";
+	strInnerHTML+="</tr></table>";		
+
+	
+	//nullでなければテキストボックスに結果を反映
+	if(item.CustomerReviews!=null && item.CustomerReviews.Review!=null && item.CustomerReviews.Review.length>0 ){
+		//レビュー	一覧を取得
+		var reviewList=item.CustomerReviews.Review;
+		
+		strInnerHTML+="<table width=800><tr><td>";
+		strInnerHTML+="<strong><small>レビュー一覧</small></strong><br>";
+		
+		//messageList配列の中身をループで取得する
+		for(var idx in reviewList){
+		
+			//idx番目のレビューメッセージを取り出す
+			var review=reviewList[idx];
+			if(review.Summary!=null && review.Content!=null){
+				strInnerHTML+="<hr><strong><small>「"+review.Summary+"」</small></strong>";
+				
+				//レビューのRatingを構成
+				for(var cnt=0;cnt<review.Rating;cnt++){
+					strInnerHTML+="<small>☆</small>";
+				}
+				//レビュー文章を構成
+				strInnerHTML+="<br><small>"+review.Content+"</small><br>";
+			}
+		}
+	}
+	
+	//詳細を表示するSPANオブジェクト
+	var detailArea=document.getElementById("detailArea");
+	
+	//innerHTMLにHTMLを設定
+	detailArea.innerHTML=strInnerHTML;
+	
+}
+
+--></script>
+</head>
+<body>
+<h1>Amazon WebサービスをAjaxで呼び出す</h1>
+<input type="text" id="keyword">
+<input type="button" onclick="getBookList();" value="検索" />
+<br>
+<small>キーワードを入力して検索ボタンを押すとajaxで書籍を検索します。(書籍画像の上でクリックする書籍の詳細を表示します。） </small>
+<hr>
+<span id="viewArea"> </span>
+<br>
+<span id="detailArea"> </span>
+</body>
+</html>
