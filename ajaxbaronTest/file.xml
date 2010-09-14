@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<test>
+  <t1><text>test1</text>
+    <t2>test1-1</t2>
+    <t2>test1-2</t2>
+    <t2>test1-3</t2>
+  </t1>
+  <t1><text>test2</text>
+    <t2>test2-1<t2>test2-1-1</t2></t2>
+    <t2>test2-2</t2>
+    <t2>test2-3</t2>
+  </t1>
+  <t1><text>test3</text>
+    <t2>test3-1</t2>
+    <t2>test3-2</t2>
+    <t2>test3-3</t2>
+  </t1>
+</test>
