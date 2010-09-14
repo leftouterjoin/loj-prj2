@@ -22,7 +22,7 @@ public class SignedRequestsHelper {
 	private static final String REQUEST_URI = "/onca/xml";
 	private static final String REQUEST_METHOD = "GET";
 
-	private String endpoint = "webservices.amazon.com"; // must be lowercase
+	private String endpoint = "webservices.amazon.co.jp"; // must be lowercase
 	private String awsAccessKeyId = "";
 	private String awsSecretKey = "";
 
