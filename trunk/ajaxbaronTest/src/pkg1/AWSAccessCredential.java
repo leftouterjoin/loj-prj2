@@ -1,6 +1,6 @@
 package pkg1;
 
-public class AWSAccessCredentials {
+public class AWSAccessCredential {
 	public static String getId() {
 		return null;
 	}

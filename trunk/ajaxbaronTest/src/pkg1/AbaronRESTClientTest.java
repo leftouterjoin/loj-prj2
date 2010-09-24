@@ -7,7 +7,7 @@ import org.junit.Test;
 public class AbaronRESTClientTest {
 	@Test
 	public void test1() {
-		SignedRequestsHelper helper = new SignedRequestsHelper(AWSAccessCredentials.getId(), AWSAccessCredentials.getKey());
+		SignedRequestsHelper helper = new SignedRequestsHelper();
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("Service", "AWSECommerceService");
 

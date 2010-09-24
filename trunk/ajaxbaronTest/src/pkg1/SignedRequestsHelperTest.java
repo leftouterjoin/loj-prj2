@@ -53,7 +53,7 @@ public class SignedRequestsHelperTest {
 		String id = "dummy";
 		String secretkey = "dummy";
 
-		SignedRequestsHelper helper = new SignedRequestsHelper(id, secretkey);
+		SignedRequestsHelper helper = new SignedRequestsHelper();
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("Service", "AWSECommerceService");
 		map.put("AWSAccessKeyId", id);
@@ -83,7 +83,7 @@ public class SignedRequestsHelperTest {
 		String id = "";
 		String secretkey = "G+";
 
-		SignedRequestsHelper helper = new SignedRequestsHelper(id, secretkey);
+		SignedRequestsHelper helper = new SignedRequestsHelper();
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("Service", "AWSECommerceService");
 		map.put("AWSAccessKeyId", id);

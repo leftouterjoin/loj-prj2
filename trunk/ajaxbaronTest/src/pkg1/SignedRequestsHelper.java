@@ -22,24 +22,22 @@ public class SignedRequestsHelper {
 	private static final String REQUEST_URI = "/onca/xml";
 	private static final String REQUEST_METHOD = "GET";
 
-	private String endpoint = "webservices.amazon.co.jp"; // must be lowercase
-	private String awsAccessKeyId = "";
-	private String awsSecretKey = "";
+	private static final String endpoint = "webservices.amazon.co.jp"; // must be lowercase
+	private final String awsAccessKeyId = AWSAccessCredential.getId();
+	private final String awsSecretKey = AWSAccessCredential.getKey();
 
 	private SecretKeySpec secretKeySpec = null;
 	private Mac mac = null;
 
-	public SignedRequestsHelper(String awsAccessKeyId, String awsSecretKey) {
-		this.awsAccessKeyId = awsAccessKeyId;
-		this.awsSecretKey = awsSecretKey;
+	public SignedRequestsHelper() {
 		try {
-			byte[] secretyKeyBytes = this.awsSecretKey.getBytes(UTF8_CHARSET);
-			this.secretKeySpec = new SecretKeySpec(secretyKeyBytes,
+			byte[] secretyKeyBytes = awsSecretKey.getBytes(UTF8_CHARSET);
+			secretKeySpec = new SecretKeySpec(secretyKeyBytes,
 					HMAC_SHA256_ALGORITHM);
 			mac = Mac.getInstance(HMAC_SHA256_ALGORITHM);
 			mac.init(secretKeySpec);
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 	}
 
@@ -54,7 +52,7 @@ public class SignedRequestsHelper {
 				+ "\n" + canonicalQS;
 
 		String hmac = hmac(toSign);
-		hmac = hmac.substring(0, hmac.length() - 2);
+
 		String sig = percentEncodeRfc3986(hmac);
 		String url = "http://" + endpoint + REQUEST_URI + "?" + canonicalQS
 				+ "&Signature=" + sig;
@@ -70,6 +68,7 @@ public class SignedRequestsHelper {
 			rawHmac = mac.doFinal(data);
 			Base64 encoder = new Base64();
 			signature = new String(encoder.encode(rawHmac));
+			signature = signature.substring(0, signature.length() - 2);   // 末尾の改行を除去
 		} catch (UnsupportedEncodingException e) {
 			throw new RuntimeException(UTF8_CHARSET + " is unsupported!", e);
 		}
