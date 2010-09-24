@@ -1,4 +1,4 @@
-package pkg1;
+package com.amazon.associates.sample;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -22,19 +22,17 @@ public class SignedRequestsHelper {
 	private static final String REQUEST_URI = "/onca/xml";
 	private static final String REQUEST_METHOD = "GET";
 
-	private String endpoint = "webservices.amazon.co.jp"; // must be lowercase
-	private String awsAccessKeyId = "";
-	private String awsSecretKey = "";
+	private String endpoint = "ecs.amazonaws.com"; // must be lowercase
+	private String awsAccessKeyId = "YOUR AWS ACCESS KEY";
+	private String awsSecretKey = "YOUR AWS SECRET KEY";
 
 	private SecretKeySpec secretKeySpec = null;
 	private Mac mac = null;
 
-	public SignedRequestsHelper(String awsAccessKeyId, String awsSecretKey) {
-		this.awsAccessKeyId = awsAccessKeyId;
-		this.awsSecretKey = awsSecretKey;
+	public SignedRequestsHelper() {
 		try {
-			byte[] secretyKeyBytes = this.awsSecretKey.getBytes(UTF8_CHARSET);
-			this.secretKeySpec = new SecretKeySpec(secretyKeyBytes,
+			byte[] secretyKeyBytes = awsSecretKey.getBytes(UTF8_CHARSET);
+			secretKeySpec = new SecretKeySpec(secretyKeyBytes,
 					HMAC_SHA256_ALGORITHM);
 			mac = Mac.getInstance(HMAC_SHA256_ALGORITHM);
 			mac.init(secretKeySpec);
@@ -54,10 +52,10 @@ public class SignedRequestsHelper {
 				+ "\n" + canonicalQS;
 
 		String hmac = hmac(toSign);
-		hmac = hmac.substring(0, hmac.length() - 2);
 		String sig = percentEncodeRfc3986(hmac);
 		String url = "http://" + endpoint + REQUEST_URI + "?" + canonicalQS
 				+ "&Signature=" + sig;
+
 		return url;
 	}
 

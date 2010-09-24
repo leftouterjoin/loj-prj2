@@ -5,20 +5,11 @@ import java.util.HashMap;
 import org.junit.Test;
 
 public class AbaronRESTClientTest {
-	public String getId() {
-		return null;
-	}
-
-	public String getKey() {
-		return null;
-	}
-
 	@Test
 	public void test1() {
-		SignedRequestsHelper helper = new SignedRequestsHelper(getId(), getKey());
+		SignedRequestsHelper helper = new SignedRequestsHelper(AWSAccessCredentials.getId(), AWSAccessCredentials.getKey());
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("Service", "AWSECommerceService");
-		map.put("AWSAccessKeyId", getId());
 
 		map.put("Operation", "ItemSearch");
 		map.put("SearchIndex", "Books");
