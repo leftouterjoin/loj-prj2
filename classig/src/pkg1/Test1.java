@@ -16,15 +16,6 @@ import org.junit.Test;
 public class Test1 {
 
 	@Test
-	public void test01() throws Exception {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-		System.out.println("何か入力>");
-		String line = br.readLine();
-		System.out.println(line);
-	}
-
-	@Test
 	public void test3() throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -37,24 +28,29 @@ public class Test1 {
 		System.out.println("戻り値を入力:");
 		String expression = br.readLine();
 
-		System.out.printf("%s\n%s\n%s\n%s", pathname, fqcn, methodName,
-				expression);
+		rewriteGetter(pathname, fqcn, methodName, expression);
+	}
+
+	@Test
+	public void doOverSign()throws Exception {
+		rewriteGetter("D:\\CTC松村\\labo\\workspace\\ajaxbaronTest\\war\\WEB-INF\\classes", "pkg1.AWSAccessCredential", "getId", "\"dummy\"");
+		rewriteGetter("D:\\CTC松村\\labo\\workspace\\ajaxbaronTest\\war\\WEB-INF\\classes", "pkg1.AWSAccessCredential", "getKey", "\"dummy\"");
 	}
 
 	public void rewriteGetter(String pathname, String fqcn, String methodName,
 			String expression) throws NotFoundException,
 			CannotCompileException, IOException {
-		ClassPool cp = new ClassPool();
+		ClassPool cp = ClassPool.getDefault();
 		cp.appendClassPath(pathname);
 
 		CtClass cc = cp.get(fqcn);
 
 		CtMethod cm = cc.getDeclaredMethod(methodName);
 
+		if (cc.isFrozen()) cc.defrost();
 		cm.setBody("{ return " + expression + "; }");
 
-		String outpath = (new File(".")).getAbsolutePath() + "/bin/";
-		cc.writeFile(outpath);
+		cc.writeFile(pathname);
 	}
 
 	@Test
