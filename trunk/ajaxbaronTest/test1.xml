@@ -1,0 +1,86 @@
+<ItemSearchResponse
+	xmlns="http://webservices.amazon.com/AWSECommerceService/2005-10-05">
+	<OperationRequest>
+		<HTTPHeaders>
+			<Header Name="UserAgent"
+				Value="Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US) AppleWebKit/534.3 (KHTML, like Gecko) Chrome/6.0.472.55 Safari/534.3"></Header>
+		</HTTPHeaders>
+		<RequestId>8eb172bb-ab1d-4b0f-81da-19ae40362a9e</RequestId>
+		<Arguments>
+			<Argument Name="Operation" Value="ItemSearch"></Argument>
+			<Argument Name="Service" Value="AWSECommerceService"></Argument>
+			<Argument Name="Signature"
+				Value="Zs1gCSKpMcEN2RHx7Vj7QI+eoQ/59O1fn1jVltu6Sig="></Argument>
+			<Argument Name="Keywords" Value="直観でわかる数学"></Argument>
+			<Argument Name="AWSAccessKeyId" Value="AKIAIPHM4QKK4E4Y4LZA"></Argument>
+			<Argument Name="Timestamp" Value="2010-09-21T05:45:10Z"></Argument>
+			<Argument Name="SearchIndex" Value="Books"></Argument>
+		</Arguments>
+		<RequestProcessingTime>0.0581200000000000</RequestProcessingTime>
+	</OperationRequest>
+	<Items>
+		<Request>
+			<IsValid>True</IsValid>
+			<ItemSearchRequest>
+				<Condition>New</Condition>
+				<DeliveryMethod>Ship</DeliveryMethod>
+				<Keywords>直観でわかる数学</Keywords>
+				<MerchantId>Amazon</MerchantId>
+				<ResponseGroup>Small</ResponseGroup>
+				<SearchIndex>Books</SearchIndex>
+			</ItemSearchRequest>
+		</Request>
+		<TotalResults>5</TotalResults>
+		<TotalPages>1</TotalPages>
+		<Item>
+			<ASIN>4000056794</ASIN>
+			<DetailPageURL>http://www.amazon.co.jp/%E7%9B%B4%E8%A6%B3%E3%81%A7%E3%82%8F%E3%81%8B%E3%82%8B%E6%95%B0%E5%AD%A6-%E7%95%91%E6%9D%91-%E6%B4%8B%E5%A4%AA%E9%83%8E/dp/4000056794%3FSubscriptionId%3DAKIAIPHM4QKK4E4Y4LZA%26tag%3Dws%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D4000056794</DetailPageURL>
+			<ItemAttributes>
+				<Author>畑村 洋太郎</Author>
+				<Manufacturer>岩波書店</Manufacturer>
+				<ProductGroup>Book</ProductGroup>
+				<Title>直観でわかる数学</Title>
+			</ItemAttributes>
+		</Item>
+		<Item>
+			<ASIN>4000062433</ASIN>
+			<DetailPageURL>http://www.amazon.co.jp/%E7%B6%9A-%E7%9B%B4%E8%A6%B3%E3%81%A7%E3%82%8F%E3%81%8B%E3%82%8B%E6%95%B0%E5%AD%A6-%E7%95%91%E6%9D%91-%E6%B4%8B%E5%A4%AA%E9%83%8E/dp/4000062433%3FSubscriptionId%3DAKIAIPHM4QKK4E4Y4LZA%26tag%3Dws%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D4000062433</DetailPageURL>
+			<ItemAttributes>
+				<Author>畑村 洋太郎</Author>
+				<Manufacturer>岩波書店</Manufacturer>
+				<ProductGroup>Book</ProductGroup>
+				<Title>続 直観でわかる数学</Title>
+			</ItemAttributes>
+		</Item>
+		<Item>
+			<ASIN>4924460893</ASIN>
+			<DetailPageURL>http://www.amazon.co.jp/%E7%89%A9%E7%90%86%E6%95%B0%E5%AD%A6%E3%81%AE%E7%9B%B4%E8%A6%B3%E7%9A%84%E6%96%B9%E6%B3%95-%E9%95%B7%E6%B2%BC-%E4%BC%B8%E4%B8%80%E9%83%8E/dp/4924460893%3FSubscriptionId%3DAKIAIPHM4QKK4E4Y4LZA%26tag%3Dws%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D4924460893</DetailPageURL>
+			<ItemAttributes>
+				<Author>長沼 伸一郎</Author>
+				<Manufacturer>通商産業研究社</Manufacturer>
+				<ProductGroup>Book</ProductGroup>
+				<Title>物理数学の直観的方法</Title>
+			</ItemAttributes>
+		</Item>
+		<Item>
+			<ASIN>4004310636</ASIN>
+			<DetailPageURL>http://www.amazon.co.jp/%E6%95%B0%E3%81%AB%E5%BC%B7%E3%81%8F%E3%81%AA%E3%82%8B-%E5%B2%A9%E6%B3%A2%E6%96%B0%E6%9B%B8-%E7%95%91%E6%9D%91-%E6%B4%8B%E5%A4%AA%E9%83%8E/dp/4004310636%3FSubscriptionId%3DAKIAIPHM4QKK4E4Y4LZA%26tag%3Dws%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D4004310636</DetailPageURL>
+			<ItemAttributes>
+				<Author>畑村 洋太郎</Author>
+				<Manufacturer>岩波書店</Manufacturer>
+				<ProductGroup>Book</ProductGroup>
+				<Title>数に強くなる (岩波新書)</Title>
+			</ItemAttributes>
+		</Item>
+		<Item>
+			<ASIN>4061498096</ASIN>
+			<DetailPageURL>http://www.amazon.co.jp/%E7%95%91%E6%9D%91%E5%BC%8F%E3%80%8C%E3%82%8F%E3%81%8B%E3%82%8B%E3%80%8D%E6%8A%80%E8%A1%93-%E8%AC%9B%E8%AB%87%E7%A4%BE%E7%8F%BE%E4%BB%A3%E6%96%B0%E6%9B%B8-%E7%95%91%E6%9D%91-%E6%B4%8B%E5%A4%AA%E9%83%8E/dp/4061498096%3FSubscriptionId%3DAKIAIPHM4QKK4E4Y4LZA%26tag%3Dws%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D4061498096</DetailPageURL>
+			<ItemAttributes>
+				<Author>畑村 洋太郎</Author>
+				<Manufacturer>講談社</Manufacturer>
+				<ProductGroup>Book</ProductGroup>
+				<Title>畑村式「わかる」技術 (講談社現代新書)</Title>
+			</ItemAttributes>
+		</Item>
+	</Items>
+</ItemSearchResponse>
