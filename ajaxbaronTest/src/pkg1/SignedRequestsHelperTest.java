@@ -4,8 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.PrintStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -52,8 +50,8 @@ public class SignedRequestsHelperTest {
 
 	@Test
 	public void test1() {
-		String id = "AKIAIPHM4QKK4E4Y4LZA";
-		String secretkey = "G+";
+		String id = "dummy";
+		String secretkey = "dummy";
 
 		SignedRequestsHelper helper = new SignedRequestsHelper(id, secretkey);
 		HashMap<String, String> map = new HashMap<String, String>();
