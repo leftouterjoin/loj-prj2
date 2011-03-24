@@ -1,18 +1,12 @@
 package com.amazon.associates.sample;
 
 import java.io.UnsupportedEncodingException;
-
-import java.net.URLDecoder;
 import java.net.URLEncoder;
-
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.SortedMap;
@@ -24,6 +18,7 @@ import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.codec.binary.Base64;
 
+// http://docs.amazonwebservices.com/AWSECommerceService/latest/DG/index.html?AuthJavaSampleSig2.html
 public class SignedRequestsHelper {
 	private static final String UTF8_CHARSET = "UTF-8";
 	private static final String HMAC_SHA256_ALGORITHM = "HmacSHA256";
@@ -37,7 +32,8 @@ public class SignedRequestsHelper {
 	private SecretKeySpec secretKeySpec = null;
 	private Mac mac = null;
 
-	public SignedRequestsHelper() throws UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeyException {
+	public SignedRequestsHelper() throws UnsupportedEncodingException,
+			NoSuchAlgorithmException, InvalidKeyException {
 		byte[] secretyKeyBytes = awsSecretKey.getBytes(UTF8_CHARSET);
 		secretKeySpec = new SecretKeySpec(secretyKeyBytes,
 				HMAC_SHA256_ALGORITHM);
@@ -120,5 +116,4 @@ public class SignedRequestsHelper {
 		}
 		return out;
 	}
-
 }
