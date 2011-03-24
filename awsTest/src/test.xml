@@ -1,0 +1,132 @@
+<?xml version="1.0" ?>
+<ItemLookupResponse
+	xmlns="http://webservices.amazon.com/AWSECommerceService/2005-10-05">
+	<OperationRequest>
+		<HTTPHeaders>
+			<Header Name="UserAgent" Value="Java/1.6.0_23"></Header>
+		</HTTPHeaders>
+		<RequestId>1ddd4066-96f4-4bc8-944e-6a65b02130d5</RequestId>
+		<Arguments>
+			<Argument Name="Operation" Value="ItemLookup"></Argument>
+			<Argument Name="Service" Value="AWSECommerceService"></Argument>
+			<Argument Name="SearchIndex" Value="Books"></Argument>
+			<Argument Name="Signature"
+				Value="Uf5iIU3nLVFxLwfQbFKUrKVz3pqmlHBK3k7YghNKjhw="></Argument>
+			<Argument Name="ItemId" Value="9784873114798"></Argument>
+			<Argument Name="IdType" Value="ISBN"></Argument>
+			<Argument Name="AWSAccessKeyId" Value="AKIAIPHM4QKK4E4Y4LZA"></Argument>
+			<Argument Name="Timestamp" Value="2011-03-24T12:04:24Z"></Argument>
+			<Argument Name="ResponseGroup" Value="Medium"></Argument>
+		</Arguments>
+		<RequestProcessingTime>0.0288390000000000</RequestProcessingTime>
+	</OperationRequest>
+	<Items>
+		<Request>
+			<IsValid>True</IsValid>
+			<ItemLookupRequest>
+				<Condition>New</Condition>
+				<DeliveryMethod>Ship</DeliveryMethod>
+				<IdType>ISBN</IdType>
+				<MerchantId>Amazon</MerchantId>
+				<OfferPage>1</OfferPage>
+				<ItemId>9784873114798</ItemId>
+				<ResponseGroup>Medium</ResponseGroup>
+				<ReviewPage>1</ReviewPage>
+				<SearchIndex>Books</SearchIndex>
+			</ItemLookupRequest>
+		</Request>
+		<Item>
+			<ASIN>4873114799</ASIN>
+			<DetailPageURL>http://www.amazon.co.jp/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9E%E3%81%8C%E7%9F%A5%E3%82%8B%E3%81%B9%E3%81%8D97%E3%81%AE%E3%81%93%E3%81%A8-%E5%92%8C%E7%94%B0-%E5%8D%93%E4%BA%BA/dp/4873114799%3FSubscriptionId%3DAKIAIPHM4QKK4E4Y4LZA%26tag%3Dws%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D4873114799</DetailPageURL>
+			<SalesRank>915</SalesRank>
+			<SmallImage>
+				<URL>http://ecx.images-amazon.com/images/I/511RPej0BNL._SL75_.jpg</URL>
+				<Height Units="pixels">75</Height>
+				<Width Units="pixels">53</Width>
+			</SmallImage>
+			<MediumImage>
+				<URL>http://ecx.images-amazon.com/images/I/511RPej0BNL._SL160_.jpg</URL>
+				<Height Units="pixels">160</Height>
+				<Width Units="pixels">113</Width>
+			</MediumImage>
+			<LargeImage>
+				<URL>http://ecx.images-amazon.com/images/I/511RPej0BNL.jpg</URL>
+				<Height Units="pixels">500</Height>
+				<Width Units="pixels">353</Width>
+			</LargeImage>
+			<ImageSets>
+				<ImageSet Category="primary">
+					<SwatchImage>
+						<URL>http://ecx.images-amazon.com/images/I/511RPej0BNL._SL30_.jpg</URL>
+						<Height Units="pixels">30</Height>
+						<Width Units="pixels">21</Width>
+					</SwatchImage>
+					<SmallImage>
+						<URL>http://ecx.images-amazon.com/images/I/511RPej0BNL._SL75_.jpg</URL>
+						<Height Units="pixels">75</Height>
+						<Width Units="pixels">53</Width>
+					</SmallImage>
+					<MediumImage>
+						<URL>http://ecx.images-amazon.com/images/I/511RPej0BNL._SL160_.jpg</URL>
+						<Height Units="pixels">160</Height>
+						<Width Units="pixels">113</Width>
+					</MediumImage>
+					<LargeImage>
+						<URL>http://ecx.images-amazon.com/images/I/511RPej0BNL.jpg</URL>
+						<Height Units="pixels">500</Height>
+						<Width Units="pixels">353</Width>
+					</LargeImage>
+				</ImageSet>
+			</ImageSets>
+			<ItemAttributes>
+				<Binding>単行本（ソフトカバー）</Binding>
+				<Creator Role="監修">和田 卓人</Creator>
+				<Creator Role="編集">Kevlin Henney</Creator>
+				<Creator Role="翻訳">夏目 大</Creator>
+				<EAN>9784873114798</EAN>
+				<ISBN>4873114799</ISBN>
+				<Label>オライリージャパン</Label>
+				<Languages>
+					<Language>
+						<Name>日本語</Name>
+						<Type>Unknown</Type>
+					</Language>
+				</Languages>
+				<ListPrice>
+					<Amount>1995</Amount>
+					<CurrencyCode>JPY</CurrencyCode>
+					<FormattedPrice>￥ 1,995</FormattedPrice>
+				</ListPrice>
+				<Manufacturer>オライリージャパン</Manufacturer>
+				<NumberOfPages>276</NumberOfPages>
+				<PackageDimensions>
+					<Height Units="hundredths-inches">79</Height>
+					<Length Units="hundredths-inches">819</Length>
+					<Weight Units="hundredths-pounds">75</Weight>
+					<Width Units="hundredths-inches">591</Width>
+				</PackageDimensions>
+				<ProductGroup>Book</ProductGroup>
+				<PublicationDate>2010-12-18</PublicationDate>
+				<Publisher>オライリージャパン</Publisher>
+				<Studio>オライリージャパン</Studio>
+				<Title>プログラマが知るべき97のこと</Title>
+			</ItemAttributes>
+			<OfferSummary>
+				<LowestNewPrice>
+					<Amount>1995</Amount>
+					<CurrencyCode>JPY</CurrencyCode>
+					<FormattedPrice>￥ 1,995</FormattedPrice>
+				</LowestNewPrice>
+				<LowestUsedPrice>
+					<Amount>1800</Amount>
+					<CurrencyCode>JPY</CurrencyCode>
+					<FormattedPrice>￥ 1,800</FormattedPrice>
+				</LowestUsedPrice>
+				<TotalNew>1</TotalNew>
+				<TotalUsed>9</TotalUsed>
+				<TotalCollectible>0</TotalCollectible>
+				<TotalRefurbished>0</TotalRefurbished>
+			</OfferSummary>
+		</Item>
+	</Items>
+</ItemLookupResponse>
