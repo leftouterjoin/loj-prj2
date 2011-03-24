@@ -30,14 +30,14 @@ public class SignedRequestsHelper {
 	private static final String REQUEST_URI = "/onca/xml";
 	private static final String REQUEST_METHOD = "GET";
 
-	private String endpoint = "ecs.amazonaws.com"; // must be lowercase
-	private String awsAccessKeyId = "YOUR AWS ACCESS KEY";
-	private String awsSecretKey = "YOUR AWS SECRET KEY";
+	private String endpoint = "ecs.amazonaws.jp"; // must be lowercase
+	private String awsAccessKeyId = "AKIAIPHM4QKK4E4Y4LZA";
+	private String awsSecretKey = "G+9xE14aCYrJS06GUuv11eC4j9RRqb4TKaJgZGlz";
 
 	private SecretKeySpec secretKeySpec = null;
 	private Mac mac = null;
 
-	public SignedRequestsHelper() {
+	public SignedRequestsHelper() throws UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeyException {
 		byte[] secretyKeyBytes = awsSecretKey.getBytes(UTF8_CHARSET);
 		secretKeySpec = new SecretKeySpec(secretyKeyBytes,
 				HMAC_SHA256_ALGORITHM);
@@ -72,6 +72,7 @@ public class SignedRequestsHelper {
 			rawHmac = mac.doFinal(data);
 			Base64 encoder = new Base64();
 			signature = new String(encoder.encode(rawHmac));
+			signature = signature.trim();
 		} catch (UnsupportedEncodingException e) {
 			throw new RuntimeException(UTF8_CHARSET + " is unsupported!", e);
 		}
