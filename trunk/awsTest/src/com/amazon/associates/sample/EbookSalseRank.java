@@ -98,16 +98,12 @@ public class EbookSalseRank {
 				"9784873114699", "9784873114712", "9784873114729",
 				"9784873114767", "9784873114774", "9784873114798" }) {
 			params.put("ItemId", isbn);
-			String url = srh.sign(params);
-			String content = getContent(new URL(url));
-			Document doc = builder.parse(new InputSource(new StringReader(
-					content)));
-			list.add(doc);
+			String content = getContent(new URL(srh.sign(params)));
+			list.add(builder.parse(new InputSource(new StringReader(content))));
 		}
 
-		Document[] d = list.toArray(new Document[list.size()]);
-
-		Arrays.sort(d, new Comparator<Document>() {
+		Document[] docs = list.toArray(new Document[list.size()]);
+		Arrays.sort(docs, new Comparator<Document>() {
 			@Override
 			public int compare(final Document o1, final Document o2) {
 				int i = 0;
@@ -126,7 +122,7 @@ public class EbookSalseRank {
 
 		System.out.println("SalesRank |ISBN          |Title");
 		System.out.println("----------+--------------+------------------------------");
-		for (Document doc : d)
+		for (Document doc : docs)
 			System.out
 					.format("%10s| %13s| %s\n",
 							xpath.evaluate(
@@ -141,7 +137,7 @@ public class EbookSalseRank {
 	}
 
 	private static String getContent(URL url) throws Exception {
-		StringBuffer buf = new StringBuffer();
+		StringBuffer sb = new StringBuffer();
 		HttpURLConnection con = null;
 		BufferedReader br = null;
 		try {
@@ -152,8 +148,8 @@ public class EbookSalseRank {
 
 			String s;
 			while ((s = br.readLine()) != null) {
-				buf.append(s);
-				buf.append("\r\n");
+				sb.append(s);
+				sb.append("\r\n");
 			}
 		} finally {
 			if (br != null)
@@ -162,6 +158,6 @@ public class EbookSalseRank {
 				con.disconnect();
 		}
 
-		return buf.toString();
+		return sb.toString();
 	}
 }
