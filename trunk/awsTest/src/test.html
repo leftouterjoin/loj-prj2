@@ -1,0 +1,763 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"> 
+<html xmlns:og="http://ogp.me/ns#"> 
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=euc-jp"> 
+<meta http-equiv="Content-Style-Type" content="text/css"> 
+<meta http-equiv="Content-Script-Type" content="text/javascript"> 
+<title>マイペースなプログラミング日記</title> 
+<link rel="start" href="./" title="マイペースなプログラミング日記"> 
+<link rel="help" href="/help" title="ヘルプ"> 
+<link rel="prev" href="/d-kami/?of=5" title="前の5日分"> 
+ 
+<link rel="stylesheet" href="http://d.st-hatena.com/statics/css/base.css?3b8b4b5efaf96e4040fd78db70ec9dfcf8f2ddea" type="text/css" media="all"> 
+ 
+<link rel="stylesheet" href="http://d.st-hatena.com/statics/theme/hatena-test/hatena-test.css?7d508c1badce2cbd3cd47b372a7bdc3e8f794141" type="text/css" media="all"> 
+ 
+ 
+<link rel="alternate" type="application/rss+xml" title="RSS" href="http://d.hatena.ne.jp/d-kami/rss"> 
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://d.hatena.ne.jp/d-kami/rss2"> 
+ 
+<link rel="meta" type="application/rdf+xml" title="FOAF" href="http://d.hatena.ne.jp/d-kami/foaf" /> 
+<link rel="search" type="application/opensearchdescription+xml" href="http://d.hatena.ne.jp/d-kami/opensearch/diary.xml" title="マイペースなプログラミング日記内日記検索" /> 
+<link rel="search" type="application/opensearchdescription+xml" href="http://d.hatena.ne.jp/d-kami/opensearch/archive.xml" title="マイペースなプログラミング日記内一覧検索" /> 
+ 
+ 
+ 
+<link rel="shortcut icon" href="http://d.hatena.ne.jp/images/de_favicon.ico"> 
+ 
+ 
+ 
+ 
+<style type="text/css"> 
+<!-- 
+span.highlight {
+	color: black;
+	background-color: yellow;
+}
+img.photo {
+	float: right;
+	margin: 10px;
+	border: 0;
+}
+a.keyword {
+	text-decoration: none;
+	border-bottom: 1px solid #d0d0d0;
+}
+ 
+table.header-talbe{
+         margin-left:10%;
+}
+-->
+</style> 
+ 
+ 
+ 
+ 
+<meta property="og:type" content="blog"> 
+<meta property="og:title" content="マイペースなプログラミング日記"> 
+<meta property="og:image" content="http://www.st-hatena.com/users/d-/d-kami/user_p.gif?"> 
+<meta property="og:url" content="http://d.hatena.ne.jp/d-kami/"> 
+<meta property="og:description" content="Javaと忘れ物が得意な筑波大学の大学院生"> 
+<meta property="og:site_name" content="はてなダイアリー"> 
+ 
+ 
+<!--
+<rdf:RDF
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:foaf="http://xmlns.com/foaf/0.1/">
+<rdf:Description rdf:about="http://d.hatena.ne.jp/d-kami/">
+   <foaf:maker rdf:parseType="Resource">
+     <foaf:holdsAccount>
+       <foaf:OnlineAccount foaf:accountName="d-kami">
+         <foaf:accountServiceHomepage rdf:resource="http://www.hatena.ne.jp/" />
+       </foaf:OnlineAccount>
+     </foaf:holdsAccount>
+   </foaf:maker>
+</rdf:Description>
+</rdf:RDF>
+--> 
+ 
+<link rel="alternate" media="handheld" type="text/html" href="http://d.hatena.ne.jp/d-kami/mobile" /> 
+<!--
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+<rdf:Description
+  rdf:about="http://d.hatena.ne.jp/d-kami/20110321/1300726045"
+  trackback:ping="http://d.hatena.ne.jp/d-kami/20110321/1300726045"
+  dc:title="今月中の目標"
+  dc:identifier="http://d.hatena.ne.jp/d-kami/20110321/1300726045" />
+</rdf:RDF>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+<rdf:Description
+  rdf:about="http://d.hatena.ne.jp/d-kami/20110316/1300282006"
+  trackback:ping="http://d.hatena.ne.jp/d-kami/20110316/1300282006"
+  dc:title="[x86エミュレータ]エミュレータをデバッグするためのOS"
+  dc:identifier="http://d.hatena.ne.jp/d-kami/20110316/1300282006" />
+</rdf:RDF>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+<rdf:Description
+  rdf:about="http://d.hatena.ne.jp/d-kami/20110315/1300192884"
+  trackback:ping="http://d.hatena.ne.jp/d-kami/20110315/1300192884"
+  dc:title="Owatter 0.12"
+  dc:identifier="http://d.hatena.ne.jp/d-kami/20110315/1300192884" />
+</rdf:RDF>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+<rdf:Description
+  rdf:about="http://d.hatena.ne.jp/d-kami/20110311/1299868284"
+  trackback:ping="http://d.hatena.ne.jp/d-kami/20110311/1299868284"
+  dc:title="とりあえず生きてる"
+  dc:identifier="http://d.hatena.ne.jp/d-kami/20110311/1299868284" />
+</rdf:RDF>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+<rdf:Description
+  rdf:about="http://d.hatena.ne.jp/d-kami/20110308/1299574893"
+  trackback:ping="http://d.hatena.ne.jp/d-kami/20110308/1299574893"
+  dc:title="ほしい物リストを公開してみる"
+  dc:identifier="http://d.hatena.ne.jp/d-kami/20110308/1299574893" />
+</rdf:RDF>
+--> 
+ 
+ 
+<link rel="microsummary" href="/microsummary/entry_title.xml"> 
+ 
+ 
+ 
+ 
+ 
+<script type="text/javascript" src="http://s.hatena.ne.jp/js/HatenaStar.js"></script> 
+<script type="text/javascript"> 
+Hatena.Star.SiteConfig = {
+  entryNodes: {
+    'div.section': {
+      uri: 'h3 a',
+      title: 'h3',
+      container: 'h3'
+    }
+  }
+};
+Hatena.Author  = new Hatena.User('d-kami');
+Hatena.DiaryName  = new Hatena.User('d-kami');
+Hatena.Visitor = new Hatena.User('qaz76');
+</script> 
+ 
+ 
+ 
+<script type="text/javascript" src="http://d.st-hatena.com/statics/js/twitter_entry_icon.js?7d508c1badce2cbd3cd47b372a7bdc3e8f794141"></script> 
+ 
+ 
+ 
+<script type="text/javascript" src="http://d.st-hatena.com/statics/js/adcolor.js?7d508c1badce2cbd3cd47b372a7bdc3e8f794141"></script> 
+ 
+ 
+ 
+<script type="text/javascript"> 
+if (typeof Hatena == 'undefined')
+  Hatena = {};
+if (typeof Hatena.Diary == 'undefined')
+  Hatena.Diary = {};
+if (typeof Hatena.Diary.EditInPlace == 'undefined')
+  Hatena.Diary.EditInPlace = {};
+Hatena.rkm = 'nyt2MnIi7mlOdmiCAS4Q4Q';
+ 
+</script> 
+ 
+<script type="text/javascript" src="http://d.st-hatena.com/statics/js/quick_pager.js?7d508c1badce2cbd3cd47b372a7bdc3e8f794141"></script> 
+<script type="text/javascript" src="http://d.st-hatena.com/statics/js/diary_utils.js?7d508c1badce2cbd3cd47b372a7bdc3e8f794141"></script> 
+<script type="text/javascript" src="http://d.st-hatena.com/statics/js/max_width_fotolife.js?7d508c1badce2cbd3cd47b372a7bdc3e8f794141"></script> 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+<meta name="keywords" content="Java,エミュレータ,自作OS,GWT,Android,CPU,リレー,x86" /> 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+<script type="text/javascript" src="http://d.st-hatena.com/statics/js/jquery-1.4.2.min.js?7d508c1badce2cbd3cd47b372a7bdc3e8f794141"></script> 
+<script type="text/javascript"> 
+  jQuery.noConflict()(function($){
+    var j$ = jQuery;
+  });
+</script> 
+ 
+ 
+ 
+ 
+</head> 
+<body> 
+ 
+<table border="0" width="100%" cellspacing="0" cellpadding="0" id="banner"> 
+<tr> 
+<td bgcolor="#1841CE" nowrap> 
+<a href="http://www.hatena.ne.jp/"><img border="0" src="http://d.hatena.ne.jp/images/hatena_de.gif" width="104" height="40" alt="Hatena::"></a><a href="http://d.hatena.ne.jp/"><img border="0" src="http://d.hatena.ne.jp/images/diaryde.gif" width="60" height="40" alt="ブログ(Diary)"></a></td> 
+<td valign="bottom" align="left" bgcolor="#1841CE" width="60%" nowrap><form method="GET" action="/search" style="margin: 0;"><font color="#5279E7" size="2">&nbsp;&nbsp;<input type="text" name="word" value="" size="18" style="font-size: 8pt">&nbsp;<input type="hidden" name="name" value="d-kami"><input type="image" name="diary" alt="日記" src="http://d.hatena.ne.jp/images/search_diaryde.gif" align="top" style="width:34px;height:20px;border:0px">&nbsp;<input type="image" name="submit" alt="検索" src="http://d.hatena.ne.jp/images/searchde.gif" align="top" style="width:34px;height:20px;border:0px"><br><img border="0" src="http://d.hatena.ne.jp/images/dot.gif" width="1" height="3" alt=""></font></form></td> 
+<td align="right" bgcolor="#1841CE"><a href="http://www.hatena.ne.jp/"><img border="0" src="http://d.hatena.ne.jp/images/hatenade.gif" width="82" height="40" alt="はてな"></a></td> 
+</tr> 
+<tr> 
+<td width="100%" bgcolor="#06289B" colspan="3"><img border="0" src="http://d.hatena.ne.jp/images/dot.gif" width="1" height="1" alt=""></td> 
+</tr> 
+<tr> 
+<td width="100%" bgColor="#ffffff" colspan="3"> 
+<div align="center"> 
+<center> 
+<table cellSpacing="0" cellPadding="2" width="100%" border="0"> 
+<tbody> 
+<tr> 
+<td bgcolor="#5279E7" width="50%" nowrap><font color="#C9D5F8" size="2">&nbsp;ようこそ<a href="/qaz76/" style="text-decoration:none; font-weight:100;"><font color="#C9D5F8">qaz76</font></a>さん&nbsp;</font></td> 
+<td bgcolor="#5279E7" nowrap align="center"><a href="http://d.hatena.ne.jp/d-kami/" style="text-decoration:none; font-weight:100;"><font size="2" color="#C9D5F8">ブログトップ</font></a></td> 
+<td bgcolor="#5279E7" nowrap align="center"><a href="http://d.hatena.ne.jp/d-kami/archive" style="text-decoration:none; font-weight:100;"><font size="2" color="#C9D5F8">記事一覧</font></a></td> 
+<td bgcolor="#5279E7" nowrap align="center"><a href="https://www.hatena.ne.jp/logout?backurl=http://d.hatena.ne.jp/" style="text-decoration:none; font-weight:100;"><font size="2" color="#C9D5F8">ログアウト</font></a></td><td bgcolor="#5279E7" nowrap align="center"><a href="http://hatenadiary.g.hatena.ne.jp/" style="text-decoration:none; font-weight:100;"><font size="2" color="#C9D5F8">ヘルプ</font></a></td> 
+ 
+</tr> 
+</tbody> 
+</table> 
+</center> 
+</div> 
+</td> 
+</tr> 
+<tr> 
+<td width="100%" bgcolor="#06289B" colspan="3"><img border="0" src="http://d.hatena.ne.jp/images/dot.gif" width="1" height="1" alt=""></td> 
+</tr> 
+</table> 
+ 
+ 
+ 
+<h1>マイペースなプログラミング日記 <a href="http://a.hatena.ne.jp/append?http://d.hatena.ne.jp/d-kami/"><img src="http://d.hatena.ne.jp/images/a_append_de.gif" title="このページをアンテナに追加" alt="このページをアンテナに追加" border="0" width="16" height="12" class="icon"></a> <a href="http://d.hatena.ne.jp/d-kami/rss"><img src="http://d.hatena.ne.jp/images/rss_de.gif" alt="RSSフィード" title="RSSフィード" border="0" width="24" height="12" class="icon"></a> <a id="twitter-header-icon" href="http://twitter.com/d_kami"><img src="/images/icon-twitter.png" alt="Twitter" title="このページ作者のTwitterへ" border="0" width="16" height="16" class="icon"></a></h1> 
+<div class="hatena-body"> 
+<div class="main"> 
+  <table class="header-talbe"> 
+    <tr> 
+      <td width="150”" valign="top"> 
+        <div class="hatena-module hatena-module-calendar2"> 
+<div class="hatena-moduletitle">カレンダー</div> 
+<div class="hatena-modulebody"> 
+<table class="calendar" summary="calendar"> 
+<tr> 
+<td class="calendar-prev-month" colspan="2"><a href="/d-kami/201102" title="201102" rel="nofollow">&lt;&lt;</a></td> 
+<td class="calendar-current-month" colspan="3"><a href="/d-kami/archive/201103" rel="nofollow">2011/03</a></td> 
+<td class="calendar-next-month" colspan="2"><a href="/d-kami/201104" title="201104" rel="nofollow">&gt;&gt;</a></td> 
+</tr> 
+<tr> 
+<td class="calendar-sunday">日</td> 
+<td class="calendar-weekday">月</td> 
+<td class="calendar-weekday">火</td> 
+<td class="calendar-weekday">水</td> 
+<td class="calendar-weekday">木</td> 
+<td class="calendar-weekday">金</td> 
+<td class="calendar-saturday">土</td> 
+</tr> 
+	<tr> 
+		<td class="calendar-day"></td> 
+		<td class="calendar-day"></td> 
+		<td class="calendar-day">1</td> 
+		<td class="calendar-day">2</td> 
+		<td class="calendar-day"><a href="/d-kami/20110303" title="3">3</a></td> 
+		<td class="calendar-day">4</td> 
+		<td class="calendar-day"><a href="/d-kami/20110305" title="5">5</a></td> 
+	</tr> 
+	<tr> 
+		<td class="calendar-day"><a href="/d-kami/20110306" title="6">6</a></td> 
+		<td class="calendar-day"><a href="/d-kami/20110307" title="7">7</a></td> 
+		<td class="calendar-day"><a href="/d-kami/20110308" title="8">8</a></td> 
+		<td class="calendar-day">9</td> 
+		<td class="calendar-day">10</td> 
+		<td class="calendar-day"><a href="/d-kami/20110311" title="11">11</a></td> 
+		<td class="calendar-day">12</td> 
+	</tr> 
+	<tr> 
+		<td class="calendar-day">13</td> 
+		<td class="calendar-day">14</td> 
+		<td class="calendar-day"><a href="/d-kami/20110315" title="15">15</a></td> 
+		<td class="calendar-day"><a href="/d-kami/20110316" title="16">16</a></td> 
+		<td class="calendar-day">17</td> 
+		<td class="calendar-day">18</td> 
+		<td class="calendar-day">19</td> 
+	</tr> 
+	<tr> 
+		<td class="calendar-day">20</td> 
+		<td class="calendar-day"><a href="/d-kami/20110321" title="21">21</a></td> 
+		<td class="calendar-day">22</td> 
+		<td class="calendar-day">23</td> 
+		<td class="calendar-day">24</td> 
+		<td class="calendar-day day-today">25</td> 
+		<td class="calendar-day">26</td> 
+	</tr> 
+	<tr> 
+		<td class="calendar-day">27</td> 
+		<td class="calendar-day">28</td> 
+		<td class="calendar-day">29</td> 
+		<td class="calendar-day">30</td> 
+		<td class="calendar-day">31</td> 
+		<td class="calendar-day"></td> 
+		<td class="calendar-day"></td> 
+	</tr> 
+</table> 
+	</div> 
+</div> 
+ 
+      </td> 
+      <td width="20"></td> 
+      <td valign="top"> 
+        	<div class="hatena-module hatena-module-section"> 
+<div class="hatena-moduletitle"><a href="/d-kami/archive">最新タイトル</a></div> 
+<div class="hatena-modulebody"> 
+<ul class="hatena-section"> 
+<li><a href="http://d.hatena.ne.jp/d-kami/20110321/1300726045">今月中の目標</a></li> 
+<li><a href="http://d.hatena.ne.jp/d-kami/20110316/1300282006">[x86エミュレータ]エミュレータをデバッグするためのOS</a></li> 
+<li><a href="http://d.hatena.ne.jp/d-kami/20110315/1300192884">Owatter 0.12</a></li> 
+<li><a href="http://d.hatena.ne.jp/d-kami/20110311/1299868284">とりあえず生きてる</a></li> 
+<li><a href="http://d.hatena.ne.jp/d-kami/20110308/1299574893">ほしい物リストを公開してみる</a></li> 
+<li><a href="http://d.hatena.ne.jp/d-kami/20110307/1299500192">ぼくのTwitterポリシー</a></li> 
+<li><a href="http://d.hatena.ne.jp/d-kami/20110306/1299410115">LPCXpresso購入</a></li> 
+<li><a href="http://d.hatena.ne.jp/d-kami/20110305/1299308663">Owatter変更</a></li> 
+<li><a href="http://d.hatena.ne.jp/d-kami/20110303/1299164450">Owatter修正</a></li> 
+<li><a href="http://d.hatena.ne.jp/d-kami/20110303/1299135255">妄想を膨らませて未来を見る</a></li> 
+</ul> 
+</div> 
+</div> 
+ 
+      </td> 
+    </tr> 
+  </table> 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+<div class="calendar" id="pager-top"> 
+  <a rel="prev" href="/d-kami/?of=5" class="prev">&lt;前の5日分</a>&nbsp;<span id="edit-in-place-add"></span> 
+</div> 
+<div id="days"> 
+ 
+<div class="day">
+
+<h2><a href="http://d.hatena.ne.jp/d-kami/20110321"><span class="date">2011-03-21</span></a></h2> 
+
+
+<div class="body">
+
+
+
+<!-- google_ad_section_start -->
+
+ 
+		<div class="section"> 
+			<h3><a href="/d-kami/20110321/1300726045" name="1300726045"><span class="sanchor">■</span></a>今月中の目標</h3> 
+			<ul> 
+				<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/JavaCC">JavaCC</a>を勉強</li> 
+				<li>自作<a class="keyword" href="http://d.hatena.ne.jp/keyword/x86">x86</a><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A8%A5%DF%A5%E5%A5%EC%A1%BC%A5%BF">エミュレータ</a>の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C7%A5%D0%A5%C3%A5%B0">デバッグ</a>用<a class="keyword" href="http://d.hatena.ne.jp/keyword/OS">OS</a>(?)で<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C7%A5%D0%A5%C3%A5%B0">デバッグ</a></li> 
+				<li>次のWeb<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A2%A5%D7%A5%EA%A5%B1%A1%BC%A5%B7%A5%E7%A5%F3">アプリケーション</a>の公開</li> 
+			</ul> 
+			<p>『<a class="keyword" href="http://d.hatena.ne.jp/keyword/JavaCC">JavaCC</a>は普通の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%F3%A5%D1%A5%A4%A5%E9">コンパイラ</a>をつくろう』で勉強。あと、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C7%A5%D0%A5%C3%A5%B0">デバッグ</a>用<a class="keyword" href="http://d.hatena.ne.jp/keyword/OS">OS</a>というよりはCのプログラムが正しく実行できてるかのチェックを行うためのプログラム。Web<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A2%A5%D7%A5%EA%A5%B1%A1%BC%A5%B7%A5%E7%A5%F3">アプリケーション</a>は１ヶ月に１個を目標に公開したいのでそれ</p> 
+			<div class="hatena-asin-detail"> 
+  <a href="http://www.amazon.co.jp/exec/obidos/ASIN/4797337958/dkami-22/"><img src="http://ecx.images-amazon.com/images/I/419S%2BG0jL-L._SL160_.jpg" class="hatena-asin-detail-image" alt="ふつうのコンパイラをつくろう 言語処理系をつくりながら学ぶコンパイルと実行環境の仕組み" title="ふつうのコンパイラをつくろう 言語処理系をつくりながら学ぶコンパイルと実行環境の仕組み"></a> 
+  <div class="hatena-asin-detail-info"> 
+    <p class="hatena-asin-detail-title"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/4797337958/dkami-22/">ふつうのコンパイラをつくろう 言語処理系をつくりながら学ぶコンパイルと実行環境の仕組み</a></p> 
+    <ul> 
+      
+      <li><span class="hatena-asin-detail-label">作者:</span> <a href="http://d.hatena.ne.jp/keyword/%C0%C4%CC%DA%CA%F6%CF%BA" class="keyword">青木峰郎</a></li> 
+      
+      <li><span class="hatena-asin-detail-label">出版社/メーカー:</span> <a href="http://d.hatena.ne.jp/keyword/%A5%BD%A5%D5%A5%C8%A5%D0%A5%F3%A5%AF%A5%AF%A5%EA%A5%A8%A5%A4%A5%C6%A5%A3%A5%D6" class="keyword">ソフトバンククリエイティブ</a></li> 
+      
+      <li><span class="hatena-asin-detail-label">発売日:</span> 2009/07/24</li> 
+                                                      <li><span class="hatena-asin-detail-label">メディア:</span> 単行本</li> 
+      <li><span class="hatena-asin-detail-label">購入</span>: 23人 <span class="hatena-asin-detail-label">クリック</span>: 321回</li> 
+      <li><a href="http://d.hatena.ne.jp/asin/4797337958/dkami-22" target="_blank">この商品を含むブログ (43件) を見る</a></li> 
+    </ul> 
+  </div> 
+  <div class="hatena-asin-detail-foot"></div> 
+</div> 
+ 
+			<p class="share-button sectionfooter"><a href="http://b.hatena.ne.jp/entry/http://d.hatena.ne.jp/d-kami/20110321/1300726045" class="hatena-bookmark-button" data-hatena-bookmark-title="今月中の目標" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script><a href="http://twitter.com/share" class="twitter-share-button" data-lang="ja" data-count="none" data-url="http://d.hatena.ne.jp/d-kami/20110321/1300726045" data-text="今月中の目標 - マイペースなプログラミング日記 (id:d-kami / @d_kami)">ツイートする</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js" charset="utf-8"></script><iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fd.hatena.ne.jp%2Fd-kami%2F20110321%2F1300726045&amp;layout=button_count&amp;show_faces=false&amp;width=100&amp;action=like&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100px; height:21px;" allowTransparency="true"></iframe></p> 
+ 
+			<p class="sectionfooter"><a href="/d-kami/20110321/1300726045">Permalink</a> | <a href="/d-kami/20110321/1300726045#c">コメント(0)</a> | <a href="/d-kami/20110321/1300726045#tb">トラックバック(0)</a> | 01:47</p> 
+ 
+		</div> 
+
+
+<!-- google_ad_section_end -->
+
+
+
+</div>
+
+
+
+ 
+ 
+  
+ 
+ 
+
+
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+
+
+ 
+
+
+</div>
+
+<div class="day">
+
+<h2><a href="http://d.hatena.ne.jp/d-kami/20110316"><span class="date">2011-03-16</span></a></h2> 
+
+
+<div class="body">
+
+
+
+<!-- google_ad_section_start -->
+
+ 
+		<div class="section"> 
+			<h3><a href="/d-kami/20110316/1300282006" name="1300282006"><span class="sanchor">■</span></a>[<a href="/d-kami/searchdiary?word=%2A%5Bx86%A5%A8%A5%DF%A5%E5%A5%EC%A1%BC%A5%BF%5D" class="sectioncategory">x86エミュレータ</a>]<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A8%A5%DF%A5%E5%A5%EC%A1%BC%A5%BF">エミュレータ</a>を<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C7%A5%D0%A5%C3%A5%B0">デバッグ</a>するための<a class="keyword" href="http://d.hatena.ne.jp/keyword/OS">OS</a></h3> 
+			<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/x86">x86</a><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A8%A5%DF%A5%E5%A5%EC%A1%BC%A5%BF">エミュレータ</a>の現在の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C7%A5%D0%A5%C3%A5%B0">デバッグ</a>方法に限界を感じてきたので、次の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C7%A5%D0%A5%C3%A5%B0">デバッグ</a>方法へ。それが<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A8%A5%DF%A5%E5%A5%EC%A1%BC%A5%BF">エミュレータ</a>を<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C7%A5%D0%A5%C3%A5%B0">デバッグ</a>するための<a class="keyword" href="http://d.hatena.ne.jp/keyword/OS">OS</a>。<a class="keyword" href="http://d.hatena.ne.jp/keyword/OS">OS</a>からある割り込みをかけて、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A8%A5%DF%A5%E5%A5%EC%A1%BC%A5%BF">エミュレータ</a>がそれを見つけたら<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%EC%A5%B8%A5%B9%A5%BF">レジスタ</a>ダンプとかを行う。こんな機能を付けて<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A8%A5%DF%A5%E5%A5%EC%A1%BC%A5%BF">エミュレータ</a>と呼ぶのかはほっといて、<a class="keyword" href="http://d.hatena.ne.jp/keyword/OS">OS</a>を作ることにした。<a class="keyword" href="http://d.hatena.ne.jp/keyword/C%B8%C0%B8%EC">C言語</a>で書かれた部分の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C7%A5%D0%A5%C3%A5%B0">デバッグ</a>に入ってから、かなり大変なことになっているな</p> 
+			<p class="share-button sectionfooter"><a href="http://b.hatena.ne.jp/entry/http://d.hatena.ne.jp/d-kami/20110316/1300282006" class="hatena-bookmark-button" data-hatena-bookmark-title="エミュレータをデバッグするためのOS" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script><a href="http://twitter.com/share" class="twitter-share-button" data-lang="ja" data-count="none" data-url="http://d.hatena.ne.jp/d-kami/20110316/1300282006" data-text="エミュレータをデバッグするためのOS - マイペースなプログラミング日記 (id:d-kami / @d_kami)">ツイートする</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js" charset="utf-8"></script><iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fd.hatena.ne.jp%2Fd-kami%2F20110316%2F1300282006&amp;layout=button_count&amp;show_faces=false&amp;width=100&amp;action=like&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100px; height:21px;" allowTransparency="true"></iframe></p> 
+ 
+			<p class="sectionfooter"><a href="/d-kami/20110316/1300282006">Permalink</a> | <a href="/d-kami/20110316/1300282006#c">コメント(0)</a> | <a href="/d-kami/20110316/1300282006#tb">トラックバック(0)</a> | 22:26</p> 
+ 
+		</div> 
+
+
+<!-- google_ad_section_end -->
+
+</div>
+
+
+
+ 
+ 
+  
+ 
+ 
+
+
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+
+
+ 
+
+
+</div>
+
+<div class="day">
+
+<h2><a href="http://d.hatena.ne.jp/d-kami/20110315"><span class="date">2011-03-15</span></a></h2> 
+
+
+<div class="body">
+
+
+
+<!-- google_ad_section_start -->
+
+ 
+		<div class="section"> 
+			<h3><a href="/d-kami/20110315/1300192884" name="1300192884"><span class="sanchor">■</span></a>Owatter 0.12</h3> 
+			<ul> 
+				<li>リンクに!が含まれてる時に認識しない問題を修正</li> 
+				<li>アイコンの右クリックしたときにポップアップメニュー表示するようにした</li> 
+				<li>アイコンのポップアップメニューからWeb版<a class="keyword" href="http://d.hatena.ne.jp/keyword/Twitter">Twitter</a>のプロフィールを見れるようにした</li> 
+			</ul> 
+			<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/Twitter">Twitter</a>で要望があったので修正した</p> 
+			<p class="share-button sectionfooter"><a href="http://b.hatena.ne.jp/entry/http://d.hatena.ne.jp/d-kami/20110315/1300192884" class="hatena-bookmark-button" data-hatena-bookmark-title="Owatter 0.12" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script><a href="http://twitter.com/share" class="twitter-share-button" data-lang="ja" data-count="none" data-url="http://d.hatena.ne.jp/d-kami/20110315/1300192884" data-text="Owatter 0.12 - マイペースなプログラミング日記 (id:d-kami / @d_kami)">ツイートする</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js" charset="utf-8"></script><iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fd.hatena.ne.jp%2Fd-kami%2F20110315%2F1300192884&amp;layout=button_count&amp;show_faces=false&amp;width=100&amp;action=like&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100px; height:21px;" allowTransparency="true"></iframe></p> 
+ 
+			<p class="sectionfooter"><a href="/d-kami/20110315/1300192884">Permalink</a> | <a href="/d-kami/20110315/1300192884#c">コメント(0)</a> | <a href="/d-kami/20110315/1300192884#tb">トラックバック(0)</a> | 21:41</p> 
+ 
+		</div> 
+
+
+<!-- google_ad_section_end -->
+
+</div>
+
+
+
+ 
+ 
+  
+ 
+ 
+
+
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+
+
+ 
+
+
+</div>
+
+<div class="day">
+
+<h2><a href="http://d.hatena.ne.jp/d-kami/20110311"><span class="date">2011-03-11</span></a></h2> 
+
+
+<div class="body">
+
+
+
+<!-- google_ad_section_start -->
+
+ 
+		<div class="section"> 
+			<h3><a href="/d-kami/20110311/1299868284" name="1299868284"><span class="sanchor">■</span></a>とりあえず生きてる</h3> 
+			<p>もの凄い強い<a class="keyword" href="http://d.hatena.ne.jp/keyword/%C3%CF%BF%CC">地震</a>が来て焦ったが無事だった。バイト中だったが、途中で帰っていいことになったみたいなので、途中で帰ってきた。普段ならバスを使う所だが歩いて帰ってきた。途中の信号とかほとんどが止まってたので、車が止まってる隙に横断歩道を渡った。家に帰るまでは「家の中は悲惨なことになってるんだろうな」と思っていたが、入ってみたら意外とそうでもなかった。ただ冷蔵庫とかパソコンを置いてる台とかが大きく位置をずらしてたのと、台の上に乗ってた小物が落ちてたぐらいで済んだ。つくばエクスプレスがいつ復旧するかわからないので、当分の間東京に出にくい状態が続く。高速バスでも利用しようかと思ったが混んでそうだな。乗れるかどうか微妙なところだ。電気ガス水道は使えるので不便はしてないが、まだ余震があったりする。早く元通りの生活になって欲しいものだ</p> 
+			<p class="share-button sectionfooter"><a href="http://b.hatena.ne.jp/entry/http://d.hatena.ne.jp/d-kami/20110311/1299868284" class="hatena-bookmark-button" data-hatena-bookmark-title="とりあえず生きてる" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script><a href="http://twitter.com/share" class="twitter-share-button" data-lang="ja" data-count="none" data-url="http://d.hatena.ne.jp/d-kami/20110311/1299868284" data-text="とりあえず生きてる - マイペースなプログラミング日記 (id:d-kami / @d_kami)">ツイートする</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js" charset="utf-8"></script><iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fd.hatena.ne.jp%2Fd-kami%2F20110311%2F1299868284&amp;layout=button_count&amp;show_faces=false&amp;width=100&amp;action=like&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100px; height:21px;" allowTransparency="true"></iframe></p> 
+ 
+			<p class="sectionfooter"><a href="/d-kami/20110311/1299868284">Permalink</a> | <a href="/d-kami/20110311/1299868284#c">コメント(0)</a> | <a href="/d-kami/20110311/1299868284#tb">トラックバック(0)</a> | 03:31</p> 
+ 
+		</div> 
+
+
+<!-- google_ad_section_end -->
+
+</div>
+
+
+
+ 
+ 
+  
+ 
+ 
+
+
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+
+
+ 
+
+
+</div>
+
+<div class="day">
+
+<h2><a href="http://d.hatena.ne.jp/d-kami/20110308"><span class="date">2011-03-08</span></a></h2> 
+
+
+<div class="body">
+
+
+
+<!-- google_ad_section_start -->
+
+ 
+		<div class="section"> 
+			<h3><a href="/d-kami/20110308/1299574893" name="1299574893"><span class="sanchor">■</span></a><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A4%DB%A4%B7%A4%A4%CA%AA%A5%EA%A5%B9%A5%C8">ほしい物リスト</a>を公開してみる</h3> 
+			<p>本名が載っちゃってるけど気にしない</p> 
+			<p><a href="http://www.amazon.co.jp/wishlist/4L9F7EHE87Z6" target="_blank">http://www.amazon.co.jp/wishlist/4L9F7EHE87Z6</a></p> 
+			<p class="share-button sectionfooter"><a href="http://b.hatena.ne.jp/entry/http://d.hatena.ne.jp/d-kami/20110308/1299574893" class="hatena-bookmark-button" data-hatena-bookmark-title="ほしい物リストを公開してみる" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script><a href="http://twitter.com/share" class="twitter-share-button" data-lang="ja" data-count="none" data-url="http://d.hatena.ne.jp/d-kami/20110308/1299574893" data-text="ほしい物リストを公開してみる - マイペースなプログラミング日記 (id:d-kami / @d_kami)">ツイートする</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js" charset="utf-8"></script><iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fd.hatena.ne.jp%2Fd-kami%2F20110308%2F1299574893&amp;layout=button_count&amp;show_faces=false&amp;width=100&amp;action=like&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100px; height:21px;" allowTransparency="true"></iframe></p> 
+ 
+			<p class="sectionfooter"><a href="/d-kami/20110308/1299574893">Permalink</a> | <a href="/d-kami/20110308/1299574893#c">コメント(0)</a> | <a href="/d-kami/20110308/1299574893#tb">トラックバック(0)</a> | 18:01</p> 
+ 
+		</div> 
+
+
+<!-- google_ad_section_end -->
+
+</div>
+
+
+
+ 
+ 
+  
+ 
+ 
+
+
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+
+
+ 
+
+
+</div>
+
+
+
+ 
+ 
+</div> 
+<div class="calendar" id="pager-bottom"> 
+  <a rel="prev" href="/d-kami/?of=5" class="prev">&lt;前の5日分</a>&nbsp;
+</div> 
+</div> 
+<div class="sidebar"> 
+ 
+  <div class="hatena-module hatena-module-profile"> 
+  <div class="hatena-moduletitle">プロフィール</div> 
+  <div class="hatena-modulebody"> 
+    <div class="hatena-profile"> 
+      <p class="hatena-profile-id"><a href="/d-kami/about">d-kami</a> <a href="/d-kami/about"><img src="/images/icon-plus.gif" alt="はてなダイアリープラス利用中" class="icon-plus" /></a></p> 
+      <p class="hatena-profile-body">Javaと忘れ物が得意な筑波大学の大学院生</p> 
+    </div> 
+  </div> 
+</div> 
+<br> 
+  <a href="http://twitter.com/d_kami" style="font-size:9pt">http://twitter.com/d_kami</a><br> 
+ 
+  <div class="hatena-module hatena-module-sectioncategory"> 
+<div class="hatena-moduletitle">カテゴリー</div> 
+<div class="hatena-modulebody"> 
+<ul class="hatena-sectioncategory"> 
+<li><a href="/d-kami/searchdiary?word=%2A%5BJava%5D">Java</a></li> 
+<li><a href="/d-kami/searchdiary?word=%2A%5B%BC%AB%BA%EEOS%5D">自作OS</a></li> 
+<li><a href="/d-kami/searchdiary?word=%2A%5BGWT%5D">GWT</a></li> 
+<li><a href="/d-kami/searchdiary?word=%2A%5Bx86%A5%A8%A5%DF%A5%E5%A5%EC%A1%BC%A5%BF%5D">x86エミュレータ</a></li> 
+<li><a href="/d-kami/searchdiary?word=%2A%5BAndroid%5D">Android</a></li> 
+<li><a href="/d-kami/searchdiary?word=%2A%5BJavaCC%5D">JavaCC</a></li> 
+<li><a href="/d-kami/searchdiary?word=%2A%5BJetpack%5D">Jetpack</a></li> 
+</ul> 
+</div> 
+</div> 
+<br> 
+ 
+  <div class="hatena-module"> 
+    <div class="hatena-moduletitle">リング</div> 
+      <div class="hatena-modulebody"> 
+        <div class="hatena-module hatena-module-ring"> 
+ 
+<div class="hatena-modulebody"> 
+<ul class="hatena-photo"> 
+ 
+ 
+ 
+  <script type="text/javascript"
+    src="http://ring.hatena.ne.jp/showlogo?rid=programming&sid=205221&mode=image"> 
+  </script> 
+  <noscript> 
+  <a href="http://programming.ring.hatena.ne.jp"><img src="http://ring.hatena.ne.jp/images/logo/p/programming/programming_s.jpg" border=0></a>
+  <a href="http://programming.ring.hatena.ne.jp/go?type=random&sid=205221">random</a>
+  <a href="http://programming.ring.hatena.ne.jp/">Hatena Ring programming</a>
+  </noscript> 
+ 
+ 
+ 
+</div> 
+</div> 
+ 
+      </div> 
+    </div> 
+<br> 
+<br> 
+ 
+  <div class="hatena-module"> 
+    <div class="hatena-moduletitle">リンク</div> 
+      <div class="hatena-modulebody"> 
+        <a href="http://www.yukun.info/">Yukun's Blog</a> 
+      </div> 
+    </div> 
+<br> 
+<br> 
+<div class="hatena-module hatena-module-graph"> 
+ 
+<div class="hatena-moduletitle"><a href="http://graph.hatena.ne.jp/d-kami/%E6%AD%A9%E6%95%B0/">d-kamiの歩数</a></div> 
+ 
+<div class="hatena-modulebody"> 
+<div class="hatena-graph"> 
+<a href="http://graph.hatena.ne.jp/d-kami/%E6%AD%A9%E6%95%B0/"><img src="http://graph.hatena.ne.jp/d-kami/graph?graphname=%E6%AD%A9%E6%95%B0"></a> 
+</div> 
+</div> 
+</div> 
+ 
+</div><div style="display:none"><script type="text/javascript"><!--
+    hatena_counter_name = "d-kami";
+    hatena_counter_id = "1";
+    hatena_counter_ref = document.referrer+"";
+    hatena_counter_screen = screen.width + "x" + screen.height+","+screen.colorDepth;
+//--></script> 
+<script type="text/javascript" src="http://counter.hatena.ne.jp//js/counter.js"></script> 
+<noscript><img src="http://counter.hatena.ne.jp/d-kami/1" border="0" alt="counter"></noscript> 
+</div> 
+</div> 
+ 
+ 
+ 
+ 
+ 
+ 
+<script type="text/javascript"> 
+ 
+  var _gaq = _gaq || [];
+  _gaq.push(
+  ['_setAccount', 'UA-441387-31'],
+  ['_trackPageview'],
+  ['b._setAccount', 'UA-7855606-1'],
+  ['b._setDomainName', '.hatena.ne.jp'],
+  ['b._trackPageview']
+  ,['c._setAccount', 'UA-704847-1'],
+  ['c._trackPageview']
+  );
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+ 
+</script> 
+<!-- CG:5,CH:5,ICG:9,ICH:6 --> 
+</body> 
+</html> 
