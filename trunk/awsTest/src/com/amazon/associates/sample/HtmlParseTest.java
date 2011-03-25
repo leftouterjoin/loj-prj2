@@ -23,7 +23,7 @@ public class HtmlParseTest {
 	public void test1() throws SAXException, IOException,
 			XPathExpressionException {
 		DOMParser parser = new DOMParser();
-		parser.parse("src/ebook.html");
+		parser.parse("https://www.oreilly.co.jp/ebook/");
 
 		Document document = parser.getDocument();
 
