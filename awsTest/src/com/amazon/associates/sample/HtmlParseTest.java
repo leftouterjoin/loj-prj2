@@ -3,21 +3,25 @@ package com.amazon.associates.sample;
 import java.io.IOException;
 import java.util.Iterator;
 
-import org.apache.xerces.stax.events.NamespaceImpl;
-import org.cyberneko.html.parsers.DOMParser;
-import org.junit.Test;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
-
 import javax.xml.namespace.NamespaceContext;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
-import javax.xml.xpath.XPathExpression;
 
+import org.cyberneko.html.parsers.DOMParser;
+import org.junit.Test;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+// http://sourceforge.net/projects/nekohtml/
+//  nekohtml.jar
+// http://xerces.apache.org/#xerces2-j/
+//  xercesImpl.jar
+//  xml-apis.jar
 public class HtmlParseTest {
 	@Test
 	public void test1() throws SAXException, IOException,
